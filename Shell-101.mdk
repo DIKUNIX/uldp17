@@ -1,4 +1,4 @@
-# Shell 101
+# Shell 101 { #sec-shell }
 
 Dear to the heart of a Unix-like operating system is a command-line interface
 with the operating system, often referred to as a "shell", or "terminal".
@@ -62,7 +62,7 @@ alis@syrakuse:~$
 comands that this Linux box understands, but it understands `cowsay`. `cowsay`
 is a classic, silly little game we've put on our Linux box.
 
-## The Prompt
+## The Prompt { #sec-shell-prompt }
 
 The line
 
@@ -82,7 +82,7 @@ will start out like this:
 ~$
 ```
 
-## The Working Directory
+## The Working Directory { #sec-shell-wd }
 
 All major operating systems (both Unix-like and Windows) are centered around
 the idea of the user working with directories and files: a *file system*. In
@@ -100,7 +100,7 @@ The following sections show how you can figure out what your working directory
 is, how to navigate the file system, create new directories, and change the
 working directory of `bash`.
 
-## `pwd`, `mkdir` and `ls`
+## `pwd`, `mkdir` and `ls` { #sec-shell-pwd-mkdir-ls }
 
 `pwd` prints the working directory:
 
@@ -239,7 +239,7 @@ drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 "hello,\ bash"
 ...
 ```
 
-## `cd`
+## `cd` { #sec-shell-cd }
 
 `cd` changes the current working directory.
 
@@ -319,7 +319,7 @@ drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Ursa Minor
 3. `cd ~/./../alis/Andromeda/./HAT-P-6/../../` Where do you end up?
 4. Create a hidden directory in your home directory.
 
-## `echo`, `cat`, and `>`
+## `echo`, `cat`, and `>` { #sec-shell-echo-cat-redirect }
 
 `echo` is a program that can display a line of text. For instance:
 
@@ -431,7 +431,7 @@ And so are you.
 ~$
 ```
 
-## `wc` and `|`
+## `wc` and `|` { #sec-shell-wc-pipe }
 
 `wc` prints the line, word, and byte count of a file.
 
@@ -504,7 +504,7 @@ missing filename, the output is the same as with `wc poem.txt` above.
 
 1. Count the number of files and directories directly under the `/` directory.
 
-## `rm`
+## `rm` { #sec-shell-rm }
 
 By now we've made a great big mess of our home directory. It is time to clean
 up a little bit. The `rm` command can be used to quickly delete files and
@@ -554,7 +554,7 @@ drwxr-xr-x 10 alis alis 4.0K Sep 19 14:38 ..
 want to keep for future reference. (Don't remove `poem.txt`, or the `1`
 directory, we will use them shortly.)
 
-## Text-Editors 101
+## Text-Editors 101 { #sec-shell-text-editors }
 
 Although we can read and write files using our various command-line utilities,
 in conjunction with clever shell tricks, this mode of operation can get a
@@ -623,7 +623,7 @@ many characters are there in the longest line?
 4. Copy the entire poem beneath itself without doing this line-by-line. Hint:
 use "Read File".
 
-## `mv` and `&&`
+## `mv` and `&&` { #sec-shell-mv-and }
 
 `mv` can be used to move/rename files. It takes at least two command-line
 arguments, the source file path and a target file path. If you supply more than
@@ -649,7 +649,7 @@ aforementioned directories into this one.
 `&&`, and `mv`. OBS! You can't read and write the same file in the same
 command. For task 4, you will need to use a temporary file.
 
-## Shell Scripts 101
+## Shell Scripts 101 { #sec-shell-shell-scripts }
 
 Composing small utilities to form complicated commands is fun, but it is also
 hard work. We can save our work by encoding a command into a so-called shell
@@ -689,7 +689,7 @@ Now, to run this shell script, pass it as an argument to the program `bash`:
 of work typing `bash double.sh` instead of just `double`. We will come back to
 how you can do this later.
 
-## `file` and `which`
+## `file` and `which` { #sec-shell-file-which }
 
 In a Unix-like operating system, everything is a file. Furthermore, it is the
 contents, or the metadata of a file (not e.g., a filename extension), that
