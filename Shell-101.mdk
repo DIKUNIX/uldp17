@@ -7,3 +7,737 @@ A [Command-Line Interface
 (CLI)](https://en.wikipedia.org/wiki/Command-line_interface) interprets textual
 commands, rather than e.g.  mouse clicks, or gestures. A CLI presents you with
 a line where you can enter text, and "prompts" you to enter a command.
+
+You can then type away at the keyboard, and hit the Enter key to "enter" the
+command. The CLI responds by trying to understand your command, and if the
+command makes sense, by executing it. This execution may, or may not have a
+directly observable effect. If the execution terminates, you will be presented
+with another prompt, prompting for the next command.
+
+When first logging in on a headless Linux box, you are greeted with a welcome
+message and a prompt:
+
+```
+Welcome to syrakuse.
+Happy hacking!
+alis@syrakuse:~$
+```
+
+In place of `alis` however, you will see the username you logged in with.
+
+Try pressing enter a couple times,
+
+```
+Welcome to syrakyse.
+Happy hacking!
+alis@syrakuse:~$
+alis@syrakuse:~$
+alis@syrakuse:~$
+alis@syrakuse:~$
+```
+
+This is how you "enter" commands into your computer.
+
+The empty command is a little silly, so let's try something (slightly) less
+silly:
+
+```
+alis@syrakuse:~$ 42
+-bash: 42: command not found
+alis@syrakuse:~$ hello
+-bash: hello: command not found
+alis@syrakuse:~$ cowsay hello
+ _______
+< hello >
+ -------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+alis@syrakuse:~$
+```
+
+`bash` is the program that interprets your commands. `42` and `hello` are not
+comands that this Linux box understands, but it understands `cowsay`. `cowsay`
+is a classic, silly little game we've put on our Linux box.
+
+## The Prompt
+
+The line
+
+```
+alis@syrakuse:~$
+```
+
+is called a "prompt". This prompt shows the username you logged in with (in
+this case, `alis`), the hostname of the machine you logged in on (in this case,
+`syrakuse`), and the working directory of your shell (in this case, `~`).
+
+In the remainder of this document, we won't point out the user and hostname, as
+all our examples will use the use the same user and hostname. So our promopts
+will start out like this:
+
+```
+~$
+```
+
+## The Working Directory
+
+All major operating systems (both Unix-like and Windows) are centered around
+the idea of the user working with directories and files: a *file system*. In
+practice, this has two aspects:
+
+1. every user has a some sort of a *home directory*, and
+2. every program is working from the point of view of a particular directory:
+its *working directory*.
+
+When you login on our Linux box, you land in a `bash` program, whose working
+directory is the home directory of the user you logged in with. The user's home
+directory has the alias `~` on Unix-like systems.
+
+The following sections show how you can figure out what your working directory
+is, how to navigate the file system, create new directories, and change the
+working directory of `bash`.
+
+## `pwd`, `mkdir` and `ls`
+
+`pwd` prints the working directory:
+
+```
+~$ pwd
+/home/alis
+~$
+```
+
+In Unix-like operating systems, file system paths are separated by `/` (forward
+slash). (In Windows, they are separated by `\` (backward slash).) Furthermore,
+in Unix-likes systems, unlike in Windows, all directories and files reside in
+one file system, starting at `/`. This is called the *root directory*.
+
+In this case, we see that the root directory has one subdirectory `home`, which
+has a sub-subdirectory `alis`. This is `alis`'s home directory. So `~` (in
+`alis`'s case) is really an alias for `/home/alis`. Let's make a mess of our home
+directory:
+
+`mkdir` can create new directories.
+
+```
+~$ mkdir Andromeda
+~$ mkdir Corvus Crux Lynx
+~$ mkdir "Ursa Major" "Ursa Minor"
+```
+
+`ls` can list directory contents
+
+```
+~$ ls
+Andromeda  Corvus  Crux  Lynx  Ursa Major  Ursa Minor
+```
+
+This is a little cryptic. How many directories do we actually have? To see
+this, you can pass the argument `-lh` to `ls`. The `l` (small L) *flag* asks
+for a long, and the `h` flag asks for a human-readable listing format.
+
+```
+~$ ls -lh
+total 24K
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Andromeda
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Corvus
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Crux
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Lynx
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Ursa Major
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Ursa Minor
+```
+
+`ls -lh` lists a whole bunch of details you probably don't even want to care
+about (for now). What's important is that it lists one directory, or file, per
+line.  Counting the lines, we see that the above `mkdir` commands created 6
+directories. We can now see how the `mkdir` command works with `bash`:
+
+```
+~$ mkdir Corvus Crux Lynx
+```
+
+Created 3 directories: `Corvus`, `Crux`, and `Lynx`: `bash` splits command
+arguments at one or more space characters.
+
+If you want to put a space in your argument, e.g. to create a directory with
+spaces in its name, you must put the argument in quotes, as we did with the
+following `mkdir` command:
+
+```
+~$ mkdir "Ursa Major" "Ursa Minor"
+```
+
+This created the two directories `Ursa Major` and `Ursa Minor`.
+
+Another way to avoid `bash` splitting up your argument is to *escape* the
+spaces.  Escaping is done by putting a special `\` (back slash) in front of the
+character you want "escaped". Some other characters that we often escape are
+`"` (double quote), and `\` (backslash) itself. The following `mkdir` command
+is equivalent to the above:
+
+```
+~$ mkdir Ursa\ Major Ursa\ Minor
+```
+
+By default, `ls` lists the contents of the working directory. It can also be
+used to list the contents of other directories.
+
+Try typing `ls A` and press TAB. `bash` will expand this to `ls Andromeda/`
+(the trailing `/` indicates that `Andromeda` is a directory):
+
+```
+~$ ls Andromeda/
+~$
+```
+
+`bash` is good friends with the working directory, and your file system in
+general.  When specifying a path, it can see the files and directories in your
+system, and help you type them out quickly and correctly.
+
+Try typing `ls U` and press TAB. `bash` will expand this to `ls Ursa\ M` but
+stop there, as it doesn't whether you mean `Ursa\ Major` or `Ursa\ Minor`.
+Continue by tying `a` and press TAB again. `bash` will now complete the name
+for you to `ls Ursa\ Major/`.
+
+NB! Unfortunately, `bash` is not good friends with your programs, and it won't
+help you remember cryptic arguments like `-lh`.
+
+The `Andromeda` directories contains no files or directories. We can use
+`mkdir` to create some subdirectories in `Andromeda` (remember TAB!):
+
+```
+~$ mkdir Andromeda/HAT-P-6 Andromeda/WASP-1
+~$ ls -lh Andromeda
+total 8.0K
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 HAT-P-6
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 WASP-1
+```
+
+### Exercises
+
+1. List the contents of the `/` directory.
+2. List the contents of the `/home/` directory.
+3. Create the directory `~/1/1/2/3/5/8/13/21`. (Hint: press UP-arrow to
+   retype last command in `bash`.)
+4. Create the directory `"hello,\ bash"` in your home directory.
+
+NB! `ls -lh` should show something like this:
+
+```
+~$ ls -lh
+...
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 "hello,\ bash"
+...
+```
+
+## `cd`
+
+`cd` changes the current working directory.
+
+```
+~$ cd Andromeda
+~/Andromeda# ls -lh
+total 8.0K
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 HAT-P-6
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 WASP-1
+~/Andromeda#
+```
+
+The `bash` prompt will comfortably let you know where you stand, so `pwd` is no
+long necessary, as long as you know what `~` and `/` mean.
+
+`cd` with no arguments will lead you back home:
+
+```
+~/Andromeda# cd
+~$
+```
+
+Of course, you can also use the path alias `~`:
+
+```
+~$ cd Andromeda
+~/Andromeda# cd ~
+~$
+```
+
+Let's go deeper:
+
+```
+~$ cd Andromeda/HAT-P-6/
+~/Andromeda/HAT-P-6#
+```
+
+Every directory has a special directory `..`
+
+If you `cd` to `..` you go "up" a directory in the file system hierarchy. We
+say that `..` refers to the *parent directory*. So here's the long way home:
+
+```
+~/Andromeda/HAT-P-6# cd ../../
+~$
+```
+
+If every directory has a special directory `..` then how come we didn't see it
+in our directory listings above? This is because Unix-like convention has it
+that hidden files and directories start with a `.` (dot). Of course, there is
+nothing overly special about "hidden" files (on Unix-like systems or Windows).
+We can get `ls` to show *all* the directories in a directory using an
+additional `a` flag:
+
+```
+~$ ls -lah
+total 40K
+drwxr-xr-x 10 alis alis 4.0K Sep 21 13:37 .
+drwxr-xr-x  3 alis alis 4.0K Sep 21 13:37 ..
+drwxr-xr-x  3 alis alis 4.0K Sep 21 13:37 1
+drwxr-xr-x  4 alis alis 4.0K Sep 21 13:37 Andromeda
+drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Corvus
+drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Crux
+drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 "hello,\ bash"
+drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Lynx
+drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Ursa Major
+drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Ursa Minor
+~$
+```
+
+`.` is also special directory, it refers to the *current directory*.
+
+### Exercises
+
+1. `cd ~/../../../../../../` Where do you end up?
+2. Go back home.
+3. `cd ~/./../alis/Andromeda/./HAT-P-6/../../` Where do you end up?
+4. Create a hidden directory in your home directory.
+
+## `echo`, `cat`, and `>`
+
+`echo` is a program that can display a line of text. For instance:
+
+```
+~$ echo "Roses are red,"
+Roses are red,
+~$
+```
+
+Note, again how arguments coontaining spaces are surrounded by double quotes.
+
+At first sight, this is a rather useless program. This is where the power of a
+Unix-like operating system comes into play. `bash` can *redirect* the output of
+a program to a file. To do this, follow the command with the character `>`,
+followed by a path to the file where you want the output.
+
+```
+~$ echo "Roses are red," > roses.txt
+~$
+```
+
+We can use `ls` to check to see what happened:
+
+```
+~$ ls -lah
+...
+drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 "hello,\ bash"
+-rw-r--r--  1 alis alis   15 Sep 21 13:37 roses.txt
+drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Lynx
+...
+~$
+```
+
+So now there is something called `roses.txt` in our home directory. Unlike the
+directories we created before, the left-most character printed by `ls` is a `-`
+(dash), rather than a `d`. This indicates that `roses.txt` is *not* a
+directory.
+
+`cd` can help us verify this:
+
+```
+~$ cd roses.txt
+bash: cd: roses.txt: Not a directory
+```
+
+> **TIP** If you want `ls -lah` to *just* list the file that you are looking
+> for, specify the file to `ls -lah`:
+>
+> ```
+> ~$ ls -lah roses.txt
+> -rw-r--r--  1 alis alis   15 Sep 21 13:37 roses.txt
+> ```
+
+`cat` is a program that can print the contents of a file back to `bash`:
+
+```
+~$ cat roses.txt
+Roses are red,
+~$
+```
+
+Let's create another file:
+
+```
+~$ echo "Violets are blue," > violets.txt
+~$
+```
+
+> **NB** `>` will overwrite the file if it already exists.
+
+`cat` can also *concatenate* files, and print the contents back to to `bash`:
+
+```
+~$ cat roses.txt violets.txt
+Roses are red,
+Violets are blue,
+~$
+```
+
+Of course, `bash` can redirect the output of any command, so we can store this,
+more complete poem in `poem.txt`.
+
+```
+~$ cat roses.txt violets.txt > poem.txt
+~$ cat poem.txt
+Roses are red,
+Violets are blue,
+~$
+```
+
+### Exercises
+
+1. Create a file `sugar.txt` with the line `Sugar is sweet,`
+2. Create a file `you.txt` with the line `And so are you.`
+3. Complete the poem in `poem.txt` by combining `roses.txt`, `violets.txt`,
+`sugar.txt`, and `you.txt` (in that order).
+
+It should be possible to do this in the end:
+
+```
+~$ cat poem.txt
+Roses are red,
+Violets are blue,
+Sugar is sweet,
+And so are you.
+~$ cat violets.txt you.txt
+Violets are blue,
+And so are you.
+~$
+```
+
+## `wc` and `|`
+
+`wc` prints the line, word, and byte count of a file.
+
+```
+~$ wc poem.txt
+ 4 13 65 poem.txt
+~$
+```
+
+So our poem is 4 lines, 13 words, or 65 bytes in length.
+
+> **TIP** This explains the `65` in the output of `ls -lah` for `poem.txt`:
+>
+> ```
+> ~$ ls -lah poem.txt
+> -rw-r--r-- 1 alis alis 65 Sep 21 13:37 poem.txt
+> ```
+
+The name `wc` is easy to remember if you think that it stands for "word count",
+although the program can do fair a bit more than that. In fact, it isn't even
+that good at counting words. Any sequence of non-whitespace characters is
+counted as a word. For instance, numbers are also counted as words. Your
+high-school teacher would not be happy with such a word count.
+
+> **TIP** If you *just* want the line count for a file, use the `-l` option.
+>
+> ```
+> ~$ wc -l poem.txt
+> 4 poem.txt
+> ~$
+> ```
+
+What if we wanted a word count of the silly poem we had above?
+
+```
+~$ cat violets.txt you.txt
+Violets are blue,
+And so are you.
+~$
+```
+
+We could use `bash` redirection to put the silly poem in a silly file, pass the
+filename to `wc`, and finally remove the silly file (more on this below); but
+this would be rather silly: Why create a file in the first place?
+
+`bash` can *pipe* the output of one program as input to another. To do this,
+type the first command, a `|` (pipe) character, then the second command:
+
+```
+~$ cat violets.txt you.txt | wc
+      2       7      34
+```
+
+`wc` with no arguments, counts the lines, words, and bytes passed to it from
+`bash`. Now `wc` does not print a file name: There is no filename to print!
+
+The silly poem is just 2 lines, 7 words, or 34 bytes in length.
+
+Let's verify that this "pipe"-thing works by doing this with `poem.txt`:
+
+```
+~$ cat poem.txt | wc
+      4      13      65
+```
+
+Except for the silly whitespace (more on how to handle this later), and the
+missing filename, the output is the same as with `wc poem.txt` above.
+
+### Exercises
+
+1. Count the number of files and directories directly under the `/` directory.
+
+## `rm`
+
+By now we've made a great big mess of our home directory. It is time to clean
+up a little bit. The `rm` command can be used to quickly delete files and
+folders.
+
+Use `rm` to delete files:
+
+```
+~$ rm poem.txt
+~$
+```
+
+We can use `ls` to verify that `poem.txt` indeed is gone:
+
+```
+~$ ls poem.txt
+ls: cannot access poem.txt: No such file or directory
+```
+
+If you want to delete directories, you will need to specify the argument `-r`,
+where the `r` flag stands for "recursive".
+
+```
+~$ rm -r 1/
+```
+
+If you want to delete all the files and directories in a directory, but the
+directory itself, you can use a wildcard `*` after the directory name:
+
+```
+~$ rm -rf Andromeda/*
+~$ ls -lah Andromeda/
+total 8.0K
+drwxr-xr-x  2 alis alis 4.0K Sep 19 14:58 .
+drwxr-xr-x 10 alis alis 4.0K Sep 19 14:38 ..
+~$
+```
+
+> **NB** `rm` does not throw your files and directories into some
+> easily-accessible "garbage bin".  Although things are not always permanently
+> and securely deleted with `rm`, recovering them is a lofty task. Take care of
+> what your remove.
+
+### Exercises
+
+1. Remove all the files and directories in your home directory which you don't
+want to keep for future reference. (Don't remove `poem.txt`, or the `1`
+directory, we will use them shortly.)
+
+## Text-Editors
+
+Although we can read and write files using our various command-line utilities,
+in conjunction with clever shell tricks, this mode of operation can get a
+little cumbersome. Text-editors are dedicated utilities to this end.
+
+There are two classical text-editors in a Unix-like environment: `vim` and
+`emacs`. The users of one are often viciously dispassionate about the users of
+the other.  More humble users use whatever suits the task at hand. For
+instance, `vi` (a slimmer, older version of `vim`) is available on most systems
+out of the box, and so `vim` proliferates in server environments, while `emacs`
+has often been a tool you need to explcitly install, making it more suitable in
+a desktop environment.
+
+Another text editor available on many systems out of the box is `nano`. To
+avoid duels over the choice of text-editor, and still teach you a somewhat
+ubiquitous tool, we decided to focus on `nano`. To start editting our
+`poem.txt` with `nano`:
+
+```
+~$ nano poem.txt
+```
+
+`nano` uses a so-called "text-based user interface" (TUI), which is quite
+reminiscent of a graphical user interface, except that a user interacts with it
+by issuing commands and/or using keyboard shortcuts instead of relying on mouse
+clicks and/or gestures. 
+
+At the bottom of the TUI, `nano` shows a short reference of useful shortcuts:
+
+```
+  ^G Get Help      ^O Write Out     ^W Where Is     ...
+  ^X Exit          ^R Read File     ^\ Replace      ...
+```
+
+Here, `^` indicates the Ctrl character. For instance, type Ctrl+o to save
+(i.e., "write out") the file you are editing. `nano` will now prompt you:
+
+```
+  File Name to Write: poem.txt
+```
+
+Type Enter to confirm and overwrite `poem.txt`. To exit `nano`, type Ctrl+x.
+
+`vim` also uses a TUI by default, while `emacs` can be started in this mode
+with the command-line argument `-nw` (i.e., no window system). So `vim` and
+`emacs` can be used to similarly edit `poem.txt`, but they are far less
+friendly to beginners.
+
+A typical problem that beginning users have is how exit either `vim` or `emacs`
+once they open them. In `vim`, you can press Esc to enter a so-called "command
+mode", enter the command `:q` and press Enter. In `emacs`, you use the keyboard
+sequence Ctrl+x, Ctrl+c. Figuring out how to edit and save files in either
+`vim` or `emacs` is left as an exercise for the bored reader. Else, continue
+with `nano`.
+
+### Exercises
+
+1. Open `poem.txt` in `nano`.
+
+2. Cut out the first line and paste it (uncut) at the bottom of the poem. Save
+the new file.
+
+3. Determine the number of lines and characters in the poem using `nano`. How
+many characters are there in the longest line?
+
+4. Copy the entire poem beneath itself without doing this line-by-line. Hint:
+use "Read File".
+
+## `mv` and `&&`
+
+`mv` can be used to move/rename files. It takes at least two command-line
+arguments, the source file path and a target file path. If you supply more than
+2 arguments, all files listed before the last argument will be moved to the
+folder designated by the last argument.
+
+`&&` can be used to chain commands together such that the second is executed if
+and only if, the first one succeeds.
+
+```
+mv poem.txt poem.txt.long && mv poem.txt.long poem.txt
+```
+
+### Exercises
+
+1. Create the directories `Andromeda`, `Corvus`, `Crux`, and `Lynx` in your
+home directory. Create a directory `Constellations` and move all the
+aforementioned directories into this one.
+
+2. Remove the folder `Constallations`.
+
+3. Do exercises 3 and 4 above (relating to `nano`) using `wc`, `cat`, `>`,
+`&&`, and `mv`. OBS! You can't read and write the same file in the same
+command. For task 4, you will need to use a temporary file.
+
+## Shell Scripts 101
+
+Composing small utilities to form complicated commands is fun, but it is also
+hard work. We can save our work by encoding a command into a so-called shell
+script — a file containing shell commands. In effect, we are creating a utility
+of our own.
+
+Let's walk through creating a shell-script for doubling the contents of a file.
+
+First, open a file `double.sh` in `nano`. The `.sh` extension follows the
+convention that shell scripts should have the filename extensions `.sh`,
+although this does not really make it a "shell script".
+
+`double.sh`, as a command-line utility, will take a command line argument
+(`$1`), regard it as a path to an existing file, `cat` this file twice into a
+temporary file (`$1.double`), and if this succeeds, move `$1.double` to `$1`,
+replacing the original file. Here, `$1` is a shell variable referring to the
+first command-line argument. If no such argument is given, `$1` is an empty
+string.
+
+Write the following to `double.sh` using `nano`:
+
+```
+cat $1 $1 > $1.double && mv $1.double $1
+```
+
+Now, to run this shell script, pass it as an argument to the program `bash`:
+
+```
+~$ wc -l poem.txt
+       4 poem.txt
+~$ bash double.sh poem.txt
+~$ wc -l poem.txt
+       8 poem.txt
+```
+
+`double.sh` is still far from a conventional command-line utility. It is a lot
+of work typing `bash double.sh` instead of just `double`. We will come back to
+how you can do this later.
+
+## `file` and `which`
+
+In a Unix-like operating system, everything is a file. Furthermore, it is the
+contents, or the metadata of a file (not e.g., a filename extension), that
+determines the _type_ of a file.
+
+The `file` utility exists to help users "guess" the type of a file. Its usage
+is simple:
+
+```
+~$ file poem.txt
+poem.txt: ASCII text
+~$ file double.sh
+double.sh: ASCII text
+~$ file 1/
+1/: directory
+~$ file .
+.: directory
+```
+
+When you type a program name in your shell, this program must exist as an
+executable somewhere on your filesystem. You can use `which` to figure out what
+a given program name resolves to.
+
+In Unix-like operating systems it is conventional to have short names (aliases)
+for more concrete programs. One such popular program is Python. Our server has
+Python version 2.7 installed, but it suffices to type `python` to start it up.
+The following sequence of `which` and `file` commands shows how we can figure
+out the concrete executable behind "`python`":
+
+```
+$ which python
+/usr/local/bin/python
+~$ file /usr/local/bin/python
+/usr/local/bin/python: symbolic link to python2
+~$ which python2
+/usr/local/bin/python2
+~$ file /usr/local/bin/python2
+/usr/local/bin/python2: symbolic link to python2.7
+~$ which python2.7
+/usr/local/bin/python2.7
+~$ file /usr/local/bin/python2
+/usr/local/bin/python2: symbolic link to python2.7
+~$ file /usr/local/bin/python2.7
+/usr/local/bin/python2.7: ELF 64-bit LSB executable ...
+```
+
+The last line indicates that we've reached the actual executable that gets
+loaded into memory when we type `python` in our shell. Until then, we merely
+follow so-called "symbolic links".
+
+### Exercises
+
+1. Which concrete executable does `sh` resolve to?
+
+2. Which concrete executable does `bash` resolve to?
+
+3. Which concrete executable does `which` resolve to?
