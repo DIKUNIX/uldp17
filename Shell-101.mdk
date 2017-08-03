@@ -5,8 +5,9 @@ with the operating system, often referred to as a "shell", or "terminal".
 
 A [Command-Line Interface
 (CLI)](https://en.wikipedia.org/wiki/Command-line_interface) interprets textual
-commands, rather than e.g.  mouse clicks, or gestures. A CLI presents you with
-a line where you can enter text, and "prompts" you to enter a command.
+commands (rather than mouse clicks, gestures, and alike). To this end, a CLI
+presents you with a "line" where you can enter text, and hereby "prompts" you
+to enter a command.
 
 You can then type away at the keyboard, and hit the Enter key to "enter" the
 command. The CLI responds by trying to understand your command, and if the
