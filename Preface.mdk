@@ -1,9 +1,14 @@
 # Preface
 
-The following notes were originally developed by Oleks and Morten in
-preparation for a 1-day course for high-school students in 2015. They were
-later expanded upon by Oleks and Troels in 2016 in preparation for a week-long
-course for (among others) 2nd-year students at DIKU. In 2017, Oleks rewrote the
-notes in [Madoko], and added a section on Makefiles.
+The following notes were originally written by Oleks and Morten in preparation
+for a 1-day course for some Danish high-school students[^ATU] in 2015. In 2016,
+they were expanded upon by Oleks and Troels in preparation for a week-long
+workshop for (among others) 2nd-year students at [DIKU](http://diku.dk). In
+2017, Oleks rewrote the notes in [Madoko], and added a section on Makefiles,
+repeating the workshop.
 
 [Madoko]: https://www.madoko.net
+
+[^ATU]: See also [Akademiet for Talentfulde Unge](http://ungetalenter.dk). The
+    original notes are available
+    [here](http://ungetalenter.dk/sites/default/files/aktiviteter/unix-like-data-processing.pdf).
