@@ -366,7 +366,7 @@ bash: cd: roses.txt: Not a directory
 ```
 
 > **TIP** If you want `ls -lah` to *just* list the file that you are looking
-> for, specify the file to `ls -lah`:
+> for, specify the file:
 >
 > ```
 > ~$ ls -lah roses.txt
