@@ -1,0 +1,98 @@
+# Introduction
+
+An *operating system* stands between the programs you are running (e.g. Chrome,
+Firefox, or Adobe Acrobat Reader), and the physical hardware packed in your
+computer. An operating system makes sure that the few hardware resources you
+have in store, are fairly shared among your programs. It also makes sure that
+programs don't unintentionally get in the way of one another, and in the end
+permits you to run multiple programs, simultaneously on one computer.
+
+Operating systems first appeared in the 1960s in response to high demand for
+computational power. At the time, different users (students, researchers, and
+staff) wanted to use the big clunky machines filling their basements for many
+different tasks. Some tasks took longer than others. Some tasks demanded more
+memory, or disk space than others. Early operating systems made sure to share
+those resources fairly among the users of what was often, one computer.
+
+As computers evolved and personal computers emerged, the focus shifted from
+supporting multiple users, to supporting multiple programs running
+simultaneously on one computer. Introvert personal computers quickly proved
+unproductive and boring: The Internet emerged to connect these marvelous
+machines into a World-Wide Web of raw computational power, where your operating
+system now also mediates your communication with the dangerous world that's out
+there.
+
+This enabled the rich desktop, laptop, and handheld devices that we have today.
+
+## Unix-Like Operating Systems
+
+UNIX® is a trademark of [The Open
+Group](http://www.unix.org/what_is_unix.html).  They certify which operating
+systems conform to their [Single UNIX
+Specification](http://www.unix.org/online.html).
+
+Colloquially however, "[Unix](https://en.wikipedia.org/wiki/Unix)" refers to a
+family of operating systems developed at Bell Labs in the 1970s, and their
+countless descendants. Modern descendants are better called
+``[Unix-like](https://en.wikipedia.org/wiki/Unix-like)'' operating systems. You
+might be familiar with such Unix-like operating systems as
+[Linux](https://en.wikipedia.org/wiki/Linux),
+[FreeBSD](https://en.wikipedia.org/wiki/FreeBSD),
+[OpenBSD](https://en.wikipedia.org/wiki/OpenBSD), [OS
+X](https://en.wikipedia.org/wiki/OS_X), and
+[iOS](https://en.wikipedia.org/wiki/IOS).  Most notoriously, [Microsoft
+Windows](https://en.wikipedia.org/wiki/Microsoft_Windows) is *not* a Unix-like
+operating system.
+
+A [1982 Bell Labs
+video](http://techchannel.att.com/play-video.cfm/2014/1/27/ATT-Archives-The-UNIX-System-Making-Computers-Easier-to-Use),
+recently made available under the [AT&T
+Archives](http://techchannel.att.com/showpage.cfm?ATT-Archives), starring such
+pioneers as [Ken Thompson](https://en.wikipedia.org/wiki/Ken_Thompson), [Dennis
+Ritchie](https://en.wikipedia.org/wiki/Dennis_Ritchie), and [Brian
+Kernighan](https://en.wikipedia.org/wiki/Brian_Kernighan), gives further
+insight into what the original UNIX systems were like, and the philosophy and
+history behind them.
+
+An important aspect of the history of UNIX is that it has always been guided by
+the needs of its users. This goal, quite incidentally, results in a philosophy:
+
+> Even though the UNIX system introduces a number of innovative programs and
+> techniques, no single program or idea makes it work well. Instead, what makes
+> it effective is an approach to programming, a philosophy of using the
+> computer.  Although that philosophy can't be written down in a single
+> sentence, at its heart is the idea that the power of a system comes more from
+> the relationships among programs than from the programs themselves. Many UNIX
+> programs do quite trivial tasks in isolation, but, combined with other
+> programs, become general and useful tools.
+>
+> *Brian Kernigan and Rob Pike. "The UNIX Programming Environment".Prentice
+> Hall, 1984*
+
+The ultimate purpose of this document is to introduce you to this philosophy of
+using the computer. This philosophy is likely to be different from what you are
+accustomed to; and yet, it stands on the shoulders of many humble pioneers of
+modern operating systems.
+
+The reason that this way of using the computer is not in wide-spread adoption
+is perhaps due to:
+
+1. a general public disinterest in computer programming,
+2. the general public fondness of [graphical user
+interfaces](http://en.wikipedia.org/wiki/Graphical_user_interface) , and
+3. the resulting sectarianism of those who practice what we preach.
+
+Last, but not leat, many aspects of a Unix-like operating system are ultimately
+about *freedom*: the freedom to chose how to set up your computer.  That is
+"free" as in free will, and not as in free beer. The price you pay for this
+freedom is sometimes your patience and your time.
+
+## Logging In On Our Linux Box
+
+For Windows users we recommend installing
+[PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html). For
+OS X and Linux users, we recommend installing
+[Mosh](https://mosh.mit.edu/#getting). Mosh is also available as a [Chrome
+Extension](https://chrome.google.com/webstore/detail/mosh/ooiklbnjmhbcgemelgfhaeaocllobloj),
+or an [Android
+App](https://play.google.com/store/apps/details?id=com.sonelli.juicessh).
