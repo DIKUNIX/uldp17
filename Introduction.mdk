@@ -66,8 +66,8 @@ the needs of its users. This goal, quite incidentally, results in a philosophy:
 > programs do quite trivial tasks in isolation, but, combined with other
 > programs, become general and useful tools.
 >
-> *Brian Kernigan and Rob Pike. "The UNIX Programming Environment".Prentice
-> Hall, 1984*
+> *Brian Kernigan and Rob Pike. "The UNIX Programming Environment". Prentice
+> Hall, 1984.*
 
 The ultimate purpose of this document is to introduce you to this philosophy of
 using the computer. This philosophy is likely to be different from what you are
