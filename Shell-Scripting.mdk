@@ -25,7 +25,7 @@ program, there are two things you must do.  First, you must add a
 
 A shebang tells the operating system what kind of code is contained in the
 file[^ShebangWindows].  In this case, we tell it to execute it using whatever
-`sh` maps to in our current envirnment (equivalent to typing `sh` in the
+`sh` maps to in our current environment (equivalent to typing `sh` in the
 terminal).
 
 [^ShebangWindows]: Windows is not fond of shebangs, and instead relies on the
