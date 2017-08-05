@@ -16,28 +16,29 @@ script ends.)  The `.sh` extension is irrelevant to the operating system — you
 can call it whatever you want and it will still work.
 
 If you want to make your script feel even more like an ordinary
-program, there are two things you must do.  First, you must add a
-*shebang* as the first line of the file:
+program, there are two things you must do:
 
-```
-#!/usr/bin/env sh
-```
+1.  You should add a *shebang* as the first line of the file:
 
-A shebang tells the operating system what kind of code is contained in the
-file[^ShebangWindows].  In this case, we tell it to execute it using whatever
-`sh` maps to in our current environment (equivalent to typing `sh` in the
-terminal).
+    ```
+    #!/usr/bin/env sh
+    ```
 
-[^ShebangWindows]: Windows is not fond of shebangs, and instead relies on the
-    filename extension.
+    A shebang tells the operating system what kind of code is contained in the
+    file[^ShebangWindows].  In this case, we tell it to execute it using whatever
+    `sh` maps to in our current environment (equivalent to typing `sh` in the
+    terminal).
 
-You must also mark the file as *executable*, or else the operating
-system will refuse to start it.  This is done with the `chmod`
-command:
+    [^ShebangWindows]: Windows is not fond of shebangs, and instead relies on the
+        filename extension.
 
-```
-~$ chmod +x myscript.sh
-```
+2.  You should mark the file as *executable*, or else the operating
+    system will refuse to start it.  This can be done with the `chmod`
+    command:
+
+    ```
+    ~$ chmod +x myscript.sh
+    ```
 
 Now we can launch the script without explicitly invoking `sh`, just by
 passing the path to the script:
