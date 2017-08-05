@@ -104,7 +104,7 @@ To print the exit code of the above command, we echo the `$?` variable:
 2
 ```
 
-By convention, an exit code of 0 means "success", and other exit codes
+By convention, the exit code 0 means "success", and other exit codes
 are used to indicate errors.  In this case, it seems that `ls` uses
 the exit code `2` to indicate that the specified file does not exist.
 It may use a different exit code if the file exists, but you do not
