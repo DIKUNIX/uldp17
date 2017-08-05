@@ -9,14 +9,22 @@ Email: athas@sigkill.dk
 
 Toc depth: 2
 
+[INCLUDE=webtoc]
+
 [TITLE]
 
-[INCLUDE=Preface.mdk]
-
+~ Begin SidePanel
 [TOC]
+~ End SidePanel
+
+~ Begin MainPanel
+
+[INCLUDE=Preface.mdk]
 
 [INCLUDE=Introduction.mdk]
 
 [INCLUDE=Shell-101.mdk]
 
 [INCLUDE=More-Data-For-Your-Shell.mdk]
+
+~ End MainPanel
