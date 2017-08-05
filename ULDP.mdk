@@ -10,6 +10,7 @@ Email: athas@sigkill.dk
 Toc depth: 2
 
 [INCLUDE=webtoc]
+[INCLUDE=webanchors]
 
 [TITLE]
 
@@ -26,5 +27,7 @@ Toc depth: 2
 [INCLUDE=Shell-101.mdk]
 
 [INCLUDE=More-Data-For-Your-Shell.mdk]
+
+[INCLUDE=Advanced-Data-Manipulation.mdk]
 
 ~ End MainPanel

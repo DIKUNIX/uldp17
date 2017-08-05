@@ -1,0 +1,366 @@
+# Advanced Data Manipulation
+
+## `grep`
+
+Let's say we want to find all the requests that were made using (supposedly)
+the Google Chrome web browser.
+
+`grep` is a utility that can print the lines matching a pattern.
+
+> **NOTE** `grep` is a slightly old utility, and so we will always use the more
+> modern, *extended* variant of `grep`, be specifying the `-E` option. This is
+> equivalent to using the `egrep` utility instead.
+
+```
+~$ cat access.log | grep -E "Chrome"
+...
+130.225.98.193...Chrome/45.0.2454.85 Safari/537.36
+...
+~$
+```
+
+The "patterns" that you can specify to `grep` are called *[regular
+expressions](https://en.wikipedia.org/wiki/Regular_expression)*. Regular
+expressions offer a powerful syntax for matching and replacing strings. They
+deserve a special role in theoretical Computer Science. We will only take a
+look at some simple, practical elements of regular expressions.
+
+For instance, the Internet Explorer web browser is typically identified by the
+string `Trident` occurring in the browser string. Here's how you would find all
+those requests that were made using _either_ Google Chrome or Internet
+Explorer:
+
+```
+~$ cat access.log | grep -E "Chrome|Trident"
+...
+130.225.98.193...Chrome/45.0.2454.85 Safari/537.36
+...
+104.148.44.191...Windows NT 6.1; Trident/5.0
+...
+~$
+```
+
+(If this doesn't work, i.e. we have no Internet Explorer users in the audience,
+try `Firefox` instead.)
+
+The character `|` is a regular expression *metacharacter*, and serves to say
+that the line should contain the string either `Chrome` _or_ `Trident`.
+
+The metacharacter `|` can be used multiple times. For instance, the Firefox web
+browser typically identifies itself with the string `Gecko`. Here is how you
+would find all the requests made with either Google Chrome, Internet Explorer
+or Firefox.
+
+```
+~$ cat access.log | grep -E "Chrome|Trident|Gecko"
+...
+130.225.98.193...Chrome/45.0.2454.85 Safari/537.36
+...
+104.148.44.191...Windows NT 6.1; Trident/5.0
+...
+109.200.246.88...Gecko/20100101 Firefox/9.0.1
+...
+~$
+```
+
+You can also ask `grep` for the inverse match, i.e. those lines not matching
+the given pattern using the `-v` option:
+
+```
+~$ cat access.log | grep -Ev "Chrome|Trident|Gecko"
+...
+130.225.98.193...curl/7.44.0
+...
+213.211.253.38...x00_-gawa.sa.pilipinas.2015
+...
+122.154.24.254...-
+...
+~$
+```
+
+> **TIP** To get `grep` to match in a *case-insensitive* manner. e.g. to match
+> strings like `chrome` even though the pattern says `Chrome`, use the `-i`
+> option. (An example follows further below.)
+
+A regular expression is a string of characters. Every character is either a
+metacharacter, or a literal character. For instance, in the regular expression
+`Chrome`, all characters are literal characters. Here is an overview of a
+couple useful metacharacters:
+
+| Metacharacter | Meaning              |
+|---------------|----------------------|
+| `|` (pipe)    | Alternation (choice) |
+| `^` (caret)   | Start of string      |
+| `$` (dollar)  | End of string        |
+| `.` (dot)     | Any character        |
+
+If you actually want to match what is otherwise a metacharacter, you will need
+to *escape* it.  Similarly to strings in `bash`, this is done by prefixing the
+metacharacter with the metacharacter `\`. For instance, `\|`, `\^`, `\$`, and
+`\.`
+
+Consider our little poem from before:
+
+```
+~$ cat poem.txt
+Roses are red,
+Violets are blue,
+Sugar is sweet,
+And so are you.
+~$
+```
+
+Here is how we would find all the lines ending with a `.` (dot):
+
+```
+~$ cat poem.txt | grep -E "\.$"
+And so are you.
+```
+
+What if we wanted to find all the strings ending with a `.` (dot) *or* a `,`
+(comma)? To this end, we could use *character groups*. A character group is a
+list of characters acceptable at a given position in the string.
+
+Character groups are perhaps best shown by example. All the following
+regular expressions match a single digit, i.e. a string that is either `0`,
+`1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, or `9`:
+
+1. `^[01234569]$`
+2. `^[0-9]$`
+3. `^[0-56-9]$`
+
+A computer represents characters as numbers. There exists a range of standard
+ways of encoding characters as numbers, with perhaps the most ubiquitous being
+the [UTF-8](http://www.utf8-chartable.de/) character encoding.
+
+Character ranges are based on these numeric representations of the characters
+involved. For instance:
+
+1. The range `[a-z]` will contain the lower-case English alphabetic characters.
+
+2. The range `[a-zA-Z]` contains both lower-case and upper-case English
+alphabetic characters.
+
+3. The range `[a-zæøå]` contains the lower-case Danish alphabetic characters.
+
+4. The range `[a-zæøåA-ZÆØÅ]` contains the lower and upper-case Danish
+alphabetic characters.
+
+5. The range `[z-a]` contains no characters because the character code for `z`
+is larger than the character code for `a`.
+
+> **TIP** If you want to quickly find the character code of a particular
+> character, right-click in your Internet browser, e.g. Google Chrome, and
+> bring up the HTML inspector. (Typically called something like "Inspect this
+> element".) In the inspector window, you should be able to find a JavaScript
+> *console*. Enter the following command in the console:
+>
+> ```
+> > "A".charCodeAt(0)
+> 65
+> ```
+>
+> Use any character you'd like in place of `A`.
+
+These regular expressions use a couple new metacharacters:
+
+| Metacharacter | Meaning               |
+|---------------|-----------------------|
+| `[`           | Start a character group |
+| `-`           | Character range[^dash-meta] |
+| `]`           | End a character group   |
+
+[^dash-meta]: The `-` character _only_ acts a metacharacter between `[` and `]`,
+  and you don't have to escape it elsewhere.
+
+Getting back to our original problem, here is how we would find all the lines
+ending with a `.` (dot) *or* a `,` (comma) in our little poem:
+
+```
+~$ cat poem.txt | grep -E "[\.,]$"
+Roses are red,
+Violets are blue,
+Sugar is sweet,
+And so are you.
+```
+
+How about those lines beginning with a flower?
+
+This requires another little regular expression construct called *capturing
+groups*.  Why these groups are called "capturing" will become clear shortly.
+For now, let us see how they help us solve our problem: A capturing group allows
+us to put a regular expression inside a regular expression, and treat it like a
+character.
+
+For instance, here is how we could find all those lines that begin with a flower
+(note the use of the case-insensitive option):
+
+```
+~$ cat poem.txt | grep -Ei "^(roses|violets)"
+Roses are red,
+Violets are blue,
+~$
+```
+
+This leaves us with the following additional metacharacters:
+
+| Metacharacter | Meaning               |
+|---------------|-----------------------|
+| `(`           | Start a capturing group |
+| `)`           | End a capturing group   |
+
+Last, but not least, the elements of a regular expression can be quantified, to
+indicate that some parts of the string repeat a number of times.
+
+| Suffix | Meaning               |
+|--------|-----------------------|
+| `*`           | This repeats 0 or more times |
+| `+`           | This repeats 1 or more times|
+| `{` $n$ `}`     | This repeats exactly $n$ times |
+| `{` $n$ `,}`     | This repeats $n$ or more times |
+| `{` $n$ `,` $m$ `}` | This repeats between $n$ and $m$ times |
+
+Here `*`, `+`, `{`, `,`[^comma-meta], and `}` are all metacharacters.
+
+[^comma-meta]: The `,` character only acts as a metacharacter between `{` and
+  `}`.
+
+For instance, to find all the entries in the access log, with the browser
+string indicating that the requesting party is using Google Chrome on Linux, we
+could do this:
+
+```
+~$ cat access.log | grep -E "Linux.*Chrome"
+...
+...(X11; Linux x86_64)...Chrome/45.0.2454.85 Safari/537.36
+...
+~$
+```
+
+Here we accept any character between the *substrings* `Linux` and `Chrome`, 0
+or more times. The result is those strings that contain both `Linux` and
+`Chrome` (in that order).
+
+> **TIP** The above quantifiers are *greedy*: They will consume all possible
+> occurrences. Sometimes, what you want is to consume up until the first
+> occurrence of the next string. Follow the quantifier with `?` to make it
+> *non-greedy*.
+
+### Exercises
+
+1. How many requests were made from Google Chrome?
+
+2. How many requests were made from neither Google Chrome, Internet Explorer,
+or Firefox?
+
+3. If the visitor does not supply a browser string, our web server writes the
+browser string `-` (dash) to the log. Find the IP addresses of those visitors
+that do not supply a browser string.
+
+4. Complete the first 14 lessons on http://regexone.com/. The tool is very
+permissive, and there are multiple answers which will be deemed "correct". For
+every lesson, try to come up with as many ways as possible to get the tool mark
+your answer as "correct".
+
+## `sed`
+
+`sed` is a tool for transforming streams of data. Transformation can take place
+using regular expressions.
+
+> **NOTE** `sed`, like `grep`, is a pretty old tool, so we will also always use
+> the more modern, *extended* variant of `sed`, using `sed -E`.
+>
+> Some operating systems (most notably, OS X) do not have an extended variant
+> of `sed`. In most cases, it is safe to replace all occurrences of `sed -E`
+> below with `perl -pe`.
+
+We can use `sed` for a lot of things (e.g., to [play
+Tetris](https://github.com/uuner/sedtris)). We will only use `sed` for
+replacing the substrings of every line in a file, matching a regular expression
+with something else. The general way to call `sed` when doing this is as
+follows:
+
+`~$ sed -E "s/` regular expression `/` replace expression `/g"`
+
+For instance, we can replace all occurrences of `"` in our log-file with `___`.
+
+```
+~$ cat access.log | sed -E "s/\"/___/g"
+...
+109.200.246.88___2015-09-20T18:37:08-04:00___...
+...
+~$
+```
+
+The second argument `sed` (e.g. `"s/\"/___/g"`) is a `sed`-command. We are only
+concerned with search-and-replace commands. These commands start with an `s`,
+and are followed by a regular expression and a *replace expression*, started,
+separated, and ended by a `/`. (So `/` is now also a metacharacter, and must
+otherwise be escaped.) The final `g` signifies that we want to replace *all*
+matching substrings on every line (mnemonic: `g` for _global_).
+
+A more interesting use of `sed` is using capturing groups. Capturing groups are
+so-called because the substrings they capture become available in a replace
+expression. To insert a substring matched in a capturing group, type `\`
+followed by the number of capturing group in the regular expression, numbered
+from left to right, starting at 1.
+
+For instance, instead of using `cut`, we could've used `sed` to cut up our
+file:
+
+```
+~$ cat access.log | sed -E "s/^(.*)\"(.*)\"(.*)\"(.*)$/\1/g"
+...
+93.174.93.218
+140.117.68.161
+...
+~$ cat access.log | sed -E "s/^(.*)\"(.*)\"(.*)\"(.*)$/\2/g"
+...
+2015-09-20T13:08:52-04:00
+2015-09-20T13:52:37-04:00
+...
+~$
+```
+
+Unlike with `cut`, with `sed` we can even reorder the fields!
+
+```
+~$ cat access.log | sed -E "s/^(.*)\"(.*)\"(.*)\"(.*)$/\2\"\1/g"
+...
+2015-09-20T13:52:37-04:00"104.148.44.191
+2015-09-20T13:52:38-04:00"104.148.44.191
+...
+~$
+```
+
+### Exercises
+
+1. The timestamps in our access log are in [ISO
+8601](https://en.wikipedia.org/wiki/ISO_8601) format. List all the unique
+access dates in the format date`-`month`-`year.
+
+2. List all the unique access times in the format hour`.`minte.
+
+3. Replace the ISO 8601 date and time by the above. Don't change any other
+fields in the log.
+
+4. Strip all digits and punctuation from the browser string.
+
+5. List the number of requests made from each unique IP. Use following format:
+IP (two spaces) count. So, strip the leading spaces and swap the columns that
+you get after `uniq -c`.
+
+6. List the number of requests in each hour of the day (use the same time zone
+as the server, so just cut out the hour of every entry in the log). Use
+following format: hour (two spaces) count. So, strip the leading spaces and
+swap the columns that you get after `uniq -c`.
+
+## Other Languages
+
+Most general-purpose programming languages come with some sort of a regular
+expression engine. Some are more advanced than others, sometimes breaking the
+otherwise elegant theory of regular languages (this theory is beyond the scope
+of these notes). The syntax of regular expressions sometimes also varies.
+
+You can find a good overview of regular expressions, and what they look like in
+various languages at http://www.regular-expressions.info/.
