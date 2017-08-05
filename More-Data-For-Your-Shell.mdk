@@ -84,7 +84,7 @@ print, using the `-n` option:
 ~$
 ```
 
-## `cut`
+## `cut` and `paste`
 
 `cut` is a utility that can cut up the lines of a file.
 
@@ -133,6 +133,8 @@ increasing order:
 ...
 ~$
 ```
+
+TODO: `paste`
 
 ### Exercises
 
@@ -232,3 +234,7 @@ log has data.
 
 7. List the number of requests in each hour of the day (use the same time zone
 as the server, so just cut out the hour of every entry in the log).
+
+## `cmp`, `comm`, and `diff`
+
+TODO
