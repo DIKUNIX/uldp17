@@ -185,9 +185,10 @@ input=$2
 output=$3
 ```
 
-The arguments to the script are stored in variables named `$n`, where
-`n` is a number.  We create new variables with more descriptive names
-for holding the arguments.
+The arguments to the script are stored in variables named `$n`, where `n` is a
+number.  Using such ill-descriptive names is a sure way to encrypt your
+shell-script. We create new variables with more descriptive names for holding
+the arguments.
 
 ```
 if ! ($program < $input | cmp $output /dev/stdin); then
