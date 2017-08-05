@@ -262,7 +262,7 @@ permissive, and there are multiple answers which will be deemed "correct". For
 every lesson, try to come up with as many ways as possible to get the tool mark
 your answer as "correct".
 
-## `sed`
+## `sed` or `perl`
 
 `sed` is a tool for transforming streams of data. Transformation can take place
 using regular expressions.
