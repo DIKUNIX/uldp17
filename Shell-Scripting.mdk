@@ -78,7 +78,7 @@ probably should) refer to earlier scripts.
 Copying commands into a file is a good starting point, but shell scripting
 first becomes a truly powerful tool when you add *control flow* (conditionals
 and branches) to your scripts.  While much less powerful than a conventional
-programming language, shell script is a convenient way to automate workflows
+programming language, a shell script is a convenient way to automate workflows
 that involve Unix-like programs.
 
 In fact, control flow is so esoteric in shell scripting that many users resort
