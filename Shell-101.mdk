@@ -566,8 +566,8 @@ There are two classical text-editors in a Unix-like environment: `vim` and
 the other.  More humble users use whatever suits the task at hand. For
 instance, `vi` (a slimmer, older version of `vim`) is available on most systems
 out of the box, and so `vim` proliferates in server environments, while `emacs`
-has often been a tool you need to explcitly install, making it more suitable in
-a desktop environment.
+has flexible user-interface customization options, making it more suitable in a
+desktop environment.
 
 Another text editor available on many systems out of the box is `nano`. To
 avoid duels over the choice of text-editor, and still teach you a somewhat
