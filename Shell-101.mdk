@@ -626,6 +626,8 @@ use "Read File".
 
 ## `mv` and `&&` { #sec-shell-mv-and }
 
+TODO: `||` and `exit`
+
 `mv` can be used to move/rename files. It takes at least two command-line
 arguments, the source file path and a target file path. If you supply more than
 2 arguments, all files listed before the last argument will be moved to the
@@ -651,6 +653,8 @@ aforementioned directories into this one.
 command. For task 4, you will need to use a temporary file.
 
 ## Shell Scripts 101 { #sec-shell-shell-scripts }
+
+TODO: `bash` and `sh` (also using `exit`)
 
 Composing small utilities to form complicated commands is fun, but it is also
 hard work. We can save our work by encoding a command into a so-called shell
