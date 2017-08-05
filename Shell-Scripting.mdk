@@ -1,0 +1,266 @@
+# Shell Scripting
+
+One useful aspect of a Unix-like environment is the ease of turning manual
+workflows into automated scripts.  If you find yourself typing some specific
+sequence of commands frequently, you can put them in a file (e.g.,
+`myscript.sh`), and run it:
+
+```
+~$ sh myscript.sh
+```
+
+This will cause the contents of the script to be executed just as if you had
+typed it yourself.  (Actually, there are some exotic differences — primary
+among these is that using `cd` in the script will not have an effect once the
+script ends.)  The `.sh` extension is irrelevant to the operating system — you
+can call it whatever you want and it will still work.
+
+If you want to make your script feel even more like an ordinary
+program, there are two things you must do.  First, you must add a
+*shebang* as the first line of the file:
+
+```
+#!/usr/bin/env sh
+```
+
+This line tells the operating system what kind of code is contained in the
+file.  In this case, we tell it to execute it using whatever `sh` maps to in
+our current envirnment (equivalent to typing `sh` in the terminal).
+
+You must also mark the file as *executable*, or else the operating
+system will refuse to start it.  This is done with the `chmod`
+command:
+
+```
+~$ chmod +x myscript.sh
+```
+
+Now we can launch the script without explicitly invoking `sh`, just by
+passing the path to the script:
+
+```
+~$ ./myscript.sh
+```
+
+In this case, the path indicates the current directory, but if the
+script was somewhere else, we could run it as:
+
+```
+~$ ~/scripts/myscript.sh
+```
+
+If you want to be able to run the script just by typing `myscript.sh`,
+you must add its containing directory to the `$PATH` environment
+variable. We will briefly cover this later.
+
+### Exercises
+
+Write a shell script for each of the following. Latter scripts can (and
+probably should) refer to earlier scripts.
+
+1. List the IP addresses that accessed the server.
+
+2. Count how many times each unique IP address occured.
+
+3. Get the requests made (supposedly) from Firefox.
+
+4. Get the IP addresses of Firefox all (supposed) users.
+
+5. Replace the ISO 8601 dates as we did above.
+
+## Basic Control Flow
+
+Copying commands into a file is a good starting point, but shell scripting
+first becomes a truly powerful tool when you add *control flow* (conditionals
+and branches) to your scripts.  While much less powerful than a conventional
+programming language, shell script is a convenient way to automate workflows
+that involve Unix-like programs.
+
+In fact, control flow is so esoteric in shell scripting that many users resort
+to Unix-like utilities to achieve something comparable to higher-order
+functional programming (e.g., `find` with the `-exec` argument, which we will
+cover later).
+
+First, it is important to understand the notion of an *exit code*.
+Every program and shell command finishes by returning a number in the
+interval 0 to 255.  By default, this number is not printed, but it is
+stored in the *shell variable* `$?`.  For example, we can attempt to
+`ls` a file that does not exist:
+
+```
+~$ ls /foo/bar
+ls: cannot access /foo/bar: No such file or directory
+```
+
+To print the exit code of `ls`, we echo the `$?` variable:
+
+```
+~$ echo $?
+2
+```
+
+By convention, an exit code of 0 means "success", and other exit codes
+are used to indicate errors.  In this case, it seems that `ls` uses
+the exit code `2` to indicate that the specified file does not exist.
+It may use a different exit code if the file exists, but you do not
+have permission to view it.  Note what happens if we check the `$?`
+variable again:
+
+```
+~$ echo $?
+0
+```
+
+The exit code is now 0!  This is because the variable `$?` is overwritten every
+time we run a command.  In this case, it now contained the exit code of our
+first `echo` command, which completed succesfully.  It is often a good idea to
+save away the value of `$?` in some other shell variable, as most commands will
+overwrite `$?`.
+
+Typically we are not much concerned with the specific code being
+returned — we only care whether it is 0 (success) or anything else
+(failure).  This is also how the shell `if`-`then`-`else` construct
+operates.  For example:
+
+```
+~$ if ls /foo/bar ; then echo ':-)'; else echo ':-('; fi
+ls: cannot access /foo/bar: No such file or directory
+:-(
+~$ if ls /dev/null ; then echo ':-)'; else echo ':-('; fi
+/dev/null
+:-)
+```
+
+The semicolons are necessary to indicate where the arguments to `echo`
+stop.  We could also use a line break instead.
+
+### A Simple Testing Program
+
+Let us try to write a simple practical shell script.  We want to
+create a program, `utest.sh`, that is invoked as follows:
+
+```
+~$ sh utest.sh prog input_file output_file
+```
+
+`utest.sh` will execute the program `prog` and feed it input from
+`input_file`.  The output from `prog` will be captured and compared to
+`output_file`, and if it differs, `utest` will complain.  Essentially,
+we are writing a small testing tool that is used to test whether some
+program, given some input, produces some specific output.  You could
+use it to create tests for the log file analysis scripts you wrote
+previously.
+
+I will go through `utest.sh` line by line.  Some new concepts will be
+introduced as necessary.
+
+```
+#!/usr/bin/env sh
+```
+
+First we have the shebang.  While not strictly necessary, it is good
+style.
+
+```
+if test $# -lt 3; then
+  echo "Usage: <program> <input> <output>"
+  exit 1
+fi
+```
+
+The *number* of arguments given to the script is stored in the
+variable `$#`.  We use the `test` program to check whether it is
+less than (`-lt`) 3.  If so, we complain to the user and exit with a
+code indicating error.
+
+```
+program=$1
+input=$2
+output=$3
+```
+
+The arguments to the script are stored in variables named `$n`, where
+`n` is a number.  We create new variables with more descriptive names
+for holding the arguments.
+
+```
+if ! ($program < $input | cmp $output /dev/stdin); then
+    echo 'Failed.'
+fi
+```
+
+A lot of things are happening here.  Let's take them one by one.
+
+```
+$program < $input
+```
+
+This runs the program stored in the variable `$program` with input
+from the file named by the variable `$input`.
+
+```
+($program < $input | cmp $output /dev/stdin)
+```
+
+We pipe the output of `$program` into the `cmp` program.  At its most
+basic operation, the `cmp` program takes two files as arguments, and
+prints in-how-far they differ.  In this case, the first file is `$output`
+(remember, the file containing *expected* output), as well as the
+special pseudo-file `/dev/stdin`, which corresponds to the input read
+from the pipe. 
+
+```
+if ! ($program < $input | cmp $output /dev/stdin); then
+    echo 'Failed.'
+fi
+```
+
+The entire pipeline is wrapped in parentheses and prefixed with `!`.
+The `!` simply inverts the exit code of a command - this is because
+`cmp` returns 0 ("true") if the files are *identical*, while we want
+to enter the branch if they are *different*.
+
+### Exercises
+
+1. Turn your command lines for the previous set of exercises into shell scripts.
+
+2. Use `utest.sh` to test your shell scripts.
+
+3. Write a master test script that automatically runs `utest.sh` on
+all your scripts and their corresponding input-output files.
+
+4. Learn about shell script `while`-loops and the `shift` command, and
+write a version of `utest.sh` called `mtest.sh` that can operate on
+any number of test sets.  The script should take as argument the
+program to test, followed by input-output file pairs. For instance,
+
+    ```
+    ~$ ./mtest.sh prog in.1 out.1 in.2 out.2
+    ```
+
+## `PATH`
+
+Previously, you learned how we can use `which` and `file` to find the concrete
+executable behind a shell command. To make your shell scripts feel as native as
+other shell commands, you should add the directory containing those
+(executable) shell scripts to your `PATH` environment variable.
+
+One way to do this is to do this in your `~/.profile`. This file is loaded by
+most shells _upon login_. That is, after modifying this file, it is best you
+log out and log in again.
+
+For instance, to add your home directory to your `PATH`, add the following line
+at the end of your `~/.profile`:
+
+```
+export PATH="$HOME:$PATH"
+```
+
+The directories are separated by `:` in `PATH`, whole `$HOME` and `$PATH` are
+shell variables for your home directory and current `PATH` environment
+variable. The `export` qualifier makes sure to export this change to your
+environment variables which persist after `~/.profile` is read.
+
+Remember to log out and log in again to see the changes applied. Now you should
+be run shell scripts in your home directory from anywhere, and without
+prefixing them with `./`, or more treacherous paths.

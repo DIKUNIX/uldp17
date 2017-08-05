@@ -30,4 +30,6 @@ Toc depth: 2
 
 [INCLUDE=Advanced-Data-Manipulation.mdk]
 
+[INCLUDE=Shell-Scripting.mdk]
+
 ~ End MainPanel
