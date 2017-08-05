@@ -1,0 +1,234 @@
+# More Data For Your Shell
+
+The world would be pretty boring if all you could do was write poems and mess
+about with your files and directories. It is time to get on the Internet!
+
+## `curl`
+
+`curl` can fetch a URL and write the fetched data to your shell.
+
+If you are reading this, you have already made your way to our server,
+https://uldp16.onlineta.org.
+
+This machine runs a web server that exposes its access log to the world. Of
+course, everyone on the Internet can make all sorts of HTTP requests to this
+web server.
+
+Let's try to fetch the access log:
+
+```
+~$ curl https://uldp16.onlineta.org/access.log.csv.txt
+...
+...GET /phpMyAdmin/scripts/setup.php HTTP/1.1"-
+...
+...GET /admin/basic HTTP/1.1"libwww-perl/6.05
+...
+...Googlebot/2.1; +http://www.google.com/bot.html)
+...
+...GET /Ringing.at.your.dorbell!...x00_-gawa.sa.pilipinas.2015
+...
+~$
+```
+
+> **TIP** Use Shift + PgUp to scroll up, and Shift + PgDn to scroll down in
+> your shell.
+
+If you `curl` the access log one more time, at the bottom of the file you will
+see a line ending with something like
+
+```
+...GET /access.log.csv.txt HTTP/1.1"curl/7.38.0
+```
+
+That's you!
+
+Remember the dangerous world that's out there? This is it! This is what happens
+when you expose your computer to the Internet. All sorts of adventerous
+crawlers try to creep in on you.
+
+### Exercises
+
+1. Make a local, snapshot copy of the access log. Save the log as `access.log`
+in your home directory.
+
+## `head` and `tail`
+
+When you have a pretty long file, such as a web server access log, you
+sometimes want to just get a glance of the start of the file, or the end of the
+file.
+
+`head` can be used to output the first part of a file:
+
+```
+~$ head access.log
+... (first 10 lines of access.log)
+~$
+```
+
+`tail` can be used to output the last part of a file:
+
+```
+~$ tail access.log
+... (last 10 lines of access.log)
+~$
+```
+
+For both `head` and `tail` you can specify the number of first or last lines to
+print, using the `-n` option:
+
+```
+~$ head -n 20 access.log
+... (first 20 lines of access.log)
+~$ tail -n 20 access.log
+... (last 20 lines of access.log)
+~$
+```
+
+## `cut`
+
+`cut` is a utility that can cut up the lines of a file.
+
+You may have noticed the silly `"` (double quotes) in the log file. They
+separate the 4 fields of the log file:
+
+1. IP (version 4) address of the requesting party.
+2. Timestamp of request.
+3. A description of the request.
+4. A so-called *browser string*: What the requesting party otherwise tells
+about itself: Typically some sort of a browser, program, or crawler name.
+
+This type of file is typically called a CSV-file. CSV stands for
+comma-separated values. You are probably familiar with Microsoft Excel, Google
+Sheets, Apple Numbers, or LibreOffice Calc. A CSV file maps naturally to a
+"spreadsheet": each row is a line in the file, with the columns separated by a
+"comma".
+
+The name CSV is unfortunate. Oftentimes, the separator is a semi-colon (`;`),
+and in our case a double quote (`"`). People use whatever separates the columns
+best (you will soon see how to do this). We use a double quote because double
+quotes can't occur in either a URL or a browser string.
+
+To get just the IP addresses of parties that have tried to access the server,
+we can cut up each line at `"` and select the first field:
+
+```
+~$ cat access.log | cut -d\" -f1
+...
+213.211.253.38
+213.211.253.38
+130.225.98.193
+...
+~$
+```
+
+You can select multiple fields, but they are always selected by `cut` in
+increasing order:
+
+```
+~$ cat access.log | cut -d\" -f1,3
+...
+213.211.253.38"x00_-gawa.sa.pilipinas.2015
+213.211.253.38"x00_-gawa.sa.pilipinas.2015
+130.225.98.193"curl/7.44.0
+...
+~$
+```
+
+### Exercises
+
+1. An IP (version 4) address is composed of 4 fields, each a number between 0
+and 255, typically separated by a `.` (dot). List the first field of every IP
+address in the access log.
+
+2. The server log the time access in [ISO
+8601](https://en.wikipedia.org/wiki/ISO_8601) format. List all the dates of the
+month on which the log was accessed.
+
+3. The HTTP request itself is described in the third column of the log file. It
+consists of 3 things:
+
+>  a. The [HTTP Method](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)
+>  used. Typically `GET`.
+>
+>  b. The resource that was requested. This is typically the tail of the URL
+>  that the crawler used, i.e. the URL after the leading
+>  `https://uldp16.onlineta.org` has been cut off.
+>
+>  c. The HTTP version used. Should be `HTTP/1.1` or `HTTP/1.0`.
+>
+>  List all the resources that were requested.
+
+## `sort` and `uniq`
+
+`sort` is a utility that can sort the lines of a file and output the sorted
+result.
+
+```
+~$ cat access.log | cut -d\" -f4 | sort
+...
+curl/7.44.0
+...
+x00_-gawa.sa.pilipinas.2015
+x00_-gawa.sa.pilipinas.2015
+...
+~$ cat access.log | cut -d\" -f1 | sort -n
+...
+130.225.98.193
+213.211.253.38
+213.211.253.38
+...
+~$
+```
+
+The `-n` option tells `sort` to sort in *alphanumeric* order rather than
+*lexicographic* order. For instance, in lexicographic order, `213.211.253.38`
+comes *before* `36.225.235.94`. In alphanumeric order, it comes *after*.
+
+See also the [man page for
+`sort`](http://man7.org/linux/man-pages/man1/sort.1.html) for other useful
+sorting options.
+
+`uniq` is a utility that can remove the immediate duplicates of lines.  If you
+have a sorted file, you can use `uniq` to output the unique lines of the
+original file.
+
+```
+~$ cat access.log | cut -d\" -f1 | sort -n | uniq
+...
+130.225.98.193
+213.211.253.38
+...
+~$
+```
+
+`uniq` also has the rather useful option that it can count the number of
+duplicate occurrences before it deletes them:
+
+```
+~$ cat access.log | cut -d\" -f1 | sort -n | uniq -c
+...
+     11 130.225.98.193
+      4 213.211.253.38
+...
+~$
+```
+
+### Exercises
+
+1. List the unique browser strings.
+
+2. Count how many times each browser string occurs.
+
+3. Count the total number of unique IP addresses that have tried to access the
+server.
+
+4. What are the different HTTP methods that have been used?
+
+5. Count the number of requests made in every day for which the access log has
+data.
+
+6. Count the number of *unique* requests made in every day for which the access
+log has data.
+
+7. List the number of requests in each hour of the day (use the same time zone
+as the server, so just cut out the hour of every entry in the log).
