@@ -555,7 +555,7 @@ drwxr-xr-x 10 alis alis 4.0K Sep 19 14:38 ..
 want to keep for future reference. (Don't remove `poem.txt`, or the `1`
 directory, we will use them shortly.)
 
-## Text-Editors 101 { #sec-shell-text-editors }
+## `nano` { #sec-shell-nano }
 
 Although we can read and write files using our various command-line utilities,
 in conjunction with clever shell tricks, this mode of operation can get a
