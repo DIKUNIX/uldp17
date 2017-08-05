@@ -97,7 +97,7 @@ stored in the *shell variable* `$?`.  For example, we can attempt to
 ls: cannot access /foo/bar: No such file or directory
 ```
 
-To print the exit code of `ls`, we echo the `$?` variable:
+To print the exit code of the above command, we echo the `$?` variable:
 
 ```
 ~$ echo $?
