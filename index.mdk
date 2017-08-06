@@ -37,6 +37,8 @@ machine will be provided at the workshop itself.
 
 [INCLUDE=Shell-Scripting.mdk]
 
+[INCLUDE=Makefiles.mdk]
+
 [INCLUDE=Conclusion.mdk]
 
 ~ End MainPanel
