@@ -15,6 +15,12 @@ command makes sense, by executing it. This execution may, or may not have a
 directly observable effect. If the execution terminates, you will be presented
 with another prompt, prompting for the next command.
 
+The shell typically also has a [Text-based User Interface
+(TUI)](https://en.wikipedia.org/wiki/Text-based_user_interface), meaning that
+if there is something to tell, it will do so by means of text. It is important
+for a user-friendly experience that the utilities you use in your shell have
+good text-formatting defaults and options.
+
 When first logging in on a headless Linux box, you are greeted with a welcome
 message and a prompt:
 
