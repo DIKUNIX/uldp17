@@ -579,8 +579,8 @@ desktop environment.
 
 Another text editor available on many systems out of the box is `nano`. To
 avoid duels over the choice of text-editor, and still teach you a somewhat
-ubiquitous tool, we decided to focus on `nano`. To start editting our
-`poem.txt` with `nano`:
+ubiquitous tool, we decided to focus on `nano`. Let's edit our `poem.txt` using
+`nano`:
 
 ```
 ~$ nano poem.txt
