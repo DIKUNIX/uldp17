@@ -171,7 +171,7 @@ These regular expressions use a couple new metacharacters:
 | `]`           | End a character group   |
 
 [^dash-meta]: The `-` character _only_ acts a metacharacter between `[` and `]`,
-  and you don't have to escape it elsewhere.
+    and you don't have to escape it elsewhere.
 
 Getting back to our original problem, here is how we would find all the lines
 ending with a `.` (dot) *or* a `,` (comma) in our little poem:
@@ -223,7 +223,7 @@ indicate that some parts of the string repeat a number of times.
 Here `*`, `+`, `{`, `,`[^comma-meta], and `}` are all metacharacters.
 
 [^comma-meta]: The `,` character only acts as a metacharacter between `{` and
-  `}`.
+    `}`.
 
 For instance, to find all the entries in the access log, with the browser
 string indicating that the requesting party is using Google Chrome on Linux, we
