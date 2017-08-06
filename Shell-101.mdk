@@ -169,8 +169,8 @@ directories. We can now see how the `mkdir` command works with `bash`:
 Created 3 directories: `Corvus`, `Crux`, and `Lynx`: `bash` splits command
 arguments at one or more space characters.
 
-If you want to put a space in your argument, e.g. to create a directory with
-spaces in its name, you must put the argument in quotes, as we did with the
+If you want to put a space in your argument (e.g., to create a directory with
+spaces in its name), you must put the argument in quotes, as we did with the
 following `mkdir` command:
 
 ```
