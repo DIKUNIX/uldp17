@@ -93,6 +93,4 @@ For Windows users we recommend installing
 [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html). For
 OS X and Linux users, we recommend installing
 [Mosh](https://mosh.mit.edu/#getting). Mosh is also available as a [Chrome
-Extension](https://chrome.google.com/webstore/detail/mosh/ooiklbnjmhbcgemelgfhaeaocllobloj),
-or an [Android
-App](https://play.google.com/store/apps/details?id=com.sonelli.juicessh).
+Extension](https://chrome.google.com/webstore/detail/mosh/ooiklbnjmhbcgemelgfhaeaocllobloj).
