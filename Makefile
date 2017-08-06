@@ -1,4 +1,7 @@
 all:
 	./node_modules/.bin/madoko index.mdk
 
-.PHONY: all
+clean:
+	rm -rf out/
+
+.PHONY: all clean
