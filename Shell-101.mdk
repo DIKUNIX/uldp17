@@ -21,8 +21,9 @@ if there is something to tell, it will do so by means of text. It is important
 for a user-friendly experience that the utilities you use in your shell have
 good text-formatting defaults and options.
 
-When first logging in on a headless Linux box, you are greeted with a welcome
-message and a prompt:
+When first logging in on a headless Unix-like machine, you are greeted with a
+welcome message and a prompt. For example, when logging in our machine, you are
+greeted as follows:
 
 ```
 Welcome to syrakuse.
