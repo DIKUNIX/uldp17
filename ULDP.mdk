@@ -20,6 +20,11 @@ Toc depth: 2
 
 ~ Begin MainPanel
 
+*NB!* This is a draft version of the notes. In particular, no machine is
+provided alongside this draft for you to get ahead on the exercises. To do so,
+you will need to get hold of your own Unix-like machine. However, a Unix-like
+machine will be provided at the workshop itself.
+
 [INCLUDE=Preface.mdk]
 
 [INCLUDE=Introduction.mdk]
