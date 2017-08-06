@@ -1,0 +1,14 @@
+# Conclusion
+
+If you found Unix-like operating systems interesting, we recommend that you try
+to play around with either [Antergos](http://antergos.com/) or
+[Ubuntu](http://www.ubuntu.com/) in your spare time. These are Linux-based
+operating systems well-suited for beginners coming from other operating
+systems. If you're afraid to mess up your computer, you can try them out in a
+virtual machine (e.g., using [VirtualBox](https://www.virtualbox.org/)).
+
+If you would like to learn more, we can recommend the book [A Practical Guide
+to Linux Commands, Editors, and Shell Programming, Second Edition (2010), by
+Mark G.
+Sobell](http://www.aem.umn.edu/~aem3100/spring2013/Prentice_Hall_A_Practical_Guide_to_Linux_Commands_Editors_and_Shell_Programming_2nd.pdf).
+This is a good, but lengthy alternative to these lecture notes.
