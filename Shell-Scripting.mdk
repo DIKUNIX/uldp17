@@ -271,3 +271,139 @@ environment variables which persist after `~/.profile` is read.
 Remember to log out and log in again to see the changes applied. Now you should
 be run shell scripts in your home directory from anywhere, and without
 prefixing them with `./`, or more treacherous paths.
+
+
+## Exercise Series: `tmpdir`
+
+Many programs need some sort of "scratch-space". In such contexts, it would be
+useful to have a `tmpdir` utility which creates a temporary directory, runs a
+given program to completion, and deletes the temporary directory in the end.
+
+The section below describes the `mktemp` utility, a standard utility for
+creating temporary directories and files. See this first.
+
+Write a shell script, `tmpdir`, which when executed as follows:
+
+```
+~$ tmpdir a b c
+```
+
+Does the following:
+
+1. Create a temporary directory with the template `/tmp/mytempdir-XXXXXX`.
+2. `cd` into that directory.
+3. Execute `a b c`.
+4. `cd` back to the original working directory.
+5. Remove the temporary directory, without regard for its contents.
+
+_Hint:_ Use a subshell to get the current working directory.
+
+For instance, the following showcases how the temporary directory only persists
+for the duration of the `tmpdir` command:
+
+```
+~$ tmpdir pwd
+/tmp/mytempdir-oFyIZZ
+$ file /tmp/mytempdir-oFyIZZ
+...: cannot open `/tmp/mytempdir-oFyIZZ' (No such file or directory)
+```
+
+Next, try a variation, so that when executed as follows:
+
+```
+~$ tmpdir a b c
+```
+
+`tmpdir` does the following:
+
+1. Create a temporary directory with the template `/tmp/mytempdir-XXXXXX`.
+2. Execute `a b c TMPDIR`, where `TMPDIR` is the path to the above directory.
+3. Remove the temporary directory, without regard for its contents.
+
+For instance,
+
+```
+~$ tmpdir echo The tempdir is
+The tempdir is /tmp/mytempdir-zGPMAL
+```
+
+Next, try another variation, so that when executed as follows:
+
+```
+~$ tmpdir a b c
+```
+
+`tmpdir` does the following:
+
+1. Create a temporary directory with the template `/tmp/mytempdir-XXXXXX`.
+2. Execute `a TMPDIR b c`, where `TMPDIR` is the path to the above directory.
+3. Remove the temporary directory, without regard for its contents.
+
+For instance,
+
+```
+~$ tmpdir echo is the tempdir
+/tmp/mytempdir-vDwq3e is the tempdir
+```
+
+_Hint:_ Use `shift`.
+
+Last, but not least, try a variation combining all of the above. Let `tmpdir`
+take one optional parameter, indicating which of the 3 above variations it
+should perform. The options are as follows:
+
+* `-c` - `cd` into the temporary directory before executing the command.
+* `-#` - the path to the temporary directory is given as the last argument to
+  the executed command.
+* `-1` - the path to the temporary directory is given as the first argument to
+  the executed command.
+
+By default, if no argument is given, assume `-c`.
+
+For instance,
+
+```
+~$ tmpdir -c pwd
+/tmp/mytempdir-udBkJX
+~$ tmpdir -# echo The tempdir is
+The tempdir is /tmp/mytempdir-IjvJPf
+~$ tmpdir -1 echo is the tempdir
+/tmp/mytempdir-8VmA46 is the tempdir
+~$ tmpdir pwd
+/tmp/mytempdir-gcpAc8
+```
+
+## `mktemp`
+
+The `mktemp` utility can be used to create a temporary file or directory. Since
+many such files or directories may exist under any given directory, `mktemp`
+takes a template intended for an application specific path, and filename prefix
+and suffix.
+
+For instance, to create a temporary file in the current working directory:
+
+```
+~$ mktemp testing-mktemp-XXXX
+testing-mktemp-Omrx
+$ file testing-mktemp-Omrx 
+testing-mktemp-Omrx: empty
+```
+
+To create a directory, pass in the `-d` option:
+
+```
+~$ mktemp -d testing-mktemp-XXXX
+testing-mktemp-7vPK
+~$ file testing-mktemp-7vPK
+testing-mktemp-7vPK: directory
+```
+
+A typical place to put temporary files and directories under the `/tmp/`
+directory on a Unix-like system. This is the typical "mount-point" of a `tmpfs`
+filesystem, i.e. a filesystem dedicated to temporary storage. Such a filesystem
+is often in-memory only, and so temporary files and directories are never
+stored on disk, and are purged upon reboot.
+
+### Exercises
+
+1. Create a temporary directory under `/tmp/` using `mktemp`. Delete it.
