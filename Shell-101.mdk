@@ -382,7 +382,8 @@ bash: cd: roses.txt: Not a directory
 > -rw-r--r--  1 alis alis   15 Sep 21 13:37 roses.txt
 > ```
 
-`cat` is a program that can print the contents of a file back to `bash`:
+`cat` is a program that can print the contents of a file directly inside the
+shell:
 
 ```
 ~$ cat roses.txt
