@@ -342,8 +342,9 @@ Note, again how arguments containing spaces are surrounded by double quotes.
 
 At first sight, `echo` is a rather useless program. This is where the power of
 a Unix-like operating system comes into play: your shell can *redirect* the
-output from a program to a file. To do this, follow the command by the
-character `>`, followed by a path to the file where you want the output.
+output from a program to a file. To do this, follow the command by the a `>`
+(output redirection) character, followed by a path to the file where you want
+the output.
 
 ```
 ~$ echo "Roses are red," > roses.txt
