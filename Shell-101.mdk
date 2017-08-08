@@ -496,8 +496,8 @@ the first command, a `|` (pipe) character, then the second command:
       2       7      34
 ```
 
-`wc` with no arguments, counts the lines, words, and bytes passed to it from
-`bash`. Now `wc` does not print a file name: There is no filename to print!
+`wc` with no arguments, counts the lines, words, and bytes passed to it via the
+pipeline. Now `wc` does not print a file name: There is no filename to print!
 
 The silly poem is just 2 lines, 7 words, or 34 bytes in length.
 
