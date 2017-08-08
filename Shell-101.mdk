@@ -475,7 +475,7 @@ high-school teacher would not be happy with such a word count.
 > ~$
 > ```
 
-What if we wanted a word count of the silly poem we had above?
+What if we wanted a word count of a silly little poem like this?
 
 ```
 ~$ cat violets.txt you.txt
