@@ -520,8 +520,14 @@ missing filename, the output is the same as with `wc poem.txt` above.
 ## `rm` { #sec-shell-rm }
 
 By now we've made a great big mess of our home directory. It is time to clean
-up a little bit. The `rm` command can be used to quickly delete files and
-folders.
+up a little bit. The `rm` command can be used to quickly delete files and folders.
+
+> **NB!** Files and directories removed using `rm` are nearly impossible to
+> recover. `rm` is quick-and-dirty: It takes no backups, and cannot be undone.
+> It also "removes" file-system entries by simply letting the file-system
+> forget the location of the data on disk. Hence, it is sometimes *possible* to
+> recover the data by scanning the raw disk device, but the general advice is:
+> **measure twice, cut once**.
 
 For instance, to delete the little poem we had:
 
@@ -555,11 +561,6 @@ drwxr-xr-x  2 alis alis 4.0K Sep 19 14:58 .
 drwxr-xr-x 10 alis alis 4.0K Sep 19 14:38 ..
 ~$
 ```
-
-> **NB** `rm` does not throw your files and directories into some
-> easily-accessible "garbage bin".  Although things are not always permanently
-> and securely deleted with `rm`, recovering them is a lofty task. Take care of
-> what your remove.
 
 ### Exercises
 
