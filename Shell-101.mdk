@@ -338,7 +338,7 @@ Roses are red,
 ~$
 ```
 
-Note, again how arguments coontaining spaces are surrounded by double quotes.
+Note, again how arguments containing spaces are surrounded by double quotes.
 
 At first sight, this is a rather useless program. This is where the power of a
 Unix-like operating system comes into play. `bash` can *redirect* the output of
