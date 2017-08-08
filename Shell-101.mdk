@@ -486,7 +486,7 @@ And so are you.
 
 We could use output redirection to put the silly poem in a silly file, pass the
 filename to `wc`, and finally remove the silly file (more on this below); but
-this would be rather silly: Why create a file in the first place?
+this would indeed be rather *silly*: Why create a file in the first place?
 
 We can *pipe* the output of one program as input to another. To do this, type
 the first command, a `|` (pipe) character, then the second command:
