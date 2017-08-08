@@ -605,14 +605,14 @@ At the bottom of the TUI, `nano` shows a short reference of useful shortcuts:
   ^X Exit          ^R Read File     ^\ Replace      ...
 ```
 
-Here, `^` indicates the Ctrl character. For instance, type Ctrl+o to save
+Here, `^` indicates the `Ctrl` character. For instance, type `Ctrl+o` to save
 (i.e., "write out") the file you are editing. `nano` will now prompt you:
 
 ```
   File Name to Write: poem.txt
 ```
 
-Type Enter to confirm and overwrite `poem.txt`. To exit `nano`, type Ctrl+x.
+Hit `Enter` to confirm and overwrite `poem.txt`. To exit `nano`, type `Ctrl+x`.
 
 `vim` also uses a TUI by default, while `emacs` can be started in this mode
 with the command-line argument `-nw` (i.e., no window system). So `vim` and
@@ -622,7 +622,7 @@ friendly to beginners.
 A typical problem that beginning users have is how exit either `vim` or `emacs`
 once they open them. In `vim`, you can press Esc to enter a so-called "command
 mode", enter the command `:q` and press Enter. In `emacs`, you use the keyboard
-sequence Ctrl+x, Ctrl+c. Figuring out how to edit and save files in either
+sequence `Ctrl+x`, `Ctrl+c`. Figuring out how to edit and save files in either
 `vim` or `emacs` is left as an exercise for the bored reader. Else, continue
 with `nano`.
 
