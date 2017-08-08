@@ -592,10 +592,11 @@ To get started on the recreational activity of recovering `poem.txt`:
 ~$ nano poem.txt
 ```
 
-`nano` uses a so-called "text-based user interface" (TUI), which is quite
-reminiscent of a graphical user interface, except that a user interacts with it
-by issuing commands and/or using keyboard shortcuts instead of relying on mouse
-clicks and/or gestures. 
+Much like the shell, `nano` uses a text-based user interface (TUI). Unlike the
+shell, `nano` relies to a greater extent on *keyboard shortcuts*, rather than
+commands. Furthermore, the `nano` TUI is quite reminiscent of a classical
+graphical user-interface (GUI). We believe that this makes `nano` more suitable
+for beginners.
 
 At the bottom of the TUI, `nano` shows a short reference of useful shortcuts:
 
