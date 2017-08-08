@@ -483,7 +483,7 @@ And so are you.
 ~$
 ```
 
-We could use `bash` redirection to put the silly poem in a silly file, pass the
+We could use output redirection to put the silly poem in a silly file, pass the
 filename to `wc`, and finally remove the silly file (more on this below); but
 this would be rather silly: Why create a file in the first place?
 
