@@ -523,7 +523,7 @@ By now we've made a great big mess of our home directory. It is time to clean
 up a little bit. The `rm` command can be used to quickly delete files and
 folders.
 
-Use `rm` to delete files:
+For instance, to delete the little poem we had:
 
 ```
 ~$ rm poem.txt
