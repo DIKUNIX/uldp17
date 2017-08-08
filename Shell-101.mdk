@@ -409,7 +409,7 @@ Violets are blue,
 ~$
 ```
 
-Of course, `bash` can redirect the output of any command, so we can store this,
+Of course, we can redirect the output of any command, so we can store this,
 more complete poem in `poem.txt`.
 
 ```
