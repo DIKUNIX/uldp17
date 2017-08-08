@@ -400,7 +400,7 @@ Let's create another file:
 
 > **NB** `>` will overwrite the file if it already exists.
 
-`cat` can also *concatenate* files, and print the contents back to to `bash`:
+`cat` can also *concatenate* files, and print the contents inside the shell:
 
 ```
 ~$ cat roses.txt violets.txt
