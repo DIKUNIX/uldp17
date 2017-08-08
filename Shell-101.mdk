@@ -514,6 +514,8 @@ missing filename, the output is the same as with `wc poem.txt` above.
 ### Exercises
 
 1. Count the number of files and directories directly under the `/` directory.
+2. Count the number of users on the system. (Hint: Recall what `~` is an alias
+   for.)
 
 ## `rm` { #sec-shell-rm }
 
