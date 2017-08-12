@@ -235,6 +235,10 @@ Your shell keeps your recent command history, and the `history` built-in allows
 you to see it. Notably, `history` is not a standard utility, and so might be
 absent from some shells you might find elsewhere.
 
+More frequently however, you want to go through your command history in order
+to fix, repeat, or extend a command. To this end, you can use the arrow keys to
+cycle through the most-recent commands.
+
 By default, `ls` lists the contents of the working directory. It can also be
 used to list the contents of other directories.
 
@@ -283,8 +287,7 @@ drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 France
 
 1. List the contents of the `/` directory.
 2. List the contents of the `/home/` directory.
-3. Create the directory `~/1/1/2/3/5/8/13/21`. (Hint: press UP-arrow to
-   retype last command in shell.)
+3. Create the directory `~/1/1/2/3/5/8/13/21`.
 4. Create the directory `"hello,\ shell"` in your home directory.
 
    **NB!** `ls -l` should show something like this:
