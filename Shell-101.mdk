@@ -145,13 +145,20 @@ home directory by attempting to map the world.
  Africa   Antarctica   Asia   Europe  North America  South America
 ```
 
-This is a little cryptic. How many directories do we actually have? To see
-this, you can pass the argument `-lh` to `ls`. The `l` (small L) *flag* asks
+This is a little cryptic. How many directories do we actually have? To get a
+line-by-line directory listing, with one entry per line, we can pass in the
+argument `-l` to `ls`. (The `l` (small L) *flag* stands for "long".)
+
+To see
+this, you can pass the argument `-lh` to `ls`.
+
+
+asks
 for a long, and the `h` flag asks for a human-readable listing format.
 
 ```
-~$ ls -lh
-total 24K
+~$ ls -l
+total 28
 drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Africa
 drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Antarctica
 drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Asia
@@ -161,16 +168,19 @@ drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 North America
 drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 South America
 ```
 
-`ls -lh` lists a whole bunch of details you probably don't even want to care
-about (for now). What's important is that it lists one directory, or file, per
-line.  Counting the lines, we see that the above `mkdir` commands created 6
-directories. We can now see how the `mkdir` command works with `bash`:
+This lists quite a number of additional details, which you probably didn't care
+about (but we will cover them later). However, you can now count the number of
+files and directories by counting the number of lines in the output.
+
+Counting the lines, we see that the above `mkdir` commands created 7
+directories. This suggests how the shell chooses to split up the arguments to
+`mkdir`. For instance, the following command:
 
 ```
 ~$ mkdir Antarctica Asia Australia
 ```
 
-Created 3 directories: `Antarctica`, `Asia`, and `Australia`: `bash` splits
+Created 3 directories: `Antarctica`, `Asia`, and `Australia`: the shell splits
 command arguments at one or more space characters.
 
 If you want to put a space in your argument (e.g., to create a directory with
@@ -181,13 +191,13 @@ following `mkdir` command:
 ~$ mkdir "North America" "South America"
 ```
 
-This created the two directories `North America` and `South America`.
+This created 2 directories: `North America` and `South America`.
 
-Another way to avoid `bash` splitting up your argument is to *escape* the
-spaces.  Escaping is done by putting a special `\` (back slash) in front of the
-character you want "escaped". Some other characters that we often escape are
-`"` (double quote), and `\` (backslash) itself. The following `mkdir` command
-is equivalent to the above:
+Another way to avoid the shell splitting up your argument is to *escape* the
+spaces.  Escaping is done by putting a special `\` (back slash) character in
+front of the character you want "escaped". Some other characters that we often
+escape are `"` (double quote), and `\` (backslash) itself. The following
+`mkdir` command is equivalent to the above:
 
 ```
 ~$ mkdir North\ America South\ America
