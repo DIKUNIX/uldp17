@@ -248,9 +248,9 @@ Try typing `ls E` and press TAB. The shell will expand this to `ls Europe/`
 
 (The `Europe` directory is empty.)
 
-The shell is good friends with the working directory, and your file system in
-general.  When specifying a path, it can see the files and directories in your
-system, and help you type them out quickly and correctly.
+> **TIP** The shell is good friends with the working directory, and your file
+> system in general.  When specifying a path, it can see the files and
+> directories in your system, and help you type them out quickly and correctly.
 
 Try typing `ls A` and press TAB. In this case, the shell cannot unambiguously
 expand to a particular directory name, and instead lists just the directories
