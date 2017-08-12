@@ -287,14 +287,13 @@ drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 France
    retype last command in shell.)
 4. Create the directory `"hello,\ shell"` in your home directory.
 
-NB! `ls -lh` should show something like this:
-
-```
-~$ ls -lh
-...
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 "hello,\ shell"
-...
-```
+   **NB!** `ls -l` should show something like this:
+   ```
+   ~$ ls -l
+   ...
+   drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 "hello,\ shell"
+   ...
+   ```
 
 ## `cd` { #sec-shell-cd }
 
