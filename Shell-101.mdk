@@ -277,7 +277,7 @@ tab and arrow keys!):
 ~$ mkdir Europe/Germany/Berlin
 ~$ mkdir Europe/France/Paris
 ~$ ls -l Europe
-total 12.0K
+total 12
 drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Denmark
 drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Germany
 drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 France
