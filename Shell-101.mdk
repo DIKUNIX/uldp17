@@ -198,7 +198,7 @@ escape are `"` (double quote), and `\` (backslash) itself. The following
 
 By default, `ls` will sort the entries alphabetically. `ls` supports multiple
 orderings out of the box. For instance, you can order the entries by
-modification time using the `t` flag:
+modification time, in reverse chronological order, using the `t` flag:
 
 ```
 ~$ ls -lt
