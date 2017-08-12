@@ -248,17 +248,19 @@ Try typing `ls E` and press TAB. The shell will expand this to `ls Europe/`
 
 (The `Europe` directory is empty.)
 
+Try typing `ls A` and press TAB. In this case, the shell cannot unambiguously
+expand to a particular directory name, and instead lists the directories that
+start with `A`. Continue by tying `f` and press TAB again. The shell will now
+complete the name for you to `ls Africa/`.
+
 > **TIP** Your shell is on good terms with your file system. When specifying a
 > path, your shell can see the files and directories in your system, and help
 > you type them out quickly and correctly. Use "tab completion".
 
-Try typing `ls A` and press TAB. In this case, the shell cannot unambiguously
-expand to a particular directory name, and instead lists just the directories
-that start with `A`. Continue by tying `f` and press TAB again. The shell will
-now complete the name for you to `ls Africa/`.
-
-NB! Unfortunately, the shell is not good friends with your programs, and it
-won't help you remember cryptic arguments like `-lh`.
+Unlike with the file system, there is typically less collaboration between your
+shell and your programs. Your shell will not help you remember cryptic
+arguments like `-lt` to `ls`. (To this end, you can introduce aliases. More
+about aliases later.)
 
 The `Europe` directories contains no files or directories. We can use `mkdir`
 to create some subdirectories in `Europe` (remember TAB!):
