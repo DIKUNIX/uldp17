@@ -147,7 +147,7 @@ home directory by attempting to map the world.
 
 This is a little cryptic. How many directories do we actually have? To get a
 line-by-line directory listing, with one entry per line, we can pass in the
-argument `-l` to `ls`. (The `l` (small L) *flag* stands for "long".)
+argument `-l` to `ls`, where the `l` (small L) *flag* stands for "long".
 
 To see
 this, you can pass the argument `-lh` to `ls`.
