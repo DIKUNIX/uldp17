@@ -203,14 +203,17 @@ modification time, in reverse chronological order, using the `t` flag:
 ```
 ~$ ls -lt
 total 28
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:31 Africa
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:32 Antarctica
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:33 Asia
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:34 Australia
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:35 Europe
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:36 North America
+drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 North America
 drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 South America
+drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Antarctica
+drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Asia
+drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Australia
+drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Africa
+drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Europe
 ```
+
+(Although the *long* listing does not show an offset in terms of creation time,
+we can verify this against our command history above.)
 
 By default, `ls` lists the contents of the working directory. It can also be
 used to list the contents of other directories.
