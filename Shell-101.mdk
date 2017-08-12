@@ -358,18 +358,18 @@ additional `a` flag:
 
 ```
 ~$ ls -lah
-total 40K
-drwxr-xr-x 10 alis alis 4.0K Sep 21 13:37 .
-drwxr-xr-x  3 alis alis 4.0K Sep 21 13:37 ..
-drwxr-xr-x  3 alis alis 4.0K Sep 21 13:37 1
-drwxr-xr-x  4 alis alis 4.0K Sep 21 13:37 Africa
-drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Antarctica
-drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Asia
-drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Australia
-drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 "hello,\ shell"
-drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Europe
-drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 North America
-drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 South America
+total 44
+drwxr-xr-x 11 alis alis 4096 Sep 21 13:37 .
+drwxr-xr-x  3 alis alis 4096 Sep 21 13:37 ..
+drwxr-xr-x  3 alis alis 4096 Sep 21 13:37 1
+drwxr-xr-x  4 alis alis 4096 Sep 21 13:37 Africa
+drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 Antarctica
+drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 Asia
+drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 Australia
+drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 Europe
+drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 "hello,\ shell"
+drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 North America
+drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 South America
 ~$
 ```
 
