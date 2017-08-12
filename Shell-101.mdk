@@ -312,8 +312,9 @@ drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 France
 ~/Europe$
 ```
 
-The shell's prompt will comfortably let you know where you stand, so `pwd` is
-no long necessary, as long as you know what `~` and `/` mean.
+It is convenient that the shell's prompt lets you know where you stand. It
+almost makes it irrelevant to know the command `pwd`, as long as you know what
+`~` means.
 
 `cd` with no arguments will lead you back home:
 
