@@ -101,7 +101,7 @@ practice, this has two aspects:
 2. every program is working from the point of view of a particular directory:
 its *working directory*.
 
-When you login on our Linux box, you land in a `bash` program, whose working
+When you login on our machine, you land in a `bash` program, whose working
 directory is the home directory of the user you logged in with. The user's home
 directory has the alias `~` on Unix-like systems.
 
