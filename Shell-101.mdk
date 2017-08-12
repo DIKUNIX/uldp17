@@ -266,8 +266,8 @@ shell and your programs. Your shell will not help you remember cryptic
 arguments like `-lt` to `ls`. (To this end, you can introduce aliases. More
 about aliases later.)
 
-The `Europe` directories contains no files or directories. We can use `mkdir`
-to create some subdirectories in `Europe` (remember TAB!):
+Let us now create some sub-directories to work with (remember to try out the
+tab and arrow keys!):
 
 ```
 ~$ mkdir Europe/Denmark
