@@ -304,11 +304,11 @@ drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 France
 
 ```
 ~$ cd Europe
-~/Europe$ ls -lh
-total 12.0K
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Denmark
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Germany
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 France
+~/Europe$ ls -l
+total 12
+drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Denmark
+drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Germany
+drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 France
 ~/Europe$
 ```
 
