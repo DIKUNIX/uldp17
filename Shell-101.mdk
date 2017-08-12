@@ -272,11 +272,11 @@ to create some subdirectories in `Europe` (remember TAB!):
 ~$ mkdir Europe/Denmark/Copenhagen
 ~$ mkdir Europe/Germany/Berlin
 ~$ mkdir Europe/France/Paris
-~$ ls -lh Europe
+~$ ls -l Europe
 total 12.0K
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Denmark
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Germany
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 France
+drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Denmark
+drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Germany
+drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 France
 ```
 
 ### Exercises
