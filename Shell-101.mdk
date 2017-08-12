@@ -300,7 +300,7 @@ drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 France
 
 ## `cd` { #sec-shell-cd }
 
-`cd` changes the current working directory.
+`cd` changes the current working directory:
 
 ```
 ~$ cd Europe
