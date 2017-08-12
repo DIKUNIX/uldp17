@@ -250,7 +250,7 @@ Try typing `ls E` and press TAB. The shell will expand this to `ls Europe/`
 
 > **TIP** Your shell is on good terms with your file system. When specifying a
 > path, your shell can see the files and directories in your system, and help
-> you type them out quickly and correctly. This is called "tab completion".
+> you type them out quickly and correctly. Use "tab completion".
 
 Try typing `ls A` and press TAB. In this case, the shell cannot unambiguously
 expand to a particular directory name, and instead lists just the directories
