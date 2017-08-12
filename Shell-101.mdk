@@ -67,7 +67,7 @@ alis@syrakuse:~$
 ```
 
 `bash` here is the program that interprets your commands: `bash` here is your
-"shell".  `42` and `hello` are not comands that this computer understands, but
+"shell".  `42` and `hello` are not commands that this computer understands, but
 it understands `cowsay`. `cowsay` is a classic, silly little game we've put on
 this machine.
 
