@@ -161,9 +161,9 @@ drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 North America
 drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 South America
 ```
 
-This lists quite a number of additional details, which you probably didn't care
-about (but we will cover them later). However, you can now count the number of
-files and directories by counting the number of lines in the output.
+This lists quite a number of additional details, which we explore below. First
+of all, you can now count the directories by (manually) counting the number of
+lines that start with a `d`.
 
 Counting the lines, we see that the above `mkdir` commands created 7
 directories. This suggests how the shell chooses to split up the arguments to
