@@ -129,7 +129,7 @@ has a sub-subdirectory `alis`. This is `alis`'s home directory. So `~` (in
 `alis`'s case) is really an alias for `/home/alis`. Let's make a mess of our
 home directory by attempting to map the world.
 
-`mkdir` can create new directories.
+`mkdir` can create new directories:
 
 ```
 ~$ mkdir Europe
@@ -138,7 +138,7 @@ home directory by attempting to map the world.
 ~$ mkdir "North America" "South America"
 ```
 
-`ls` can list directory contents
+`ls` can list directory contents:
 
 ```
 ~$ ls
