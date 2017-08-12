@@ -705,11 +705,11 @@ mv poem.txt poem.txt.long && mv poem.txt.long poem.txt
 
 ### Exercises
 
-1. Create the directories `Andromeda`, `Corvus`, `Crux`, and `Lynx` in your
-home directory. Create a directory `Constellations` and move all the
+1. Create the directories `North America` and `South America` in your
+home directory. Create a directory `America` and move all the
 aforementioned directories into this one.
 
-2. Remove the folder `Constallations`.
+2. Remove the folder `America`.
 
 3. Do exercises 3 and 4 above (relating to `nano`) using `wc`, `cat`, `>`,
 `&&`, and `mv`. OBS! You can't read and write the same file in the same
