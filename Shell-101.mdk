@@ -9,7 +9,7 @@ commands (rather than mouse clicks, gestures, and alike). To this end, a CLI
 presents you with a "line" where you can enter text, and hereby "prompts" you
 to enter a command.
 
-You can then type away at the keyboard, and hit the Enter key to "enter" the
+You can then type away at the keyboard, and hit the Enter key to "enter" a
 command. The CLI responds by trying to interpret your command, and if the
 command makes sense, by executing it. This execution may, or may not have a
 directly observable effect. If the execution terminates, you will be presented
