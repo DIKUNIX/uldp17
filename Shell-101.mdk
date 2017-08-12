@@ -66,7 +66,7 @@ alis@syrakuse:~$ cowsay hello
 alis@syrakuse:~$
 ```
 
-`bash` is the program that interprets your commands: this is your "shell"!
+`bash` here is the program that interprets your commands: this is your "shell"!
 `42` and `hello` are not comands that this Linux box understands, but it
 understands `cowsay`. `cowsay` is a classic, silly little game we've put on our
 Linux box.
