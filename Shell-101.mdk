@@ -212,8 +212,28 @@ drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Africa
 drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Europe
 ```
 
-(Although the *long* listing does not show an offset in terms of creation time,
-we can verify this against our command history above.)
+Although the *long* listing does not show an offset in terms of creation time,
+we can verify this against our command history above. If you are not convinced,
+or happened to enter the above `mkdir` commands in a different order, you can
+use the `history` built-in:
+
+```
+~$ history
+...
+  562  mkdir Europe
+  563  mkdir Africa
+  564  mkdir Antarctica Asia  Australia
+  565  mkdir "North America" "South America"
+  566  ls
+  567  ls -l
+  568  ls -lt
+  569  history
+~$
+```
+
+Your shell keeps your recent command history, and the `history` built-in allows
+you to see it. Notably, `history` is not a standard utility, and so might be
+absent from some shells you might find elsewhere.
 
 By default, `ls` lists the contents of the working directory. It can also be
 used to list the contents of other directories.
