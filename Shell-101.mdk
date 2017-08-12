@@ -127,27 +127,22 @@ one file system, starting at `/`. This is called the *root directory*.
 In this case, we see that the root directory has one subdirectory `home`, which
 has a sub-subdirectory `alis`. This is `alis`'s home directory. So `~` (in
 `alis`'s case) is really an alias for `/home/alis`. Let's make a mess of our
-home directory by attempting to map some [modern stellar
-constellations](https://en.wikipedia.org/wiki/88_modern_constellations)[^NaurAstronomer]:
-
-[^NaurAstronomer]: It is lesser known that [Peter
-    Naur](https://en.wikipedia.org/wiki/Peter_Naur), a co-creator of [ALGOL
-    60](https://en.wikipedia.org/wiki/ALGOL_60), and a founding figure of
-    [DIKU](http://diku.dk), was originally educated as an Astronomer.
+home directory by attempting to map the world.
 
 `mkdir` can create new directories.
 
 ```
-~$ mkdir Andromeda
-~$ mkdir Corvus Crux Lynx
-~$ mkdir "Ursa Major" "Ursa Minor"
+~$ mkdir Europe
+~$ mkdir Africa
+~$ mkdir Antarctica Asia Australia
+~$ mkdir "North America" "South America"
 ```
 
 `ls` can list directory contents
 
 ```
 ~$ ls
-Andromeda  Corvus  Crux  Lynx  Ursa Major  Ursa Minor
+ Africa   Antarctica   Asia   Europe  North America  South America
 ```
 
 This is a little cryptic. How many directories do we actually have? To see
@@ -157,12 +152,13 @@ for a long, and the `h` flag asks for a human-readable listing format.
 ```
 ~$ ls -lh
 total 24K
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Andromeda
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Corvus
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Crux
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Lynx
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Ursa Major
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Ursa Minor
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Africa
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Antarctica
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Asia
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Australia
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Europe
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 North America
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 South America
 ```
 
 `ls -lh` lists a whole bunch of details you probably don't even want to care
@@ -171,21 +167,21 @@ line.  Counting the lines, we see that the above `mkdir` commands created 6
 directories. We can now see how the `mkdir` command works with `bash`:
 
 ```
-~$ mkdir Corvus Crux Lynx
+~$ mkdir Antarctica Asia Australia
 ```
 
-Created 3 directories: `Corvus`, `Crux`, and `Lynx`: `bash` splits command
-arguments at one or more space characters.
+Created 3 directories: `Antarctica`, `Asia`, and `Australia`: `bash` splits
+command arguments at one or more space characters.
 
 If you want to put a space in your argument (e.g., to create a directory with
 spaces in its name), you must put the argument in quotes, as we did with the
 following `mkdir` command:
 
 ```
-~$ mkdir "Ursa Major" "Ursa Minor"
+~$ mkdir "North America" "South America"
 ```
 
-This created the two directories `Ursa Major` and `Ursa Minor`.
+This created the two directories `North America` and `South America`.
 
 Another way to avoid `bash` splitting up your argument is to *escape* the
 spaces.  Escaping is done by putting a special `\` (back slash) in front of the
@@ -194,17 +190,17 @@ character you want "escaped". Some other characters that we often escape are
 is equivalent to the above:
 
 ```
-~$ mkdir Ursa\ Major Ursa\ Minor
+~$ mkdir North\ America South\ America
 ```
 
 By default, `ls` lists the contents of the working directory. It can also be
 used to list the contents of other directories.
 
-Try typing `ls A` and press TAB. `bash` will expand this to `ls Andromeda/`
-(the trailing `/` indicates that `Andromeda` is a directory):
+Try typing `ls E` and press TAB. `bash` will expand this to `ls Europe/`
+(the trailing `/` indicates that `Europe` is a directory):
 
 ```
-~$ ls Andromeda/
+~$ ls Europe/
 ~$
 ```
 
@@ -212,23 +208,29 @@ Try typing `ls A` and press TAB. `bash` will expand this to `ls Andromeda/`
 general.  When specifying a path, it can see the files and directories in your
 system, and help you type them out quickly and correctly.
 
-Try typing `ls U` and press TAB. `bash` will expand this to `ls Ursa\ M` but
-stop there, as it doesn't whether you mean `Ursa\ Major` or `Ursa\ Minor`.
-Continue by tying `a` and press TAB again. `bash` will now complete the name
-for you to `ls Ursa\ Major/`.
+Try typing `ls A` and press TAB. In this case, `bash` cannot unambiguously
+expand to a particular directory name, and instead lists just the directories
+that start with `A`. Continue by tying `f` and press TAB again. `bash` will now
+complete the name for you to `ls Africa/`.
 
 NB! Unfortunately, `bash` is not good friends with your programs, and it won't
 help you remember cryptic arguments like `-lh`.
 
-The `Andromeda` directories contains no files or directories. We can use
-`mkdir` to create some subdirectories in `Andromeda` (remember TAB!):
+The `Europe` directories contains no files or directories. We can use `mkdir`
+to create some subdirectories in `Europe` (remember TAB!):
 
 ```
-~$ mkdir Andromeda/HAT-P-6 Andromeda/WASP-1
-~$ ls -lh Andromeda
-total 8.0K
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 HAT-P-6
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 WASP-1
+~$ mkdir Europe/Denmark
+~$ mkdir Europe/Germany
+~$ mkdir Europe/France
+~$ mkdir Europe/Denmark/Copenhagen
+~$ mkdir Europe/Germany/Berlin
+~$ mkdir Europe/France/Paris
+~$ ls -lh Europe
+total 12.0K
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Denmark
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Germany
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 France
 ```
 
 ### Exercises
@@ -253,12 +255,13 @@ drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 "hello,\ bash"
 `cd` changes the current working directory.
 
 ```
-~$ cd Andromeda
-~/Andromeda# ls -lh
-total 8.0K
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 HAT-P-6
-drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 WASP-1
-~/Andromeda#
+~$ cd Europe
+~/Europe$ ls -lh
+total 12.0K
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Denmark
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 Germany
+drwxr-xr-x 2 alis alis 4.0K Sep 21 13:37 France
+~/Europe$
 ```
 
 The `bash` prompt will comfortably let you know where you stand, so `pwd` is no
@@ -267,23 +270,23 @@ long necessary, as long as you know what `~` and `/` mean.
 `cd` with no arguments will lead you back home:
 
 ```
-~/Andromeda# cd
+~/Europe$ cd
 ~$
 ```
 
 Of course, you can also use the path alias `~`:
 
 ```
-~$ cd Andromeda
-~/Andromeda# cd ~
+~$ cd Europe
+~/Europe$ cd ~
 ~$
 ```
 
 Let's go deeper:
 
 ```
-~$ cd Andromeda/HAT-P-6/
-~/Andromeda/HAT-P-6#
+~$ cd Europe/Denmark
+~/Europe/Denmark$
 ```
 
 Every directory has a special directory `..`
@@ -292,7 +295,7 @@ If you `cd` to `..` you go "up" a directory in the file system hierarchy. We
 say that `..` refers to the *parent directory*. So here's the long way home:
 
 ```
-~/Andromeda/HAT-P-6# cd ../../
+~/Europe/Denmark$ cd ../../
 ~$
 ```
 
@@ -309,13 +312,14 @@ total 40K
 drwxr-xr-x 10 alis alis 4.0K Sep 21 13:37 .
 drwxr-xr-x  3 alis alis 4.0K Sep 21 13:37 ..
 drwxr-xr-x  3 alis alis 4.0K Sep 21 13:37 1
-drwxr-xr-x  4 alis alis 4.0K Sep 21 13:37 Andromeda
-drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Corvus
-drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Crux
+drwxr-xr-x  4 alis alis 4.0K Sep 21 13:37 Africa
+drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Antarctica
+drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Asia
+drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Australia
 drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 "hello,\ bash"
-drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Lynx
-drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Ursa Major
-drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Ursa Minor
+drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Europe
+drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 North America
+drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 South America
 ~$
 ```
 
@@ -325,7 +329,7 @@ drwxr-xr-x  2 alis alis 4.0K Sep 21 13:37 Ursa Minor
 
 1. `cd ~/../../../../../../` Where do you end up?
 2. Go back home.
-3. `cd ~/./../alis/Andromeda/./HAT-P-6/../../` Where do you end up?
+3. `cd ~/./../alis/Europe/./Denmark/../../` Where do you end up?
 4. Create a hidden directory in your home directory.
 
 ## `echo`, `cat`, and `>` { #sec-shell-echo-cat-redirect }
@@ -554,8 +558,8 @@ If you want to delete all the files and directories in a directory, but the
 directory itself, you can use a wildcard `*` after the directory name:
 
 ```
-~$ rm -rf Andromeda/*
-~$ ls -lah Andromeda/
+~$ rm -rf Europe/*
+~$ ls -lah Europe/
 total 8.0K
 drwxr-xr-x  2 alis alis 4.0K Sep 19 14:58 .
 drwxr-xr-x 10 alis alis 4.0K Sep 19 14:38 ..
