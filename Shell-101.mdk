@@ -134,7 +134,7 @@ home directory by attempting to map the world.
 ```
 ~$ mkdir Europe
 ~$ mkdir Africa
-~$ mkdir Antarctica Asia Australia
+~$ mkdir Antarctica Asia  Australia
 ~$ mkdir "North America" "South America"
 ```
 
@@ -170,7 +170,7 @@ directories. This suggests how the shell chooses to split up the arguments to
 `mkdir`. For instance, the following command:
 
 ```
-~$ mkdir Antarctica Asia Australia
+~$ mkdir Antarctica Asia  Australia
 ```
 
 Created 3 directories: `Antarctica`, `Asia`, and `Australia`: the shell splits
