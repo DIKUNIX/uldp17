@@ -83,9 +83,9 @@ is called a "prompt". This prompt shows the username you logged in with (in
 this case, `alis`), the hostname of the machine you logged in on (in this case,
 `syrakuse`), and the working directory of your shell (in this case, `~`).
 
-In the remainder of this document, we won't point out the user and hostname, as
-all our examples will use the use the same user and hostname. So our promopts
-will start out like this:
+In the remainder of this document, we won't point out the username and
+hostname, as all our examples will use the use the same user and hostname. So
+our promopts will start out like this:
 
 ```
 ~$
