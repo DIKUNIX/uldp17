@@ -306,7 +306,11 @@ prompting you to enter another character, to break the ambiguity.
 2. Assuming you have the files `hello` and `world`, is there a difference
    between `ls hello world` and `ls world hello`? Why, or why not?
 
-3. Create a file `"hello,\ shell"` (containing both `"` and `\`).
+3. Create a couple files with names composed of just spaces (e.g., 1 space, 2
+   spaces, and 3 spaces). How does this change the readability of `ls` and
+   `ls -l`? (Try also passing the option `--quoting-style=shell` to `ls`.)
+
+4. Create a file `"hello,\ shell"` (containing both `"` and `\`).
 
    Hence, `ls -l` should show something like this:
    ```
