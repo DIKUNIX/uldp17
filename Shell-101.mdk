@@ -417,7 +417,7 @@ For each of the below exercises use a globbing pattern:
 
 ## `pwd`, `mkdir` and `ls` { #sec-shell-pwd-mkdir-ls }
 
-`pwd` prints the working directory:
+`pwd` prints the *current* working directory:
 
 ```
 ~$ pwd
