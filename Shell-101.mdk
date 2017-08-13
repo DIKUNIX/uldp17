@@ -688,13 +688,16 @@ drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 Antarctica
 drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 Asia
 drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 Australia
 drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 Europe
-drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 "hello,\ shell"
 drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 North America
 drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 South America
 ~$
 ```
 
+
 `.` is also special directory, it refers to the *current directory*.
+
+It is notable, that the gobbling pattern `*` will not produce the virtual
+directories `.` and `..`.
 
 ### Exercises
 
@@ -702,11 +705,29 @@ drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 South America
 2. Go back home.
 3. `cd ~/./../alis/Europe/./Denmark/../../` Where do you end up?
 4. Create a hidden directory in your home directory.
-5. Move all the continents to a dedicated `Continents` directory. That is, your
-   home directory should only contain a directory `Continents`, having `Europe`,
-   `Africa`, and so on as subdirectories. (Hint: First, move everything to a
-   hidden directory; then, rename the hidden directory.)
+5. Remove all entries from your home directory, except the continents.
 
+   Now, move all the continents to a dedicated `Earth` directory, without
+   explicitly listing them (i.e., use `*`).
+
+   In the end, your home directory should looks like this:
+
+   ```
+   $ tree -L 2
+   .
+   └── Continents
+       ├── Africa
+       ├── Antarctica
+       ├── Asia
+       ├── Australia
+       ├── Europe
+       ├── North America
+       └── South America
+
+   8 directories, 0 files
+   ```
+
+  (Hint: Use a temporarily hidden directory.)
 
 ## `echo`, `cat`, and `>` { #sec-shell-echo-cat-redirect }
 
