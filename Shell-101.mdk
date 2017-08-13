@@ -496,6 +496,9 @@ drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 France
 ~$ mkdir North\ America/United\ States/Washington
 ```
 
+Note, how if we type `ls -l E` and press TAB, this will complete as `ls -l
+Europe/`, with the trailing slash indicating that `Europe` is a directory.
+
 If our ultimate intent is to create a directory of continents, countries, and
 cities, `mkdir` comes with a convenient option out of the box: `mkdir -p` (`p`
 for parents) can be used to create a directory, and all the directories leading
