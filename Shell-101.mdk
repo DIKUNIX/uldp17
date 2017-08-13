@@ -316,7 +316,7 @@ prompting you to enter another character, to break the ambiguity.
    ```
    ~$ ls -l
    ...
-   drwxr-xr-x 2 alis alis 4096 Aug 14 13:37 "hello,\ shell"
+   -rw-r--r-- 1 alis alis 0 Aug 14 13:37 "hello,\ shell"
    ...
    ```
 
