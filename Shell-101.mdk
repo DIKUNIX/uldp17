@@ -501,7 +501,7 @@ use the `history` built-in:
 
 Your shell keeps your recent command history, and the `history` built-in allows
 you to see it. Notably, `history` is not a standard utility, and so might be
-absent from some shells you might find elsewhere.
+absent from some shells you happen find elsewhere.
 
 More frequently however, you want to go through your command history in order
 to fix, repeat, or extend a command. To this end, you can use the arrow keys to
