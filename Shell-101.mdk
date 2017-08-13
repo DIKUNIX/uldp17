@@ -610,9 +610,9 @@ say that `..` refers to the *parent directory*. So here's the long way home:
 If every directory has a special directory `..` then how come we didn't see it
 in our directory listings above? This is because Unix-like convention has it
 that hidden files and directories start with a `.` (dot). Of course, there is
-nothing overly special about "hidden" files (on Unix-like systems or Windows).
-We can get `ls` to show *all* the directories in a directory using an
-additional `a` flag:
+nothing overly special about "hidden" files and directories (on Unix-like
+systems or Windows).  We can get `ls` to show *all* the directories in a
+directory using an additional `a` flag:
 
 ```
 ~$ ls -lah
