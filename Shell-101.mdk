@@ -1006,9 +1006,7 @@ executed if and only if, the first one *fails*. This useful for error reporting
 `&&`, and `mv`. OBS! You can't read and write the same file in the same
 command. For task 4, you will need to use a temporary file.
 
-## Shell Scripts 101 { #sec-shell-shell-scripts }
-
-TODO: `bash` and `sh` (also using `exit`)
+## Hello, Shell Script { #sec-shell-hello-shell-script }
 
 Composing small utilities to form complicated commands is fun, but it is also
 hard work. We can save our work by encoding a command into a so-called shell
