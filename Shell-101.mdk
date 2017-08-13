@@ -253,6 +253,9 @@ of these approaches. The following command are equivalent:
 ~$ touch Here\'s" a file with \"\" in "'the filename'
 ```
 
+From now on, we will refer to the use of `'`, `"`, and `\` collectively as
+"escaping".
+
 By now we've made a great big mess of our working directory. It is time to
 clean up a little bit. `rm` can help us clean up.
 
