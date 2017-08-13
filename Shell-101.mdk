@@ -678,8 +678,8 @@ systems or Windows).  We can get `ls` to show *all* the directories in a
 directory using the `-a` (meaning "all") option:
 
 ```
-~$ ls -lah
-total 44
+~$ ls -la
+total 40
 drwxr-xr-x 11 alis alis 4096 Sep 21 13:37 .
 drwxr-xr-x  3 alis alis 4096 Sep 21 13:37 ..
 drwxr-xr-x  3 alis alis 4096 Sep 21 13:37 1
