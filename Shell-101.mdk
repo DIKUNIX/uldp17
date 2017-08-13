@@ -464,6 +464,41 @@ drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 North America
 drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 South America
 ```
 
+Let us go ahead and create some subdirectories: We would like to create
+directories like `Europe/Denmark`, `Europe/Germany`, etc. We can use tab
+completion to help us along, but we can also cycle through our command history
+using the arrow keys. This is useful when all you want to do is extend or
+repeat a recent command.
+
+Try using the arrow keys when doing the following:
+
+```
+~$ mkdir Europe/Denmark
+~$ mkdir Europe/Denmark/Copenhagen
+```
+
+Crucially, we cannot create the directory `Europe/Denmark/Copenhagen` before
+the `Europe/Denmark` directory.
+
+Let's create a couple more directories to work with:
+
+```
+~$ mkdir Europe/Germany
+~$ mkdir Europe/Germany/Berlin
+~$ mkdir Euprpe/France
+~$ mkdir Euprpe/France/Paris
+```
+
+If our ultimate intent is to create a directory of continents, countries, and
+cities, `mkdir` comes with a convenient option out of the box: `mkdir -p` (`p`
+for parents) can be used to create a directory, and all the directories leading
+up to it, if they are missing:
+
+```
+$ mkdir -p Asia/China/Beijing
+$ mkdir -p Asia/Japan/Tokyo
+```
+
 By default, `ls` will sort the entries alphabetically. `ls` supports multiple
 orderings out of the box. For instance, you can order the entries by
 modification time, in reverse chronological order, using the `t` flag:
