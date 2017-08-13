@@ -110,6 +110,199 @@ The following sections show how you can figure out what your working directory
 is, how to navigate the file system, create new directories, and change the
 working directory of `bash`.
 
+## `touch`, `ls`, and `rm` { #sec-touch-ls-rm }
+
+There is an intricate relationship between your shell and your file-system. One
+of the most basic things you can do in a shell is to "touch" a file. If you
+touch a file that does not exist, it will be created. If you touch a file that
+already exists, its modification time is set to the current time.
+
+Let's `touch` a couple files:
+
+```
+~$ touch hello
+~$ touch world
+~$ touch shell
+```
+
+We can now use `ls` to see what we've done to the working directory:
+
+```
+~$ ls
+hello shell world
+```
+
+By default, `ls` will sort the entries alphabetically. You can parametrise this
+behaviour by passing in command-line options. Command-line options are given as
+command-line arguments, separated from the command by at least one space
+character, and (conventionally) begin with either a `-` (dash) or `--` (double
+dash).
+
+For instance, `ls -t` will list the entries ordered by their modification time:
+
+```
+~$ ls -t
+shell world hello
+```
+
+Indeed, this corresponds to the order in which we touched the files above.
+
+`touch` can also touch multiple files at once, with the filenames separated by
+at least one space character. For instance, we can touch `hello` and `world`
+with just one command:
+
+```
+~$ touch hello world
+~$ ls -t
+hello world shell
+```
+
+Space is special. If you want a space in your filename, you will have to either
+surround it with `'` (single quotes), `"` (double quotes), or *escape* the
+space character. For instance, the following commands are equivalent:
+
+```
+~$ touch 'hello, world'
+~$ touch "hello, world"
+~$ touch hello,\ world
+```
+
+Some other characters that we often escape are `'`, `"`, and `\` (backslash)
+itself.
+
+If we try to `ls` again, things start getting cryptic:
+
+```
+~$ ls
+hello        hello, world shell        world
+```
+
+How many files do we actually have here? To get a line-by-line directory
+listing, with one entry per line, we can pass in the option `-l` (small L) to
+`ls`:
+
+```
+~$ ls -l
+total 0
+-rw-r--r--  1 alis  alis  0 Aug 14 13:38 hello
+-rw-r--r--  1 alis  alis  0 Aug 14 13:39 hello, world
+-rw-r--r--  1 alis  alis  0 Aug 14 13:37 shell
+-rw-r--r--  1 alis  alis  0 Aug 14 13:38 world
+```
+
+This gives us a "long" directory listing, with quite a number of additional
+details. We explore these below. To start with,  you can now count the number
+of files in the working directory by (manually) counting the number of lines
+that start with a `-` (dash).
+
+The `-l` option can be mixed with `-t`. As a matter of convenience, all of the
+following are equivalent, and you can pick the mnemonic that makes most sense
+to you: `ls -l -t`, `ls -t -l`, `ls -lt`, and `ls -tl`. (If none of this makes
+sense to you, you can introduce an "alias". More about aliases later.)
+
+For instance, `ls -lt` gives a long listing of the working directory, with
+entries ordered by their modification time:
+
+```
+~$ ls -lt
+total 0
+-rw-r--r--  1 alis  alis  0 Aug 14 13:39 hello, world
+-rw-r--r--  1 alis  alis  0 Aug 14 13:38 hello
+-rw-r--r--  1 alis  alis  0 Aug 14 13:38 world
+-rw-r--r--  1 alis  alis  0 Aug 14 13:37 shell
+```
+
+`ls` can also accept file system paths as command-line arguments. The effect is
+that it lists the paths given as arguments, instead of looking at the current
+working directory. As is convention, any command-line options to `ls` must
+precede the other command-line arguments. For instance, this shows that we
+touched the `shell` before we touched the `world`:
+
+```
+~$ ls -lt shell world
+-rw-r--r--  1 alis  alis  0 Aug 14 13:38 world
+-rw-r--r--  1 alis  alis  0 Aug 14 13:37 shell
+```
+
+We used 3 different approaches to escaping the space character above. There are
+some subtle differences between these:
+
+1. Arguments enclosed in `'` are interpreted literally. There is no escaping,
+   and so you also cannot express `'` itself in an argument enclosed in `'`.
+2. Arguments enclosed in `"` is interpreted literally, except for certain
+   character sequences starting with `$`, \`, and `\`. We will come
+   back to `$` and \` later. `\` is used for escaping. For instance, if
+   you want to use a `"` in an argument.
+3. A `\` followed by a character will preserve the literal meaning of this
+   subsequent character. There are some subtle differences between escaping
+   inside `"` and outside, but we invite you to explore these at your leisure.
+
+Things get even more intricate when you realise that you can mix and match all
+of these approaches. The following command are equivalent:
+
+```
+~$ touch "Here's a file with \"\" in the filename"
+~$ touch Here\'s\ a\ file\ with\ \"\"\ in\ the\ filename
+~$ touch Here\'s\ 'a file with "" in the filename'
+~$ touch Here\'s" a file with \"\" in "'the filename'
+```
+
+By now we've made a great big mess of our working directory. It is time to
+clean up a little bit. `rm` can help us clean up.
+
+> **NB!** Files and directories removed using `rm` are nearly impossible to
+> recover. `rm` is quick-and-dirty: It takes no backups, and cannot be undone.
+> It also "removes" file-system entries by simply letting the file-system
+> forget the location of the data on disk. Hence, it is sometimes *possible* to
+> recover the data by scanning the raw disk device, but the general advice is:
+> **measure twice, `rm` once**.
+
+For instance, let us remove `world`:
+
+```
+~$ rm world
+```
+
+We can use `ls` or `rm` to verify that `world` indeed is gone:
+
+```
+~$ ls world
+ls: world: No such file or directory
+~$ rm world
+rm: hello: No such file or directory
+```
+
+As with `touch`, `rm` accepts multiple command line arguments, and deletes all
+the given file names. For instance, to remove the other silly little files:
+
+```
+~$ rm hello shell
+```
+
+How about the file with a long and complicated name? Would we really have to
+type out that mess again? As we said, there is an intricate relationship
+between your shell and your file system. The shell can help you type out file
+system paths quickly and correctly through a mechanism called "tab completion".
+
+Type `rm Here` and press TAB. This should complete the file name using the
+escape-character strategy described above. If the shell cannot make out what
+file system path you are trying to type, it will list the options for you,
+prompting you to enter another character, to break the ambiguity.
+
+### Exercises
+
+1. Create a file `"hello,\ shell"` (containing both `"` and `\`).
+
+   Hence, `ls -l` should show something like this:
+   ```
+   ~$ ls -l
+   ...
+   drwxr-xr-x 2 alis alis 4096 Aug 14 13:37 "hello,\ shell"
+   ...
+   ```
+
+
+
 ## `pwd`, `mkdir` and `ls` { #sec-shell-pwd-mkdir-ls }
 
 `pwd` prints the working directory:
