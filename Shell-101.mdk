@@ -415,7 +415,7 @@ For each of the below exercises use a globbing pattern:
 8. List all the entries containing a comma.
 9. Remove all the entries from your working directory.
 
-## `pwd`, `mkdir`, and `mv` { #sec-shell-pwd-mkdir-mv }
+## `pwd`, `mkdir`, `mv`, and `tree` { #sec-shell-pwd-mkdir-mv-tree }
 
 `pwd` prints the *current* working directory:
 
@@ -545,6 +545,61 @@ You must use the `-r` option even if the directory is empty:
 ~$ rm Asia/Japan/Tokyo
 rm: cannot remove 'Asia/Japan/Tokyo': Is a directory
 ~$ rm -r Asia/Japan/Tokyo
+```
+
+Finally, you can admire the file system hierarchy you created in all its glory
+using `tree`:
+
+```
+~$ tree
+.
+├── Africa
+├── Antarctica
+├── Asia
+│   ├── China
+│   │   └── Beijing
+│   └── Japan
+├── Australia
+├── Europe
+│   ├── Denmark
+│   │   ├── Aalborg
+│   │   ├── Aarhus
+│   │   ├── Copenhagen
+│   │   └── Odense
+│   ├── France
+│   │   └── Paris
+│   └── Germany
+│       └── Berlin
+├── North America
+└── South America
+
+19 directories, 0 files
+```
+
+Note how we only removed the `Tokyo` directory, but not its parent directory,
+`Japan`.
+
+Executing `tree` without further constraints can be quite incomprehensible.
+Pass in the `-L` option followed by an integer argument to restrict the depth
+of the printed tree:
+
+```
+~$ tree -L 2
+.
+├── Africa
+├── Antarctica
+├── Asia
+│   ├── China
+│   └── Japan
+├── Australia
+├── Europe
+│   ├── Denmark
+│   ├── France
+│   └── Germany
+├── North America
+└── South America
+
+12 directories, 0 files
 ```
 
 ### Exercises
