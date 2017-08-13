@@ -827,21 +827,21 @@ Violets are blue,
 1. Create a file `sugar.txt` with the line `Sugar is sweet,`
 2. Create a file `you.txt` with the line `And so are you.`
 3. Complete the poem in `poem.txt` by combining `roses.txt`, `violets.txt`,
-`sugar.txt`, and `you.txt` (in that order).
+   `sugar.txt`, and `you.txt` (in that order).
 
-It should be possible to do this in the end:
+   It should be possible to do this in the end:
 
-```
-~$ cat poem.txt
-Roses are red,
-Violets are blue,
-Sugar is sweet,
-And so are you.
-~$ cat violets.txt you.txt
-Violets are blue,
-And so are you.
-~$
-```
+   ```
+   ~$ cat poem.txt
+   Roses are red,
+   Violets are blue,
+   Sugar is sweet,
+   And so are you.
+   ~$ cat violets.txt you.txt
+   Violets are blue,
+   And so are you.
+   ~$
+   ```
 
 ## `wc` and `|` { #sec-shell-wc-pipe }
 
