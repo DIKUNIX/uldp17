@@ -533,7 +533,7 @@ make a mistake):
 Another, more recreational way to correct a mistake is to remove the directory,
 and try again. Removing directories is (intentionally) slightly harder than
 files. This is an attempt to remind you that you now might be deleting more
-than you think. Pass the option `-r` to a directory to remove it:
+than you think. Pass the option `-r` to `rm` to remove a directory:
 
 ```
 ~$ rm -r North\ America/United\ States/
