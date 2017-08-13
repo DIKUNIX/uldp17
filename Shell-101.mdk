@@ -320,7 +320,100 @@ prompting you to enter another character, to break the ambiguity.
    ...
    ```
 
+## Globbing { #sec-shell-globbing }
 
+Consider touching the following files:
+
+```
+~$ touch hello world shell hello,\ world hello,\ shell
+```
+
+What if you want to do something with all files that begin with "hello"?
+
+The `*` (star) character can be used to specify a set of files, without typing
+out their names in full.
+
+For instance, to list just the files that begin with "hello":
+
+```
+~$ ls -l hello*
+-rw-r--r--  1 alis  alis  0 Aug 14 13:37 hello
+-rw-r--r--  1 alis  alis  0 Aug 14 13:37 hello, shell
+-rw-r--r--  1 alis  alis  0 Aug 14 13:37 hello, world
+```
+
+Similarly, we can list all the files that end with "world":
+
+```
+~$ ls -l *world
+-rw-r--r--  1 alis  alis  0 Aug 14 13:37 hello, world
+-rw-r--r--  1 alis  alis  0 Aug 14 13:37 world
+```
+
+`*` is part of a built-in shell mechanism called "globbing" — the use of
+patterns to specify sets of filenames.
+
+To show that `*` is a built-in shell mechanism, try typing `ls s*` and press
+TAB. Assuming you only have one file starting with "s" in your working
+directory, namely "shell", this will expand the command to `ls shell`.
+
+A `*` can be used both at the end, start, or in the middle of an argument,
+provided it is not otherwise escaped.
+
+One peculiar use of `*` is as an argument to `ls`:
+
+```
+~$ ls -l *
+-rw-r--r--  1 alis  alis  0 Aug 14 13:37 hello
+-rw-r--r--  1 alis  alis  0 Aug 14 13:37 hello, shell
+-rw-r--r--  1 alis  alis  0 Aug 14 13:37 hello, world
+-rw-r--r--  1 alis  alis  0 Aug 14 13:37 shell
+-rw-r--r--  1 alis  alis  0 Aug 14 13:37 world
+```
+
+Note how this removes the peculiar "total" line from before, and you can now
+count the number of entries in the working directory simply by counting the
+number of lines output by `ls -l *`.
+
+Some common globbing patterns are summarised in Table [#tab-globbing].
+
+~ TableFigure { #tab-globbing; \
+    caption: "Globbing patterns an their meaning."; }
+|          | Matches                     | Number of times       |
+|:--------:|:----------------------------|:----------------------|
+| `*`      | Any character.              | Any number of times.  |
+| `?`      | Any character.              | Once.                 |
+| `[abc]`  | Either `a`, `b`, or `c`.    | Once.                 |
+| `[0-9]`  | Either `0`, `1`, ..., `9`.  | Once.                 |
+| `[!abc]` | Neither `a`, `b`, nor `c`.  | Once.                 |
+| `[!0-9]` | Neither `0`, `1`, ..., `9`. | Once.                 |
+|----------|-----------------------------|-----------------------|
+{ .booktable }
+~
+
+> **NB!** Control characters used in globbing patterns must be escaped if they
+> are to be interpreted literally.
+
+### Exercises
+
+For the purposes of the subsequent exercises, pl
+
+```
+~$ touch hello hallo haaallo
+~$ touch 1 2 3 4 5 6 7 8 9
+```
+
+For each of the below exercises use a globbing pattern:
+
+1. List all the entries that start with an `h`.
+2. List all the entries that start with an alphabetic character (`a`-`z`).
+3. List all the entries that do not start with an alphabetic character.
+4. List all the entries that end with a `d`.
+5. List all the entries that end with a `l` or `d`.
+6. List all the entries that do not end with an `l` or `d`.
+7. List just the files `hello` and `hallo`, but not `haaallo`.
+8. List all the entries containing a comma.
+9. Remove all the entries from your working directory.
 
 ## `pwd`, `mkdir` and `ls` { #sec-shell-pwd-mkdir-ls }
 
