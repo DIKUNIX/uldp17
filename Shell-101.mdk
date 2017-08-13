@@ -172,7 +172,9 @@ space character. For instance, the following commands are equivalent:
 ```
 
 Some other characters that we often escape are `'`, `"`, and `\` (backslash)
-itself.
+itself. In general, there are many special characters around in a shell. To be
+on the safe side, stick to characters you know the meaning of when naming files
+in the shell.
 
 If we try to `ls` again, things start getting cryptic:
 
