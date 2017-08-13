@@ -545,54 +545,6 @@ You must use the `-r` option even if the directory is empty:
 ~$ rm -r Asia/Japan/Tokyo
 ```
 
-More frequently however, you want to go through your command history in order
-to fix, repeat, or extend a command. To this end, you can use the arrow keys to
-cycle through the most-recent commands.
-
-By default, `ls` lists the contents of the working directory. It can also be
-used to list the contents of other directories.
-
-Try typing `ls E` and press TAB. The shell will expand this to `ls Europe/`
-(the trailing `/` indicates that `Europe` is a directory):
-
-```
-~$ ls Europe/
-~$
-```
-
-(The `Europe` directory is empty.)
-
-Try typing `ls A` and press TAB. In this case, the shell cannot unambiguously
-expand to a particular directory name, and instead lists the directories that
-start with `A`. Continue by tying `f` and press TAB again. The shell will now
-complete the name for you to `ls Africa/`.
-
-> **TIP** Your shell is on good terms with your file system. When specifying a
-> path, your shell can see the files and directories in your system, and help
-> you type them out quickly and correctly. Use "tab completion".
-
-Unlike with the file system, there is typically less collaboration between your
-shell and your programs. Your shell will not help you remember cryptic
-arguments like `-lt` to `ls`. (To this end, you can introduce aliases. More
-about aliases later.)
-
-Let us now create some sub-directories to work with (remember to try out the
-tab and arrow keys!):
-
-```
-~$ mkdir Europe/Denmark
-~$ mkdir Europe/Germany
-~$ mkdir Europe/France
-~$ mkdir Europe/Denmark/Copenhagen
-~$ mkdir Europe/Germany/Berlin
-~$ mkdir Europe/France/Paris
-~$ ls -l Europe
-total 12
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Denmark
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Germany
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 France
-```
-
 ### Exercises
 
 1. List the contents of the `/` directory.
