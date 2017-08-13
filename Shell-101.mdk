@@ -415,7 +415,7 @@ For each of the below exercises use a globbing pattern:
 8. List all the entries containing a comma.
 9. Remove all the entries from your working directory.
 
-## `pwd`, `mkdir` and `ls` { #sec-shell-pwd-mkdir-ls }
+## `pwd` and `mkdir` { #sec-shell-pwd-mkdir }
 
 `pwd` prints the *current* working directory:
 
@@ -432,10 +432,9 @@ one file system, starting at `/`. This is called the *root directory*.
 
 In this case, we see that the root directory has a subdirectory `home`, which
 has a sub-subdirectory `alis`. This is `alis`'s home directory. So `~` (in
-`alis`'s case) is really an alias for `/home/alis`. Let's make a mess of our
-home directory by attempting to map the world.
+`alis`'s case) is really an alias for `/home/alis`.
 
-`mkdir` can create new directories:
+`mkdir` can create new directories in our working directory:
 
 ```
 ~$ mkdir Europe
@@ -444,16 +443,14 @@ home directory by attempting to map the world.
 ~$ mkdir "North America" "South America"
 ```
 
-`ls` can list directory contents:
+As before, we can use `ls` to list the entries in the current working directory:
 
 ```
 ~$ ls
- Africa   Antarctica   Asia   Europe  North America  South America
+Africa   Antarctica   Asia   Europe  North America  South America
 ```
 
-This is a little cryptic. How many directories do we actually have? To get a
-line-by-line directory listing, with one entry per line, we can pass in the
-argument `-l` to `ls`, where the `l` (small L) *flag* stands for "long".
+As before, we can use `ls -l` for a less cryptic listing:
 
 ```
 ~$ ls -l
@@ -465,41 +462,6 @@ drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Australia
 drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Europe
 drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 North America
 drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 South America
-```
-
-This lists quite a number of additional details, which we explore below. First
-of all, you can now count the directories by (manually) counting the number of
-lines that start with a `d`.
-
-Counting the lines, we see that the above `mkdir` commands created 7
-directories. This suggests how the shell chooses to split up the arguments to
-`mkdir`. For instance, the following command:
-
-```
-~$ mkdir Antarctica Asia  Australia
-```
-
-Created 3 directories: `Antarctica`, `Asia`, and `Australia`: the shell splits
-command arguments at one or more space characters.
-
-If you want to put a space in your argument (e.g., to create a directory with
-spaces in its name), you must put the argument in quotes, as we did with the
-following `mkdir` command:
-
-```
-~$ mkdir "North America" "South America"
-```
-
-This created 2 directories: `North America` and `South America`.
-
-Another way to avoid the shell splitting up your argument is to *escape* the
-spaces.  Escaping is done by putting a special `\` (back slash) character in
-front of the character you want "escaped". Some other characters that we often
-escape are `"` (double quote), and `\` (backslash) itself. The following
-`mkdir` command is equivalent to the above:
-
-```
-~$ mkdir North\ America South\ America
 ```
 
 By default, `ls` will sort the entries alphabetically. `ls` supports multiple
