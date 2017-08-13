@@ -918,57 +918,6 @@ missing filename, the output is the same as with `wc poem.txt` above.
 2. Count the number of users on the system. (Hint: Recall what `~` is an alias
    for.)
 
-## `rm` { #sec-shell-rm }
-
-By now we've made a great big mess of our home directory. It is time to clean
-up a little bit. The `rm` command can be used to quickly delete files and folders.
-
-> **NB!** Files and directories removed using `rm` are nearly impossible to
-> recover. `rm` is quick-and-dirty: It takes no backups, and cannot be undone.
-> It also "removes" file-system entries by simply letting the file-system
-> forget the location of the data on disk. Hence, it is sometimes *possible* to
-> recover the data by scanning the raw disk device, but the general advice is:
-> **measure twice, cut once**.
-
-For instance, to delete the little poem we had:
-
-```
-~$ rm poem.txt
-~$
-```
-
-We can use `ls` to verify that `poem.txt` indeed is gone:
-
-```
-~$ ls poem.txt
-ls: cannot access poem.txt: No such file or directory
-```
-
-If you want to delete directories, you will need to specify the argument `-r`,
-where the `r` flag stands for "recursive".
-
-```
-~$ rm -r 1/
-```
-
-If you want to delete all the files and directories in a directory, but the
-directory itself, you can use a wildcard `*` after the directory name:
-
-```
-~$ rm -rf Europe/*
-~$ ls -lah Europe/
-total 8.0K
-drwxr-xr-x  2 alis alis 4.0K Sep 19 14:58 .
-drwxr-xr-x 10 alis alis 4.0K Sep 19 14:38 ..
-~$
-```
-
-### Exercises
-
-1. Remove all the files and directories in your home directory which you don't
-want to keep for future reference. (Don't remove the `1` directory, we will use
-them shortly.)
-
 ## `nano` { #sec-shell-nano }
 
 Although we can read and write files using our various command-line utilities,
