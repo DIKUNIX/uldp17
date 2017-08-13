@@ -518,7 +518,7 @@ directories and move them around. To this end, we have an `mv` command:
 as the last argument.
 
 Crucially, `mv` can also be used to rename (i.e., "move") entries (e.g., if you
-made a mistake):
+make a mistake):
 
 ```
 ~$ mkdir Phenix
