@@ -291,7 +291,13 @@ prompting you to enter another character, to break the ambiguity.
 
 ### Exercises
 
-1. Create a file `"hello,\ shell"` (containing both `"` and `\`).
+1. What is the difference between `touch hello world` and `touch world hello`?
+   If doubt, try it out.
+
+2. Assuming you have the files `hello` and `world`, is there a difference
+   between `ls hello world` and `ls world hello`? Why, or why not?
+
+3. Create a file `"hello,\ shell"` (containing both `"` and `\`).
 
    Hence, `ls -l` should show something like this:
    ```
