@@ -1,0 +1,10 @@
+# backup files
+*~
+\#*#
+
+# latex compile files
+*.aux
+*.log
+*.out
+*.pdf
+

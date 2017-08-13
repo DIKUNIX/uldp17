@@ -1,0 +1,56 @@
+\ProvidesPackage{listings/customlistings}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{backgroundblue}{rgb}{0.93, 0.93, 1.0}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{turqusnumbers}{rgb}{0.17,0.57,0.69}
+\definecolor{redstrings}{rgb}{0.5,0,0}
+\definecolor{red}{rgb}{0.5,0.0,0.0}
+\definecolor{blue}{rgb}{0.0,0.5,1.0}
+\definecolor{green}{rgb}{0.0,0.5,0.0}
+
+
+% basic settings, can be overrided
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  columns=fullflexible,
+  escapeinside={\%},
+  frame=none,
+  backgroundcolor=\color{backgroundblue},
+  showspaces=false,
+  keepspaces=true,
+  showstringspaces=false,
+  showtabs=false,
+  numbers=left,
+  aboveskip=-3pt,
+  sensitive=true
+}
+
+
+% nice horizontal line "-------- <text> --------", used above a listing
+\def\headline#1{\begin{minipage}{36em}\vspace{4mm}\hrulefill\quad\lower.3em\hbox{#1}\quad\hrulefill\end{minipage}}
+
+% horizontal line, used below a listing
+\newcommand{\lstline}{\vspace{-3mm}\hrulefill\vspace{2mm}\newline}
+
+
+% fancy insert listing command
+% example of usage: `\customlisting{FSharp}{Some Function}{<file.fsx>}`
+\newcommand{\customlisting}[3]{\lstinputlisting[language=#1,name=#2]{#3}\lstline}
+
+
+% Insert the code, e.g. from a file like this:
+% \lstinputlisting[language=<language>]{<input_file>}
+% \lstinputlisting[language=<language>, firstline=X, lastline=Y]{<input_file>}
+
+% Or directly write the code in the .tex document:
+% \begin{lstlisting}[language=<language>]

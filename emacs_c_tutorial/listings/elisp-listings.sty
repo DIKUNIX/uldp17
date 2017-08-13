@@ -1,0 +1,16 @@
+\ProvidesPackage{listings/elisp-listings}
+
+\lstdefinelanguage{ELisp}
+{
+morekeywords={setq, defun, defvar, eq, when, unless, member},
+keywordstyle=\color{bluekeywords},
+morecomment=[l][\color{greencomments}]{;},
+escapeinside={"},
+extendedchars=true,
+alsoletter={"},
+sensitive=false,
+%stringstyle=\color{redstring},
+morestring=[b][\color{redstring}]",
+title={\headline{\small ELisp - \textit{\lstname}}},
+numbers=none
+}
