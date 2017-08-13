@@ -132,6 +132,10 @@ We can now use `ls` to see what we've done to the working directory:
 hello shell world
 ```
 
+`ls`, without further arguments, lists all the entries in the working
+directory.  (For now, all "entries" are files, but later we will also deal in
+directories).
+
 By default, `ls` will sort the entries alphabetically. You can parametrise this
 behaviour by passing in command-line options. Command-line options are given as
 command-line arguments, separated from the command by at least one space
