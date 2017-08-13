@@ -527,7 +527,6 @@ make a mistake):
 ```
 ~$ mkdir Phenix
 ~$ mv Phenix Phoenix
-~$ mkdir North\ America/United\ States
 ~$ mv Phoenix North\ America/United\ States/
 ```
 
