@@ -646,14 +646,24 @@ Of course, you can also use the path alias `~`:
 Let's go deeper:
 
 ```
-~$ cd Europe/Denmark
-~/Europe/Denmark$
+~$ cd Europe/Denmark/Copenhagen
+~/Europe/Denmark/Copenhagen$
 ```
+
+How do we go back?
 
 Every directory has a special directory `..`
 
 If you `cd` to `..` you go "up" a directory in the file system hierarchy. We
-say that `..` refers to the *parent directory*. So here's the long way home:
+say that `..` refers to the *parent directory*.
+
+```
+~/Europe/Denmark/Copenhagen$ cd ..
+~/Europe/Denmark$
+```
+
+`..` is actually a special, virtual directory that every directory has. For
+instance, here is the long way home:
 
 ```
 ~/Europe/Denmark$ cd ../../
