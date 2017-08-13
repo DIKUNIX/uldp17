@@ -542,22 +542,6 @@ You must use the `-r` option even if the directory is empty:
 ~$ rm -r Asia/Japan/Tokyo
 ```
 
-By default, `ls` will sort the entries alphabetically. `ls` supports multiple
-orderings out of the box. For instance, you can order the entries by
-modification time, in reverse chronological order, using the `t` flag:
-
-```
-~$ ls -lt
-total 28
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 North America
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 South America
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Antarctica
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Asia
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Australia
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Africa
-drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Europe
-```
-
 Although the *long* listing does not show an offset in terms of creation time,
 we can verify this against our command history above. If you are not convinced,
 or happened to enter the above `mkdir` commands in a different order, you can
