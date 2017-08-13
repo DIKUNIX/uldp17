@@ -415,7 +415,7 @@ For each of the below exercises use a globbing pattern:
 8. List all the entries containing a comma.
 9. Remove all the entries from your working directory.
 
-## `pwd` and `mkdir` { #sec-shell-pwd-mkdir }
+## `pwd`, `mkdir`, and `mv` { #sec-shell-pwd-mkdir-mv }
 
 `pwd` prints the *current* working directory:
 
@@ -497,6 +497,42 @@ up to it, if they are missing:
 ```
 $ mkdir -p Asia/China/Beijing
 $ mkdir -p Asia/Japan/Tokyo
+```
+
+Yet another way to create a file system hierarchy is to create files and
+directories and move them around. To this end, we have an `mv` command:
+
+```
+~$ mkdir Aarhus Aalborg Odense
+~$ mv Aarhus Aalborg Odense Europe/Denmark/
+```
+
+`mv` moves the files or directories at the given paths to whatever is given
+as the last argument.
+
+Crucially, `mv` can also be used to rename (i.e., "move") entries (e.g., if you
+made a mistake):
+
+```
+~$ mkdir Phenix
+~$ mv Phenix Phoenix
+~$ mkdir North\ America/United\ States
+~$ mv Phoenix North\ America/United\ States/
+```
+
+Another, more recreational way to correct a mistake is to remove the directory
+and try again. Removing directories is (intentionally) slightly harder than
+files. This is an attempt to remind you that you now might be deleting more
+than one file. Pass the option `-r` to a directory to remove it:
+
+```
+~$ rm -r North\ America/United\ States/
+```
+
+You must use the `-r` option even if the directory is empty:
+
+```
+~$ rm -r Asia/Japan/Tokyo
 ```
 
 By default, `ls` will sort the entries alphabetically. `ls` supports multiple
