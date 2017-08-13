@@ -485,8 +485,8 @@ Let's create a couple more directories to work with:
 ```
 ~$ mkdir Europe/Germany
 ~$ mkdir Europe/Germany/Berlin
-~$ mkdir Euprpe/France
-~$ mkdir Euprpe/France/Paris
+~$ mkdir Europe/France
+~$ mkdir Europe/France/Paris
 ~$ ls -l Europe
 total 12
 drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Denmark
