@@ -619,6 +619,8 @@ total 12
 drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Denmark
 drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 Germany
 drwxr-xr-x 2 alis alis 4096 Sep 21 13:37 France
+~/Europe$ pwd
+/home/alis/Europe
 ~/Europe$
 ```
 
