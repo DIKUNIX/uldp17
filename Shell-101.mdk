@@ -639,6 +639,11 @@ drwxr-xr-x  2 alis alis 4096 Sep 21 13:37 South America
 2. Go back home.
 3. `cd ~/./../alis/Europe/./Denmark/../../` Where do you end up?
 4. Create a hidden directory in your home directory.
+5. Move all the continents to a dedicated `Continents` directory. That is, your
+   home directory should only contain a directory `Continents`, having `Europe`,
+   `Africa`, and so on as subdirectories. (Hint: First, move everything to a
+   hidden directory; then, rename the hidden directory.)
+
 
 ## `echo`, `cat`, and `>` { #sec-shell-echo-cat-redirect }
 
