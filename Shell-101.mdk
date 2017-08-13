@@ -542,6 +542,8 @@ than one file. Pass the option `-r` to a directory to remove it:
 You must use the `-r` option even if the directory is empty:
 
 ```
+~$ rm Asia/Japan/Tokyo
+rm: cannot remove 'Asia/Japan/Tokyo': Is a directory
 ~$ rm -r Asia/Japan/Tokyo
 ```
 
