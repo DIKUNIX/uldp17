@@ -5,6 +5,9 @@ directory:=uldp17
 all:
 	./node_modules/.bin/madoko index.mdk
 
+pdf:
+	./node_modules/.bin/madoko --pdf index.mdk
+
 clean:
 	rm -rf out/
 
