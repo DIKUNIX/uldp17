@@ -278,7 +278,7 @@ We can use `ls` or `rm` to verify that `world` indeed is gone:
 ~$ ls world
 ls: world: No such file or directory
 ~$ rm world
-rm: hello: No such file or directory
+rm: world: No such file or directory
 ```
 
 As with `touch`, `rm` accepts multiple command line arguments, and deletes all
