@@ -992,59 +992,62 @@ many characters are there in the longest line?
 4. Copy the entire poem beneath itself without doing this line-by-line. Hint:
 use "Read File".
 
-## `&&` and `||` { #sec-shell-and-or }
+## `history`
 
-`&&` can be used to chain commands together such that the second is executed if
-and only if, the first one succeeds.
+We have covered quite a number of commands. One way to revisit them is to read
+the text again. Another, is to take a look at the history of commands that you
+have executed in your shell. Besides, wouldn't it be nice to store these in a
+file so that you can later revisit what you did?
 
-Similarly, `||` can be used to chain commands together such that the second is
-executed if and only if, the first one *fails*. This useful for error reporting
-
-### Exercises
-
-1. Do exercises 3 and 4 above (relating to `nano`) using `wc`, `cat`, `>`,
-`&&`, and `mv`. OBS! You can't read and write the same file in the same
-command. For task 4, you will need to use a temporary file.
-
-## Hello, Shell Script { #sec-shell-hello-shell-script }
-
-Composing small utilities to form complicated commands is fun, but it is also
-hard work. We can save our work by encoding a command into a so-called shell
-script — a file containing shell commands. In effect, we are creating a utility
-of our own.
-
-Let's walk through creating a shell-script for doubling the contents of a file.
-
-First, open a file `double.sh` in `nano`. The `.sh` extension follows the
-convention that shell scripts should have the filename extensions `.sh`,
-although this does not really make it a "shell script".
-
-`double.sh`, as a command-line utility, will take a command line argument
-(`$1`), regard it as a path to an existing file, `cat` this file twice into a
-temporary file (`$1.double`), and if this succeeds, move `$1.double` to `$1`,
-replacing the original file. Here, `$1` is a shell variable referring to the
-first command-line argument. If no such argument is given, `$1` is an empty
-string.
-
-Write the following to `double.sh` using `nano`:
+You can do this using the built-in `history` command:
 
 ```
-cat $1 $1 > $1.double && mv $1.double $1
+~$ history
+...
+  566  cat violets.txt you.txt | wc
+  567  cat poem.txt | wc
+  568  nano poem.txt
+  569  history
+~$
 ```
 
-Now, to run this shell script, pass it as an argument to the program `bash`:
+This will likely show you quite a long list of commands. If this list goes off
+the screen, you can scroll using `Shift+PgUp` and `Shift+PgDn`.
+
+Although we could execute `history` and redirect the output to a file, the
+numbers printed by `history` are a bit annoying.
+
+To save your history to a file, you better use the `-w` option:
 
 ```
-~$ wc -l poem.txt
-       4 poem.txt
-~$ bash double.sh poem.txt
-~$ wc -l poem.txt
-       8 poem.txt
+~$ history -w commands.txt
+~$ cat commands.txt
+cat violets.txt you.txt | wc
+cat poem.txt | wc
+nano poem.txt
+history
+history -w commands.txt
 ```
 
-`double.sh` is still far from a conventional command-line utility. It is a lot
-of work typing `bash double.sh` instead of just `double`. We will come back to
-how you can do this later.
+## `--help`, `man`, and `less`
+
+We have covered quite a number of options. How did we learn these options?
+Probably word of mouth, and the Internet. However, there is another useful
+source of documentation.
+
+Most commands have a `--help` or `-h` option which you can use for a quick
+overview on how to use the command:
+
+```
+~$ history --help
+```
+
+Such help pages can be quite extensive, but the convention is to keep them
+short and to the point. It is then customary for the programmer to write a more
+extensive "manual" for the program. Such manuals can be browsed using the `man`
+program.
+
+TODO: `man` and `less`.
 
 ## `file` and `which` { #sec-shell-file-which }
 
