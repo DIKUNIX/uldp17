@@ -1,12 +1,14 @@
 user:=oleks
 server:=dikunix.dk
 directory:=uldp17
+madoko:=./node_modules/.bin/madoko
+index:=index.mdk
 
 all:
-	./node_modules/.bin/madoko index.mdk
+	$(madoko) $(index)
 
 pdf:
-	./node_modules/.bin/madoko --pdf index.mdk
+	$(madoko) --pdf $(index)
 
 clean:
 	rm -rf out/
