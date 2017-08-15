@@ -163,7 +163,32 @@ increasing order:
 ~$
 ```
 
-TODO: `paste`
+If we would like to reorder the columns, we can use `paste`. `paste` places
+each line of a given file along the corresponding line of each subsequent file.
+
+```
+~$ cat access.log | cut -d\" -f1 > ips.txt
+~$ cat access.log | cut -d\" -f4 > user_agents.txt
+~$ paste ips.txt user_agents.txt
+...
+x00_-gawa.sa.pilipinas.2015    213.211.253.38
+x00_-gawa.sa.pilipinas.2015    213.211.253.38
+curl/7.44.0    130.225.98.193
+...
+```
+
+By default, `paste` uses TAB as a separator. If you would like a custom
+separator, you can use the `-d` option:
+
+```
+~$ paste -d\" ips.txt user_agents.txt
+...
+x00_-gawa.sa.pilipinas.2015"213.211.253.38
+x00_-gawa.sa.pilipinas.2015"213.211.253.38
+curl/7.44.0"130.225.98.193
+...
+
+```
 
 ### Exercises
 
