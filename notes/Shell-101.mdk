@@ -1049,6 +1049,42 @@ program.
 
 TODO: `man` and `less`.
 
+## Hello, Shell Script { #sec-shell-hello-shell-script }
+
+Composing small utilities to form complicated commands is fun, but it is also
+hard work. We can save our work by encoding a command into a so-called shell
+script — a file containing shell commands. In effect, we are creating a utility
+of our own.
+
+Let's walk through creating a shell-script for doubling the contents of a file.
+
+First, open a file `double.sh` in `nano`. The `.sh` extension follows the
+convention that shell scripts should have the filename extensions `.sh`,
+although this does not really make it a "shell script".
+
+`double.sh`, as a command-line utility, will take a command line argument
+(`$1`), regard it as a path to an existing file, `cat` this file twice into a
+temporary file (`$1.double`), and if this succeeds, move `$1.double` to `$1`,
+replacing the original file. Here, `$1` is a shell variable referring to the
+first command-line argument. If no such argument is given, `$1` is an empty
+string.
+
+Write the following to `double.sh` using `nano`:
+
+```
+cat $1 $1 > $1.double
+mv $1.double $1
+```
+
+Now, to run this shell script, pass it as an argument to the program `bash`:
+
+```
+~$ wc -l poem.txt
+       4 poem.txt
+~$ bash double.sh poem.txt
+~$ wc -l poem.txt
+       8 poem.txt
+
 ## `file` and `which` { #sec-shell-file-which }
 
 In a Unix-like operating system, everything is a file. Furthermore, it is the
