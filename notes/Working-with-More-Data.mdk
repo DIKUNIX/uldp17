@@ -3,53 +3,52 @@
 The world would be pretty boring if all you could do was write poems and mess
 about with your file system. It is time to get on the Internet!
 
-## `curl`
+## `curl` and `less`
 
 `curl` can fetch a URL and write the fetched data to your shell.
 
-If you are reading this, you have already made your way to our server,
-https://uldp16.onlineta.org.
+In 2014, OpenDNS, a domain-name service, published the top 10.000 URLs that
+their users had visited, ordered by popularity. We've mirrored this under
+[https://dikunix.dk/~oleks/uldp17/domains.txt](https://dikunix.dk/~oleks/uldp17/domains.txt).
 
-This machine runs a web server that exposes its access log to the world. Of
-course, everyone on the Internet can make all sorts of HTTP requests to this
-web server.
-
-Let's try to fetch the access log:
+You can fetch this list using `curl`:
 
 ```
-~$ curl https://uldp16.onlineta.org/access.log.csv.txt
-...
-...GET /phpMyAdmin/scripts/setup.php HTTP/1.1"-
-...
-...GET /admin/basic HTTP/1.1"libwww-perl/6.05
-...
-...Googlebot/2.1; +http://www.google.com/bot.html)
-...
-...GET /Ringing.at.your.dorbell!...x00_-gawa.sa.pilipinas.2015
-...
-~$
+~$ curl https://dikunix.dk/~oleks/uldp17/domains.txt
 ```
 
-> **TIP** Use Shift + PgUp to scroll up, and Shift + PgDn to scroll down in
-> your shell.
+> **TIP** Use `Shift` + `PgUp` to scroll up, and `Shift` + `PgDn` to scroll
+> down in your shell.
 
-If you `curl` the access log one more time, at the bottom of the file you will
-see a line ending with something like
+> **NB!** On Apple
+> computers, `PgUp` is `Fn+Up`, similarly for `PgDn`.
+
+The 10.000 lines will blink before your eyes. It is unlikely that your shell
+will let you see all of the 10.000 lines vis-a-vis the **TIP** above. Your
+shell is trying to spare you the trouble.
+
+If you would like to scroll around in the file to get a feel for its contents,
+you can pipe it over to `less`:
 
 ```
-...GET /access.log.csv.txt HTTP/1.1"curl/7.38.0
+~$ curl https://dikunix.dk/~oleks/uldp17/domains.txt | less
 ```
 
-That's you!
+`less` is a great tool for *reading* files, *especially* large files: unlike
+most text-editors, it does not lead the entire file into memory, but just
+enough to show the part visible on the screen. This is an inherent consequence
+of the goal of `less` to enable reading rather than *editing* text.
 
-Remember the dangerous world that's out there? This is it! This is what happens
-when you expose your computer to the Internet. All sorts of adventerous
-crawlers try to creep in on you.
+Type `h` to get help, and learn more about `less`.
+
+Type `q` to quit.
 
 ### Exercises
 
-1. Make a local, snapshot copy of the access log. Save the log as `access.log`
-in your home directory.
+1. Make a local, snapshot copy of `domains.txt`, so as to not have to download
+   the data every time you want to do something with it. Save it as
+   `domains.txt` in your home directory.
+2. Use `less` to read `domains.txt`.
 
 ## `head` and `tail`
 
@@ -60,16 +59,34 @@ file.
 `head` can be used to output the first part of a file:
 
 ```
-~$ head access.log
-... (first 10 lines of access.log)
+~$ head domains.txt
+google.com
+facebook.com
+doubleclick.net
+google-analytics.com
+akamaihd.net
+googlesyndication.com
+googleapis.com
+googleadservices.com
+facebook.net
+youtube.com
 ~$
 ```
 
 `tail` can be used to output the last part of a file:
 
 ```
-~$ tail access.log
-... (last 10 lines of access.log)
+~$ tail domains.txt
+synxis.com
+adyoulike.com
+costco.ca
+pressly.com
+doorsteps.com
+clkbid.com
+cyveillance.com
+musicnet.com
+mrnumber.com
+arenabg.com
 ~$
 ```
 
@@ -77,12 +94,18 @@ For both `head` and `tail` you can specify the number of first or last lines to
 print, using the `-n` option:
 
 ```
-~$ head -n 20 access.log
-... (first 20 lines of access.log)
-~$ tail -n 20 access.log
-... (last 20 lines of access.log)
+~$ head -n 20 domains.txt
+... (first 20 lines of domains.txt)
+~$ tail -n 20 domains.txt
+... (last 20 lines of domains.txt)
 ~$
 ```
+
+### Exercises
+
+1. What are the top 100 most-visited URLs?
+2. What are the bottom 10 of the top 100?
+3. What is the 100th most-visited URL?
 
 ## `cut` and `paste`
 
