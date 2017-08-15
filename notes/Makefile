@@ -6,6 +6,7 @@ index:=index.mdk
 
 all:
 	$(madoko) $(index)
+	cp domains.txt out/
 
 pdf:
 	$(madoko) --pdf $(index)
