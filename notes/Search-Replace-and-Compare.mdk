@@ -112,10 +112,10 @@ And so are you.
 
 Here is how we would find all the lines ending with a `.` (dot):
 
-%```
-%~$ cat poem.txt | grep -E "\.$"
-%And so are you.
-%```
+```
+~$ cat poem.txt | grep -E "\.$"
+And so are you.
+```
 
 What if we wanted to find all the strings ending with a `.` (dot) *or* a `,`
 (comma)? To this end, we could use *character groups*. A character group is a
@@ -176,13 +176,13 @@ These regular expressions use a couple new metacharacters:
 Getting back to our original problem, here is how we would find all the lines
 ending with a `.` (dot) *or* a `,` (comma) in our little poem:
 
-%```
-%~$ cat poem.txt | grep -E "[\.,]$"
-%Roses are red,
-%Violets are blue,
-%Sugar is sweet,
-%And so are you.
-%```
+```
+~$ cat poem.txt | grep -E "[\.,]$"
+Roses are red,
+Violets are blue,
+Sugar is sweet,
+And so are you.
+```
 
 How about those lines beginning with a flower?
 
@@ -308,19 +308,19 @@ from left to right, starting at 1.
 For instance, instead of using `cut`, we could've used `sed` to cut up our
 file:
 
-%```
-%~$ cat access.log | sed -E "s/^(.*)\"(.*)\"(.*)\"(.*)$/\1/g"
-%...
-%93.174.93.218
-%140.117.68.161
-%...
-%~$ cat access.log | sed -E "s/^(.*)\"(.*)\"(.*)\"(.*)$/\2/g"
-%...
-%2015-09-20T13:08:52-04:00
-%2015-09-20T13:52:37-04:00
-%...
-%~$
-%```
+```
+~$ cat access.log | sed -E "s/^(.*)\"(.*)\"(.*)\"(.*)$/\1/g"
+...
+93.174.93.218
+140.117.68.161
+...
+~$ cat access.log | sed -E "s/^(.*)\"(.*)\"(.*)\"(.*)$/\2/g"
+...
+2015-09-20T13:08:52-04:00
+2015-09-20T13:52:37-04:00
+...
+~$
+```
 
 Unlike with `cut`, with `sed` we can even reorder the fields!
 
