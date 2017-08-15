@@ -148,7 +148,13 @@ You can select multiple fields, but they are always selected by `cut` in
 increasing order:
 
 ```
-~$ cat access.log | cut -d\" -f1,3
+~$ cat access.log | cut -d\" -f1,4
+...
+213.211.253.38"x00_-gawa.sa.pilipinas.2015
+213.211.253.38"x00_-gawa.sa.pilipinas.2015
+130.225.98.193"curl/7.44.0
+...
+~$ cat access.log | cut -d\" -f4,1
 ...
 213.211.253.38"x00_-gawa.sa.pilipinas.2015
 213.211.253.38"x00_-gawa.sa.pilipinas.2015
