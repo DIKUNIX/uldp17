@@ -1084,6 +1084,7 @@ Now, to run this shell script, pass it as an argument to the program `bash`:
 ~$ bash double.sh poem.txt
 ~$ wc -l poem.txt
        8 poem.txt
+```
 
 ## `file` and `which` { #sec-shell-file-which }
 
