@@ -288,7 +288,3 @@ log has data.
 
 7. List the number of requests in each hour of the day (use the same time zone
 as the server, so just cut out the hour of every entry in the log).
-
-## `cmp`, `comm`, and `diff`
-
-TODO

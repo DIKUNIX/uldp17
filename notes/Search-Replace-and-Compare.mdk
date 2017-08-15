@@ -1,4 +1,4 @@
-# Search and Replace
+# Search, Replace, and Compare
 
 ## `grep`
 
@@ -364,3 +364,7 @@ of these notes). The syntax of regular expressions sometimes also varies.
 
 You can find a good overview of regular expressions, and what they look like in
 various languages at http://www.regular-expressions.info/.
+
+## `cmp`, `comm`, and `diff`
+
+TODO
