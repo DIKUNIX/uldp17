@@ -65,7 +65,7 @@ probably should) refer to earlier scripts.
 
 1. List the IP addresses that accessed the server.
 
-2. Count how many times each unique IP address occured.
+2. Count how many times each unique IP address occurred.
 
 3. Get the requests made (supposedly) from Firefox.
 
