@@ -109,10 +109,19 @@ print, using the `-n` option:
 
 ## `cut` and `paste`
 
-`cut` is a utility that can cut up the lines of a file.
+You will find another dataset under `/var/www/logs/normalized.log`. This a
+normalized version of `/var/www/logs/access.log`, the access log of our web
+server. Later, we will ask you to perform this normalization using a shell a
+script.
 
-You may have noticed the silly `"` (double quotes) in the log file. They
-separate the 4 fields of the log file:
+Copy both logs to your home directory.
+
+> **NB!** If you do not have access to our server, ask us, or a fellow student
+> for a copy. Please do not make this log public, as it may contain personally
+> identifiable information.
+
+Looking at the file, we notice some silly `"` (double quotes) in the log file.
+They separate the 4 fields of the log file:
 
 1. IP (version 4) address of the requesting party.
 2. Timestamp of request.
@@ -131,11 +140,13 @@ and in our case a double quote (`"`). People use whatever separates the columns
 best (you will soon see how to do this). We use a double quote because double
 quotes can't occur in either a URL or a browser string.
 
+`cut` is a utility that can cut up the lines of a file.
+
 To get just the IP addresses of parties that have tried to access the server,
 we can cut up each line at `"` and select the first field:
 
 ```
-~$ cat access.log | cut -d\" -f1
+~$ cat normalized.log | cut -d\" -f1
 ...
 213.211.253.38
 213.211.253.38
@@ -148,13 +159,13 @@ You can select multiple fields, but they are always selected by `cut` in
 increasing order:
 
 ```
-~$ cat access.log | cut -d\" -f1,4
+~$ cat normalized.log | cut -d\" -f1,4
 ...
 213.211.253.38"x00_-gawa.sa.pilipinas.2015
 213.211.253.38"x00_-gawa.sa.pilipinas.2015
 130.225.98.193"curl/7.44.0
 ...
-~$ cat access.log | cut -d\" -f4,1
+~$ cat normalized.log | cut -d\" -f4,1
 ...
 213.211.253.38"x00_-gawa.sa.pilipinas.2015
 213.211.253.38"x00_-gawa.sa.pilipinas.2015
@@ -167,8 +178,8 @@ If we would like to reorder the columns, we can use `paste`. `paste` places
 each line of a given file along the corresponding line of each subsequent file.
 
 ```
-~$ cat access.log | cut -d\" -f1 > ips.txt
-~$ cat access.log | cut -d\" -f4 > user_agents.txt
+~$ cat normalized.log | cut -d\" -f1 > ips.txt
+~$ cat normalized.log | cut -d\" -f4 > user_agents.txt
 ~$ paste ips.txt user_agents.txt
 ...
 x00_-gawa.sa.pilipinas.2015    213.211.253.38
@@ -193,26 +204,39 @@ curl/7.44.0"130.225.98.193
 ### Exercises
 
 1. An IP (version 4) address is composed of 4 fields, each a number between 0
-and 255, typically separated by a `.` (dot). List the first field of every IP
-address in the access log.
+   and 255, typically separated by a `.` (dot). List the first field of every
+   IP address in the access log.
 
-2. The server log the time access in [ISO
-8601](https://en.wikipedia.org/wiki/ISO_8601) format. List all the dates of the
-month on which the log was accessed.
+2. The server logs the time of access in the following format:
+
+   ```
+   day/month/year:hour:minute:second zone
+   where
+     day = 2*digit
+     month = 3*letter
+     year = 4*digit
+     hour = 2*digit
+     minute = 2*digit
+     second = 2*digit
+     zone = (`+' | `-') 4*digit
+   ```
+   List all the dates of the month on which the log was accessed.
 
 3. The HTTP request itself is described in the third column of the log file. It
-consists of 3 things:
+   consists of 3 things:
 
->  a. The [HTTP Method](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)
->  used. Typically `GET`.
->
->  b. The resource that was requested. This is typically the tail of the URL
->  that the crawler used, i.e. the URL after the leading
->  `https://uldp16.onlineta.org` has been cut off.
->
->  c. The HTTP version used. Should be `HTTP/1.1` or `HTTP/1.0`.
->
->  List all the resources that were requested.
+   a. The [HTTP Method](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)
+      used. Typically `GET`.
+   b. The resource that was requested. This is typically the tail of the URL
+      that the crawler used, i.e. the URL after the leading
+      `https://uldp16.onlineta.org` has been cut off.
+   c. The HTTP version used. Should be `HTTP/1.1` or `HTTP/1.0`.
+
+   List all the resources that were requested.
+
+4. Write a shell script `normalize.sh` that turns `access.log` into
+   `normalized.log`. (Hint: First cut out the parts you need into some temporary
+   files. Then, paste those files together.)
 
 ## `sort` and `uniq`
 
@@ -220,14 +244,14 @@ consists of 3 things:
 result.
 
 ```
-~$ cat access.log | cut -d\" -f4 | sort
+~$ cat normalized.log | cut -d\" -f4 | sort
 ...
 curl/7.44.0
 ...
 x00_-gawa.sa.pilipinas.2015
 x00_-gawa.sa.pilipinas.2015
 ...
-~$ cat access.log | cut -d\" -f1 | sort -n
+~$ cat normalized.log | cut -d\" -f1 | sort -n
 ...
 130.225.98.193
 213.211.253.38
@@ -249,7 +273,7 @@ have a sorted file, you can use `uniq` to output the unique lines of the
 original file.
 
 ```
-~$ cat access.log | cut -d\" -f1 | sort -n | uniq
+~$ cat normalized.log | cut -d\" -f1 | sort -n | uniq
 ...
 130.225.98.193
 213.211.253.38
@@ -261,7 +285,7 @@ original file.
 duplicate occurrences before it deletes them:
 
 ```
-~$ cat access.log | cut -d\" -f1 | sort -n | uniq -c
+~$ cat normalized.log | cut -d\" -f1 | sort -n | uniq -c
 ...
      11 130.225.98.193
       4 213.211.253.38
@@ -276,15 +300,15 @@ duplicate occurrences before it deletes them:
 2. Count how many times each browser string occurs.
 
 3. Count the total number of unique IP addresses that have tried to access the
-server.
+   server.
 
 4. What are the different HTTP methods that have been used?
 
 5. Count the number of requests made in every day for which the access log has
-data.
+   data.
 
 6. Count the number of *unique* requests made in every day for which the access
-log has data.
+   log has data.
 
 7. List the number of requests in each hour of the day (use the same time zone
-as the server, so just cut out the hour of every entry in the log).
+   as the server, so just cut out the hour of every entry in the log).
