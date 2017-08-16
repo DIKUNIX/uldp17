@@ -6,7 +6,7 @@ sequence of commands frequently, you can put them in a file (e.g.,
 `myscript.sh`), and run it:
 
 ```
-~$ sh myscript.sh
+~$ bash myscript.sh
 ```
 
 This will cause the contents of the script to be executed just as if you had
@@ -21,7 +21,7 @@ program, there are two things you must do:
 1.  You should add a *shebang* as the first line of the file:
 
     ```
-    #!/usr/bin/env sh
+    #!/usr/bin/env bash
     ```
 
     A shebang tells the operating system what kind of code is contained in the
@@ -56,7 +56,7 @@ script was somewhere else, we could run it as:
 
 If you want to be able to run the script just by typing `myscript.sh`,
 you must add its containing directory to the `$PATH` environment
-variable. We will briefly cover this later.
+variable. We will cover this in the next section.
 
 ### Exercises
 
@@ -71,7 +71,154 @@ probably should) refer to earlier scripts.
 
 4. Get the IP addresses of Firefox all (supposed) users.
 
-5. Replace the ISO 8601 dates as we did above.
+5. Replace the dates as we did above.
+
+## Environment
+
+When you run a shell script using the `bash` program, what really happens is
+that a fresh instance of the `bash` shell is spawned, and the shell script is
+executed in the context of *that* shell.
+
+This means, for example, that executing a `cd` command in the shell script has
+no effect on your current environment:
+
+```
+~$ pwd
+/home/alis/
+~$ cat myscript.sh
+cd Continents
+~$ bash myscript.sh
+~$ pwd
+/home/alis/
+```
+
+There is another way to execute shell scripts which *does* enable the shell
+script to influence the outside execution environment. This is achieved with
+the `source` built-in:
+
+```
+~$ source myscript.sh
+~/Continents$ pwd
+/home/alis/
+```
+
+When we use `bash`, we say that the shell script is executed in a *subshell*,
+whereas with `source` it is executed in the current shell environment. This
+distinction will also play a role as we discover how to define functions in
+shell scripts.
+
+The more frequent use of source is indeed to modify the execution environment.
+For instance, to set up an environment as you log in on a machine, or as you
+start up a fresh instance of the shell. We will return to use `source` at the
+end of this section.
+
+It is easy to declare variables in the shell:
+
+```
+~$ foo=bar
+```
+
+These can be referred back to using `$`, followed by the variable name:
+
+```
+~$ echo $foo
+bar
+```
+
+In more exotic cases, for instance if you want to use a variable as part of a
+longer text, it is best to surround the variable name in curly braces:
+
+```
+~$ echo $foobaz
+
+~$ echo ${foo}baz
+barbaz
+```
+
+Variables are alive for the lifetime of the shell.
+
+Unfortunately, they are not also passed on to subshells, unless you explicitly
+mark them for `export`:
+
+```
+~$ bash
+~$ echo $foo
+
+~$ exit
+~$ export foo
+~$ bash
+~$ echo $foo
+bar
+~$ exit
+```
+
+First, we introduce some *environment variables*. Environment variables are
+global variables, conventionally spelled out in all caps.
+
+For instance, there is a variable `HOME` that has a path to your `HOME`
+directory as a value:
+
+```
+~$ echo $HOME
+/home/alis
+```
+
+Similarly, there is a variable `PATH` which is a colon-separated list of
+directories that your shell searches for a program that corresponds to your
+command:
+
+```
+~$ echo $PATH
+/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin
+```
+
+If your shell script (e.g., `myscript.sh`) was in one of these directories, you
+could've simply executed it as follows:
+
+```
+~$ myscript.sh
+```
+
+Unfortunately, you do not have permissions to write to any of these
+directories. You do however, have permissions to overwrite the `PATH`
+environment variable, and include one of the directories under your home
+directory.
+
+As you *append* a path to your `PATH` environment variable, you should be very
+careful not to *overwrite* the `PATH` environment variable, as this will likely
+render your shell unusable (until you manage to spawn another shell).
+
+This an excellent chance to see how variables work in general:
+
+```
+~$ oldpath=$PATH
+~$ echo $oldpath
+/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin
+~$ echo $PATH
+/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin
+```
+
+We are now safe to overwrite `PATH`, as we have a backup if something goes
+wrong:
+
+```
+~$ PATH=$PATH:$HOME/scripts
+~$ myscript.sh
+```
+
+When you log in, your shell (i.e,, `bash`) reads the files `.profile` and
+`.bash_profile` in your home directory. Add the above line, modifying the
+`PATH` environment variable, to either of these files to make sure that `bash`
+does this every time you log in.
+
+When you start a new instance of your shell, `bash` reads the file `.bashrc`.
+It is important that the code in `.bashrc` is reentrant.
+
+### Exercises
+
+1. Make `bash` add `~/scripts` to your `PATH` environment variable on login.
+2. How can you test that your change works, without logging out and in again?
+3. Why shouldn't you set your `PATH` in your `.bashrc`?
 
 ## Basic Control Flow
 
