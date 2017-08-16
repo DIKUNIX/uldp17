@@ -206,7 +206,7 @@ wrong:
 ~$ myscript.sh
 ```
 
-When you log in, your shell (i.e,, `bash`) reads the files `.profile` and
+When you log in, your shell (i.e., `bash`) reads the files `.profile` and
 `.bash_profile` in your home directory. Add the above line, modifying the
 `PATH` environment variable, to either of these files to make sure that `bash`
 does this every time you log in.
