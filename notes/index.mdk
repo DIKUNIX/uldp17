@@ -32,9 +32,9 @@ Toc depth: 2
 
 [INCLUDE=Search-Replace-and-Compare.mdk]
 
-[INCLUDE=Shell-Scripting.mdk]
-
 [INCLUDE=Searching-the-File-System]
+
+[INCLUDE=Shell-Scripting.mdk]
 
 [INCLUDE=Applications.mdk]
 
