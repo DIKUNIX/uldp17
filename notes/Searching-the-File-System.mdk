@@ -1,0 +1,186 @@
+# Searching the File System
+
+The `grep` utility can be used not just to search and filter a file, but also
+to search through a directory of files, to find those that contain lines that
+match a given regular expression.
+
+Another utility, called `find`, can be used to search based on file system
+names and attributes instead.
+
+Learning to search through a directory structure using `grep` is particularly
+useful in computer programming: most programming languages are text-based, and
+many elements of their syntax are amenable to capture using regular
+expressions.
+
+## `grep`
+
+To find all the files containing a shebang in your home directory:
+
+```
+~$ grep -r '^!#/' *
+```
+
+Of course, this is a bit crude, as this will also match files containing
+shebangs not just on the very first line, but also further down in the file.
+
+### Exercise
+
+1. What sort of interpreters do we need in our environment to run all the
+   shebanged files in our home directory? Write a command to find these.
+
+## `find`
+
+The `find` utility can be used to search for files and directories across your
+file system that match a given name or regular expression. At the very least,
+you must provide `find` with a starting point.
+
+For instance, to (recursively) list all the files and directories under the
+current working directory:
+
+```
+~$ find .
+```
+
+Effectively, this is perhaps a more ubiquitous variant of `tree`. The power
+`find` comes from the *subsequent* search refining options we provide.
+
+For instance, we can limit the types of entries that `find` lists using a
+`-type` argument.
+
+To list only directories:
+
+```
+~$ find . -type d
+```
+
+To list only files:
+
+```
+~$ find . -type f
+```
+
+To list files of depth at most 1:
+
+```
+~$ find . -type f -maxdepth 1
+```
+
+To list files of depth at least 2:
+
+```
+~$ find . -type f -mindepth 2
+```
+
+To list files of depth *exactly* 2:
+
+```
+~$ find . -type f -mindepth 2 -maxdepth 2
+```
+
+`find` can also be used to search for files and directories according to either
+a globbing pattern:
+
+```
+~$ find . -type f -name '*.txt'
+```
+
+Or a regular expression:
+
+```
+~$ find . -type f -regex '^.*\.txt$'
+```
+
+For a case-insensitive search use either `-iname` or `-iregex`, respectively.
+
+For each entry that `find` finds, we can also execute a command. To do this,
+use the `-exec` option, followed by the command, ending with a special option
+`\;`. To refer to the entry matched by `find`, use the special option `{}`.
+
+For instance, to count the number of lines in all of your text files:
+
+```
+~$ find . -type f -name '*.txt' -exec wc -l {} \;
+```
+
+### Exercises
+
+1. Find all the shell scripts in your home directory.
+2. Find the third longest shell script in your home directory.
+
+## Redirecting Standard Error
+
+There are some directories to which regular users do not have access to.
+
+For instance, if we attempt to search through Bob's home directory, we will be
+told that we do not have permission to look through his `.ssh` directory:
+
+```
+~$ find /home/bob -type d
+/home/bob/
+...
+find: /home/xbf852/.ssh: Permission denied
+...
+```
+
+Here, valid output is *intermixed* with error reports. It may seem like find
+wouldn't play well with other Unix-like utilities when it does this.
+
+In fact, `find` is writing valid output and error reports to *separate* files,
+and it is your shell that decides to merge those files.
+
+To illustrate this, we can attempt to redirect the output of `find` to a file
+(much as we did with `curl`):
+
+```
+~$ find /home/bob -type d > results
+find: /home/xbf852/.ssh: Permission denied
+...
+~$ cat results
+/home/bob/
+...
+
+```
+
+Now, the valid output ends up in `results`, and the error reports end up in the
+shell.
+
+How about the other way around? Can we discard the error reports to a file and
+get only the valid outputs in the shell? Yes we can!
+
+The "files" that `find` writes the valid output and error reports to are called
+"standard out", and "standard error", respectively. We write "files" as these
+files are merely virtual, and do not reside on your file system (unless you
+redirect them).
+
+These files have the standard "handles" 1 and 2, respectively. Output
+redirection (`>`) can be preceded by the handle that you want to redirect.
+
+For instance, to redirect the errors from find:
+
+```
+~$ find /home/bob -type d 2> errors
+/home/bob/
+...
+~$ cat errors
+find: /home/xbf852/.ssh: Permission denied
+...
+```
+
+Some programmers, may care little for such nuanced errors, and might want to
+suppress them altogether. To this end, there is a special file in your file
+system called `/dev/null`. Anything you write to this file will vanish into
+thin air.
+
+Hence, to suppress error reports from `find` (or any other command) altogether:
+
+```
+~$ find /home/bob -type d 2> /dev/null
+/home/bob/
+...
+```
+
+### Exercises
+
+1. Count the number of users on the system using `find`.
+   (Earlier we used `ls -la /home/ | grep "^d" | wc -l`.)
+2. Count the number of directories created by all users on the system.

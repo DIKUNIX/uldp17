@@ -34,6 +34,8 @@ Toc depth: 2
 
 [INCLUDE=Shell-Scripting.mdk]
 
+[INCLUDE=Searching-the-File-System]
+
 [INCLUDE=Applications.mdk]
 
 [INCLUDE=Makefiles.mdk]
