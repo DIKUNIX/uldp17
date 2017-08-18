@@ -480,6 +480,10 @@ done
 
    To skip the first character, use `"$(echo "$1" | tail -c +2)"`.
 
+## Subshells and Process Substitution
+
+TODO: `$()` vs. `<()`.
+
 ## `mktemp`
 
 The `mktemp` utility can be used to create a temporary file or directory. Since
