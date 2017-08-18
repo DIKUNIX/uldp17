@@ -321,6 +321,11 @@ $ ls -l
 **Mental exercise:** Can you come up with other ways of solving the
 problem with the `clean` target?
 
+### Exercises
+
+1. Rewrite `normalize.sh` as a `Makefile` instead. Assume that there is an
+   `access.log` in the working directory when `make` is invoked.
+
 ## A `test` target
 
 Another useful phony target is a `test` target to perform the tests we
