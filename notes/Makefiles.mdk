@@ -23,26 +23,26 @@ It is about as easy to get started with `make` as it is to get started with C.
 Hopefully, it takes a bit less forbearance to become proficient in `make`, than
 it takes to become proficient in C.
 
-To get started, create an empty directory and navigate to it:
+To get started, lets create directory for our sources:
 
-**Terminal.**
-
-    $ mkdir canon
-    $ cd canon
+```
+$ mkdir src
+$ cd src
+```
 
 Consider a simple program which fits on a file, which we can call
 `main.c`:
 
-**main.c.**
-
-    int main() { return 42; }
+```
+int main() { return 42; }
+```
 
 With no further work, we can already use `make` to compile this program:
 
-**Terminal.**
-
-    $ make main
-    cc     main.c   -o main
+```
+$ make main
+cc     main.c   -o main
+```
 
 > **Note**
 >
@@ -50,35 +50,33 @@ With no further work, we can already use `make` to compile this program:
 > to your standard C compiler. Presumably, this is GCC. You can check
 > what `cc` really is using the programs `which` and `file`:
 >
-> **Terminal.**
->
->     $ which cc
->     /usr/bin/cc
->     $ file /usr/bin/cc
->     /usr/bin/cc: symbolic link to gcc
+> ```
+> $ which cc
+> /usr/bin/cc
+> $ file /usr/bin/cc
+> /usr/bin/cc: symbolic link to gcc
+> ```
 
-If we instead called our file `root.c` we would have to compile it like
-this:
+If we instead called our file `root.c` we would have to compile it like this:
 
-**Terminal.**
+```
+$ make root
+cc     root.c   -o root
+```
 
-    $ make root
-    cc     root.c   -o root
+If we forget the program name, `make` will complain, not knowing what to do:
 
-If we forget the program name, `make` will complain, not knowing what to
-do:
-
-**Terminal.**
-
-    $ make
-    make: *** No targets specified and no makefile found.  Stop.
+```
+$ make
+make: *** No targets specified and no makefile found.  Stop.
+```
 
 Similarly, if we misspell the program name, `make` will complain:
 
-**Terminal.**
-
-    $ make homework
-    make: *** No rule to make target 'homework'.  Stop.
+```
+$ make homework
+make: *** No rule to make target 'homework'.  Stop.
+```
 
 As long as we pass the command-line argument `main` to `make`, `make`
 can [save us a couple keystrokes](getting-started-with-c.html), and
@@ -89,29 +87,28 @@ behalf.
 >
 > Your directory structure should now look like this:
 >
-> **Terminal.**
->
->     $ ls -lh
->     -rwxr-xr-x [..] main
->     -rw-r--r-- [..] main.c
+> ```
+> $ ls -l
+> -rwxr-xr-x [..] main
+> -rw-r--r-- [..] main.c
+> ```
 
-We can try to [run our program and check its exit
-code](a-unix-like-programming-environment):
+We can try to run our program and check its exit code:
 
-**Terminal.**
-
-    $ ./main || echo $?
-    42
+```
+$ ./main || echo $?
+42
+```
 
 A classical feature of `make`, is that it helps us avoid unnecessary
 recompilations.
 
 Try to call `make main` again (without changing `main.c`):
 
-**Terminal.**
-
-    $ make main
-    make: 'main' is up to date.
+```
+$ make main
+make: 'main' is up to date.
+```
 
 In this basic use, `make` takes `main.c` as a **prerequisite** for the
 **target** `main`. That is, `make` sets up a **dependency graph** which
@@ -143,19 +140,21 @@ all (except use the expected C compiler!):
 
 **Makefile.**
 
-    main: main.c
-            gcc main.c -o main
+```
+main: main.c
+    gcc main.c -o main
+```
 
 > **Note**
 >
 > Your directory structure should now look like this:
 >
-> **Terminal.**
->
->     $ ls -lh
->     -rwxr-xr-x [..] main
->     -rw-r--r-- [..] main.c
->     -rw-r--r-- [..] Makefile
+> ```
+> $ ls -lh
+> -rwxr-xr-x [..] main
+> -rw-r--r-- [..] main.c
+> -rw-r--r-- [..] Makefile
+> ```
 
 A `Makefile` specifies a number of **rules**. A rule has a number of
 **targets** and **prerequisites**, as well as a **recipe** for brining
@@ -165,11 +164,13 @@ in their own shell.
 
 The format of a `Makefile` rule goes as follows:
 
-    TARGETS `:` PREREQUISITES LINE-BREAK
-    TAB COMMAND LINE-BREAK
-    TAB COMMAND LINE-BREAK
-    TAB COMMAND LINE-BREAK
-    ...
+```
+TARGETS `:` PREREQUISITES LINE-BREAK
+TAB COMMAND LINE-BREAK
+TAB COMMAND LINE-BREAK
+TAB COMMAND LINE-BREAK
+...
+```
 
 > **Important**
 >
@@ -183,13 +184,13 @@ There is one benefit to our `Makefile` however: we no longer need to
 specify `main` as the command-line argument to `make`. It is now assumed
 by default:
 
-**Terminal.**
-
-    $ make
-    make: 'main' is up to date.
-    $ rm main
-    $ make
-    gcc main.c -o main
+```
+$ make
+make: 'main' is up to date.
+$ rm main
+$ make
+gcc main.c -o main
+```
 
 ## Phony Targets
 
@@ -202,77 +203,77 @@ remove the `main` file.
 A simple approach would’ve been to just add the `clean` target to our
 `Makefile`:
 
-**Makefile.**
+```
+#BadMakefile
 
-    #BadMakefile
+main: main.c
+    gcc main.c -o main
 
-    main: main.c
-            gcc main.c -o main
-
-    clean:
-            rm main
+clean:
+    rm main
+```
 
 Unfortunately, if we were ever to place a file called `clean` into our
 directory, the `clean` target would always be considered up to date
 (why?). For instance, consider the following session at the terminal:
 
-**Terminal.**
-
-    $ echo 42 > clean
-    $ make clean
-    make: 'clean' is up to date.
-    $ make
-    gcc main.c -o main
-    $ make clean
-    make: 'clean' is up to date.
-    $ ls -lh
-    -rw-r--r-- [..] clean
-    -rwxr-xr-x [..] main
-    -rw-r--r-- [..] main.c
-    -rw-r--r-- [..] Makefile
+```
+$ echo 42 > clean
+$ make clean
+make: 'clean' is up to date.
+$ make
+gcc main.c -o main
+$ make clean
+make: 'clean' is up to date.
+$ ls -l
+-rw-r--r-- [..] clean
+-rwxr-xr-x [..] main
+-rw-r--r-- [..] main.c
+-rw-r--r-- [..] Makefile
+```
 
 To avoid this problem (and make sure the recipe for `clean` is always
 run when we ask it to), we have to mark the `clean` target as `.PHONY`:
 
-**Makefile.**
+```
+.PHONY: clean
 
-    .PHONY: clean
+main: main.c
+    gcc main.c -o main
 
-    main: main.c
-            gcc main.c -o main
-
-    clean:
-            rm main
+clean:
+    rm main
+```
 
 Continuing the terminal session from before..
 
-**Terminal.**
-
-    $ make clean
-    rm main
+```
+$ make clean
+rm main
+```
 
 > **Note**
 >
 > If you followed our ill advice and created a file called `clean`,
 > remove it so that we again have a directory structure like this:
 >
-> **Terminal.**
->
->     $ ls -lh
->     -rwxr-xr-x [..] main
->     -rw-r--r-- [..] main.c
->     -rw-r--r-- [..] Makefile
+> ```
+> $ ls -l
+> -rwxr-xr-x [..] main
+> -rw-r--r-- [..] main.c
+> -rw-r--r-- [..] Makefile
+> ```
 
 If you spuriously try to play around, and try to `make clean` again,
 you’ll get to see `make` fail:
 
-**Terminal.**
-
-    $ make clean
-    rm main
-    rm: cannot remove ‘main’: No such file or directory
-    Makefile:7: recipe for target 'clean' failed
-    make: *** [clean] Error 1
+```
+$ make clean
+rm main
+rm: cannot remove ‘main’: No such file or directory
+Makefile:7: recipe for target 'clean' failed
+make: *** [clean] Error 1
+```
 
 The recipe is failing because we’ve already removed the file called
 `main`.`make` then tries to be helpful and tell us that it failed on
@@ -286,15 +287,15 @@ This is what `rm` does for a nonexistent file. We can add a `-f`
 command-line argument to `rm` in our recipe to make `rm` ignore
 nonexistent files:
 
-**Makefile.**
+```
+.PHONY: clean
 
-    .PHONY: clean
+main: main.c
+    gcc main.c -o main
 
-    main: main.c
-            gcc main.c -o main
-
-    clean:
-            rm -f main
+clean:
+    rm -f main
+```
 
 > **Warning**
 >
@@ -303,19 +304,19 @@ nonexistent files:
 
 Now we can go on a command spree again!
 
-**Terminal.**
-
-    $ make
-    gcc main.c -o main
-    $ make
-    make: 'main' is up to date.
-    $ make clean
-    rm -f main
-    $ make clean
-    rm -f main
-    $ ls -lh
-    -rw-r--r-- [..] main.c
-    -rw-r--r-- [..] Makefile
+```
+$ make
+gcc main.c -o main
+$ make
+make: 'main' is up to date.
+$ make clean
+rm -f main
+$ make clean
+rm -f main
+$ ls -l
+-rw-r--r-- [..] main.c
+-rw-r--r-- [..] Makefile
+```
 
 **Mental exercise:** Can you come up with other ways of solving the
 problem with the `clean` target?
@@ -330,47 +331,47 @@ prerequisites.
 
 One naïve approach could go as follows:
 
-**Makefile.**
+```
+#BadMakefile
 
-    #BadMakefile
+.PHONY: test clean
 
-    .PHONY: test clean
+main: main.c
+    gcc main.c -o main
 
-    main: main.c
-            gcc main.c -o main
+test: main
+    ./main
 
-    test: main
-            ./main
-
-    clean:
-            rm -f main
+clean:
+    rm -f main
+```
 
 Let’s try to `make test` and see what happens:
 
-**Terminal.**
-
-    $ make test
-    ./main
-    Makefile:7: recipe for target 'test' failed
-    make: *** [test] Error 42
+```
+$ make test
+./main
+Makefile:7: recipe for target 'test' failed
+make: *** [test] Error 42
+```
 
 So `./main` yields the expected exit code alright, but it is ill
 practice to designate a test error as a success.
 
 A better `Makefile` could go as follows:
 
-**Makefile.**
+```
+.PHONY: test clean
 
-    .PHONY: test clean
+main: main.c
+    gcc main.c -o main
 
-    main: main.c
-            gcc main.c -o main
+test: main
+    ./main || echo $$?
 
-    test: main
-            ./main || echo $$?
-
-    clean:
-            rm -f main
+clean:
+    rm -f main
+```
 
 > **Important**
 >
@@ -380,11 +381,11 @@ A better `Makefile` could go as follows:
 
 We can try to `make test` to make sure that things work as expected:
 
-**Terminal.**
-
-    $ make test
-    ./main || echo $?
-    42
+```
+$ make test
+./main || echo $?
+42
+```
 
 Note, the `test` target lists `main` as a prerequisite. So the
 dependency graph deduced by `make` can be illustrated as follows:
@@ -408,31 +409,31 @@ dependency graph deduced by `make` can be illustrated as follows:
 To see how `make` implements this dependency graph, let’s try to
 `make clean` and `make test`:
 
-**Terminal.**
-
-    $ make clean
-    rm -f main
-    $ make test
-    gcc main.c -o main
-    ./main || echo $?
-    42
+```
+$ make clean
+rm -f main
+$ make test
+gcc main.c -o main
+./main || echo $?
+42
+```
 
 Out of mere interest, let us try to introduce an error into our program
 and see how `make` will handle a compilation error:
 
-**Terminal.**
-
-    $ make clean
-    $ echo "int main() { return x; }" > main.c
-    $ make test
-    gcc main.c -o main
-    main.c: In function ‘main’:
-    main.c:1:21: error: ‘x’ undeclared (first use in this function)
-     int main() { return x; }
-                         ^
-    main.c:1:21: note: each undeclared identifier is reported only once for each function it appears in
-    Makefile:4: recipe for target 'main' failed
-    make: *** [main] Error 1
+```
+$ make clean
+$ echo "int main() { return x; }" > main.c
+$ make test
+gcc main.c -o main
+main.c: In function ‘main’:
+main.c:1:21: error: ‘x’ undeclared (first use in this function)
+int main() { return x; }
+                    ^
+main.c:1:21: note: each undeclared identifier is reported only once for each function it appears in
+Makefile:4: recipe for target 'main' failed
+make: *** [main] Error 1
+```
 
 Perhaps as you had already expected, `make` stopped processing the
 dependency graph as soon as it encountered an error in one of the
@@ -443,14 +444,14 @@ recipes.
 You might’ve noticed that `make` with no arguments still works despite
 the fact that there are now multiple targets in our `Makefile`:
 
-**Terminal.**
-
-    $ make
-    make: 'main' is up to date.
-    $ make clean
-    rm -f main
-    $ make
-    gcc main.c -o main
+```
+$ make
+make: 'main' is up to date.
+$ make clean
+rm -f main
+$ make
+gcc main.c -o main
+```
 
 `make` resolves target ambiguity in a very simple way — the top target
 is the default target, and in our `Makefile`, the top target is `main`.
@@ -468,74 +469,74 @@ This is not a good default target for two reasons:
 We can embrace both by adding a phony target `all` at the top of our
 `Makefile`, listing `test` as a prerequisite:
 
-**Makefile.**
+```
+.PHONY: all test clean
 
-    .PHONY: all test clean
+all: test
 
-    all: test
+main: main.c
+    gcc main.c -o main
 
-    main: main.c
-            gcc main.c -o main
+test: main
+    ./main || echo $$?
 
-    test: main
-            ./main || echo $$?
-
-    clean:
-            rm -f main
+clean:
+    rm -f main
+```
 
 Let’s take the `Makefile` for a spin:
 
-**Terminal.**
-
-    $ make clean
-    rm -f main
-    $ make
-    gcc main.c -o main
-    ./main || echo $?
-    42
+```
+$ make clean
+rm -f main
+$ make
+gcc main.c -o main
+./main || echo $?
+42
+```
 
 ## A More Complicated Program
 
 Consider our stack calculator from the accompanying tutorial on [Getting
-Started with C](getting-started-with-c.html).
+Started with C.
 
 There, we had a stack data structure declared in a header file
 `stack.h`, and implemented in the C file `stack.c`. We compiled the
 implementation follows:
 
-**Terminal.**
-
-    gcc -Werror -Wall -Wextra -pedantic -std=c11 -c stack.c
+```
+gcc -Werror -Wall -Wextra -pedantic -std=c11 -c stack.c
+```
 
 We then had a file `calc.c` which implemented the actual stack
 calculator using the stack implementation above. `calc.c` contained a
 `main` function. So we then compiled the program as follows:
 
-**Terminal.**
-
-    gcc -Werror -Wall -Wextra -pedantic -std=c11 stack.o calc.c
+```
+gcc -Werror -Wall -Wextra -pedantic -std=c11 stack.o calc.c
+```
 
 Perhaps a natural `Makefile` for our stack calculator would then go as
 follows:
 
-**Makefile.**
+```
+.PHONY: all test clean
 
-    .PHONY: all test clean
+all: test
 
-    all: test
+test:
+   ./calc
 
-    test:
-            ./calc
+calc: stack.o calc.c
+    gcc -Werror -Wall -Wextra -pedantic -std=c11 stack.o calc.c
 
-    calc: stack.o calc.c
-            gcc -Werror -Wall -Wextra -pedantic -std=c11 stack.o calc.c
+stack.o: stack.h stack.c
+    gcc -Werror -Wall -Wextra -pedantic -std=c11 -c stack.c
 
-    stack.o: stack.h stack.c
-            gcc -Werror -Wall -Wextra -pedantic -std=c11 -c stack.c
-
-    clean:
-            rm -f stack.o
-            rm -f calc
+clean:
+    rm -f stack.o
+    rm -f calc
+```
 
 The dependency graph deduced by `make` in this case, can be illustrated
 as follows:
@@ -585,27 +586,27 @@ separated by `_`.
 
 For instance, here’s a `Makefile` that resolves our problems above:
 
-**Makefile.**
+```
+CC=gcc
+CFLAGS=-Werror -Wall -Wextra -pedantic -std=c11
 
-    CC=gcc
-    CFLAGS=-Werror -Wall -Wextra -pedantic -std=c11
+.PHONY: all test clean
 
-    .PHONY: all test clean
+all: test
 
-    all: test
+test:
+    ./calc
 
-    test:
-            ./calc
+calc: stack.o calc.c
+    $(CC) $(CFLAGS) stack.o calc.c
 
-    calc: stack.o calc.c
-            $(CC) $(CFLAGS) stack.o calc.c
+stack.o: stack.h stack.c
+    $(CC) $(CFLAGS) -c stack.c
 
-    stack.o: stack.h stack.c
-            $(CC) $(CFLAGS) -c stack.c
-
-    clean:
-            rm -f stack.o
-            rm -f calc
+clean:
+    rm -f stack.o
+    rm -f calc
+```
 
 > **Note**
 >
@@ -669,5 +670,3 @@ here are a couple good resources for further study:
 
 2.  Free Software Foundation, Inc. GNU `make`.
     <http://www.gnu.org/software/make/manual/make.html>. 2014.
-
-
