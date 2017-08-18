@@ -106,7 +106,7 @@ print, using the `-n` option:
 1. What are the top 100 most-visited URLs?
 2. What are the bottom 10 of the top 100?
 3. What is the 100th most-visited URL?
-4. What are two most-recently modified files in your home directory?
+4. What are 3 most-recently modified entries in your home directory?
 
 ## `cut` and `paste`
 
