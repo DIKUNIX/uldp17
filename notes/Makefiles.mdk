@@ -444,6 +444,12 @@ Perhaps as you had already expected, `make` stopped processing the
 dependency graph as soon as it encountered an error in one of the
 recipes.
 
+### Exercises
+
+1. Write a test target for your normalization procedure from before. Test that
+   IP addresses are properly extracted. IP-adresses should match the regular
+   expression `\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}`.
+
 ## The Default Target
 
 You might’ve noticed that `make` with no arguments still works despite
