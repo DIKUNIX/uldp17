@@ -2,36 +2,28 @@
 
 `make` is a canonical build system for Unix-like development environments.
 Although primarily geared towards software development, `make` can also come in
-handy for data processing.
+handy for constructing data processing pipelines.
 
-This tutorial is not a comprehensive introduction to `make`. We only
-cover what you might need for the course [Machine Architecture
-(ARK)](http://www.webcitation.org/6a2I3GpLv) at
-[DIKU](http://www.diku.dk), and beyond. Most crucially, `make` goes far
+This tutorial is not a comprehensive introduction to `make`. We only cover what
+you might need for the course [Computer Systems
+(CompSys)](https://web.archive.org/web/20170716004417/http://kurser.ku.dk/course/ndab16005u/2017-2018)
+at [DIKU](http://www.diku.dk), and beyond. Most crucially, `make` goes far
 beyond programming in C, we don’t.
 
-This tutorial assumes that you’ve already set up [a Unix-like
-programming environment](a-unix-like-programming-environment.html), know
-how to work with directories and files, and know your way around a text
-editor. We assume that you’ve already tried to [get started with
-C](getting-started-with-c.html), but you don’t have to have completed it
-yet. Another great kick-starter is the [G1
-assignment](../../assignments/G1.html).
+This tutorial assumes that you’ve already set up a Unix-like programming
+environment, know how to work with directories and files, and know your way
+around a text editor.
 
-This tutorial assumes that you already have GNU Binutils and GCC, the
-GNU Compiler Collection installed.
-
-Go back to the aforementioned material if you are feeling uneasy.
+This tutorial assumes that you have GNU Binutils and GCC, the GNU Compiler
+Collection installed.
 
 ## Hello, `make`
 
-It is about as easy to get started with `make` as it is to [get started
-with C](getting-started-with-c). Hopefully, it takes a bit less
-forbearance to become proficient in `make`, than it takes to become
-proficient in C.
+It is about as easy to get started with `make` as it is to get started with C.
+Hopefully, it takes a bit less forbearance to become proficient in `make`, than
+it takes to become proficient in C.
 
-To get started, [create an empty directory and navigate to
-it](a-unix-like-programming-environment.html):
+To get started, create an empty directory and navigate to it:
 
 **Terminal.**
 
