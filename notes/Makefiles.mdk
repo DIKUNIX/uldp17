@@ -503,7 +503,8 @@ gcc main.c -o main
 ## A More Complicated Program
 
 Consider our stack calculator from the accompanying tutorial on [Getting
-Started with C.
+Started with C. See [`stack.h`](stack.h), [`stack.c`](stack.c), and
+[`calc.c`](calc.c).
 
 There, we had a stack data structure declared in a header file
 `stack.h`, and implemented in the C file `stack.c`. We compiled the
